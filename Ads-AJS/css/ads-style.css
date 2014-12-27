@@ -1,19 +1,24 @@
 body {
-    background: lightgray;
+    background-image: url("../img/thumb07.jpg");
+    background-repeat: repeat;
+    background-attachment: fixed;
 }
+
+div, li {
+    overflow: hidden;
+}
+
+#login-register {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
 .ad {
     border: 1px solid black;
     margin: 10px;
     padding: 10px;
 }
-
-.my-label {
-    display: inline-block;
-    width: 80%;
-    float: right;
-}
-
-.my-well {
-    width: 50%;
+img {
+    max-height: 300px;
 }
 

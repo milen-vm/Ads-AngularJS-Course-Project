@@ -1,30 +1,22 @@
 <section class="col-sm-10 col-md-8">
-    <!-- Ads -->
-    <div class="panel panel-primary">
+    <div ng-repeat="ad in adsList.ads" class="panel panel-primary">
         <div class="panel-heading">
-            <span>iPhone 4S for Sale</span><span class="pull-right">3-Jan-2015</span>
+            <span>{{ ad.title }}</span><span class="pull-right">{{ ad.date }}</span>
             <div class="clearfix"></div>
         </div>
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 col-sm-3">
                     <a href="#" class="thumbnail">
-                        <img data-src="holder.js/100%x180" src="iphone6-plus-box-silver-2014.jpeg" alt="...">
-                    </a>
-                       
+                        <img data-src="holder.js/100%x180" ng-src="{{ ad.imageDataUrl }}" src="" alt="image">
+                    </a>                       
                 </div>
                 <div class="col-xs-12 col-sm-9">
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
+                    <p>{{ ad.text }}</p>
                     <ul class="list-group">
-                        <li class="list-group-item">Name: <span>Victor</span></li>
-                        <li class="list-group-item">Email: <span><a href="mailto:igra4a@abv.bg"> igra4a@abv.bg</a></span></li>
-                        <li class="list-group-item">Phone: <span> +359 898 887 977</span></li>                                  
+                        <li class="list-group-item">Name: <span>{{ ad.ownerName }}</span></li>
+                        <li class="list-group-item">Email: <span><a href="mailto:{{ ad.ownerEmail }}">{{ ad.ownerEmail }}</a></span></li>
+                        <li class="list-group-item">Phone: <span>{{ ad.ownerPhone }}</span></li>                                  
                     </ul>
                 </div>                            
             </div>

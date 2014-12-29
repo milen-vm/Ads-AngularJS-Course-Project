@@ -1,12 +1,14 @@
 'use strict';
 
 app.factory('adsData', function($http, $q) {
-    function getAllAds() {
+    var baseUrl = 'http://softuni-ads.azurewebsites.net/api';       // http://localhost:1337
+    
+    function getAllAds(pageSize, startPage) {
         var defer = $q.defer();
         
         $http({
             method: 'GET',
-            url: 'http://softuni-ads.azurewebsites.net/api/ads'
+            url: baseUrl + '/ads?pagesize=' + pageSize + '&startpage=' + startPage,
         })
         .success(function(data, status, headers, config) {
             defer.resolve(data);

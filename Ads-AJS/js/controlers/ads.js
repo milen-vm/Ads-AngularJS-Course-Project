@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('AdsList', function($scope, adsData) {
+app.controller('AdsList', function($scope, $log, adsData) {
     var ADS_PER_PAGE = 10,
         PAGER_MAX_SIZE = 5;
         
@@ -15,6 +15,7 @@ app.controller('AdsList', function($scope, adsData) {
             function(data) {
                 $scope.adsList = data;
                 $scope.totalAds = $scope.adsList.numItems;
+                console.log('request from loadAds');
             },
             function(error) {
                 console.log(error);
@@ -29,9 +30,8 @@ app.controller('AdsList', function($scope, adsData) {
 
     $scope.pageChanged = function() {
         console.log('Page changed to: ' + $scope.currentPage);
+        console.log('request from page cahnged');
         loadAds(ADS_PER_PAGE, $scope.currentPage);
     };
-
-    
 
 });

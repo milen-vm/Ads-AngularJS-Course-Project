@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('AdsList', function($scope, $log, adsData) {
+app.controller('AdsList', function($scope, $log, httpRequest) {
     var ADS_PER_PAGE = 10,
         PAGER_MAX_SIZE = 5;
         
@@ -9,18 +9,28 @@ app.controller('AdsList', function($scope, $log, adsData) {
     $scope.adsPerPage = ADS_PER_PAGE;
     
     loadAds(ADS_PER_PAGE, $scope.currentPage);
+    loadFilterData('categories');
        
     function loadAds(pageSize, startPage) {
-        adsData.getAds(pageSize, startPage).then(
+        httpRequest.getAds(pageSize, startPage).then(
             function(data) {
                 $scope.adsList = data;
                 $scope.totalAds = $scope.adsList.numItems;
-                console.log('request from loadAds');
+            },
+            function(error) {
+                console.log(error);
+            });           
+    }
+    
+    function loadFilterData(type) {
+        httpRequest.getFilterData(type).then(
+            function(data) {
+                $scope[type] = data;
             },
             function(error) {
                 console.log(error);
             });
-    }
+    }   
     
     // pagination
     $scope.setPage = function (pageNo) {
@@ -29,8 +39,7 @@ app.controller('AdsList', function($scope, $log, adsData) {
     };
 
     $scope.pageChanged = function() {
-        console.log('Page changed to: ' + $scope.currentPage);
-        console.log('request from page cahnged');
+        // console.log('Page changed to: ' + $scope.currentPage);
         loadAds(ADS_PER_PAGE, $scope.currentPage);
     };
 

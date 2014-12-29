@@ -46,14 +46,11 @@
                              <select class="form-control selectpicker" ng-model="categorie"
                                  ng-options="cat as cat.name for cat in categories track by cat.id">
                                  <option value="" selected="selected" label="All">All</option>
-                             </select>
-                             <h4>Towns<h4>
-                            <select class="form-control selectpicker">
-                                 <option>1</option>
-                                 <option>2</option>
-                                 <option>3</option>
-                                 <option>4</option>
-                                 <option>5</option>
+                         </select>
+                             <h4>Towns<h4><span>{{ town.id }}</span>
+                             <select class="form-control selectpicker" ng-model="town"
+                                 ng-options="twn as twn.name for twn in towns track by twn.id">
+                                 <option value="" selected="selected" label="All">All</option>
                              </select>
                         </div>
                     </div>

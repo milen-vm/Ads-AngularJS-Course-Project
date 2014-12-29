@@ -10,6 +10,7 @@ app.controller('AdsList', function($scope, $log, httpRequest) {
     
     loadAds(ADS_PER_PAGE, $scope.currentPage);
     loadFilterData('categories');
+    loadFilterData('towns');
        
     function loadAds(pageSize, startPage) {
         httpRequest.getAds(pageSize, startPage).then(

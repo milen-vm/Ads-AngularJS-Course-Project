@@ -1,7 +1,7 @@
 <section class="col-sm-10 col-md-8">
     <div ng-repeat="ad in adsList.ads" class="panel panel-primary">
         <div class="panel-heading">
-            <strong class="ad-title">{{ ad.title }}</strong><span class="pull-right">{{ ad.date | date: 'd MMM yyyy' }}</span>
+            <strong class="title">{{ ad.title }}</strong><span class="pull-right">{{ ad.date | date: 'd MMM yyyy' }}</span>
             <div class="clearfix"></div>
         </div>
         <div class="panel-body">
@@ -25,7 +25,7 @@
     <!-- Paging -->
     <nav class="text-center">
         <ul pagination
-            total-items="totalAds"
+            total-items="adsList.numItems"
             items-per-page="adsPerPage"
             ng-model="currentPage"
             max-size="maxSize"
@@ -35,23 +35,25 @@
         </ul>
     </nav>
 </section>
-<!-- Right side bar -->
-                <aside class="col-sm-12 col-md-2">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <strong>Filters</strong>
-                        </div>
-                        <div class="panel-body">
-                             <h4>Categories</h4><span>{{ categorie.id }}</span>
-                             <select class="form-control selectpicker" ng-model="categorie"
-                                 ng-options="cat as cat.name for cat in categories track by cat.id">
-                                 <option value="" selected="selected" label="All">All</option>
-                         </select>
-                             <h4>Towns<h4><span>{{ town.id }}</span>
-                             <select class="form-control selectpicker" ng-model="town"
-                                 ng-options="twn as twn.name for twn in towns track by twn.id">
-                                 <option value="" selected="selected" label="All">All</option>
-                             </select>
-                        </div>
-                    </div>
-                </aside>
+<!-- Filters side bar -->
+    <aside class="col-sm-12 col-md-2">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <strong class="title">Filters</strong>
+            </div>
+            <div class="panel-body">
+                 <h4>Categories</h4><span>{{ categorieId }}</span>
+                 <select class="form-control selectpicker" ng-model="categorieId" ng-change="filterItemChnaged()">
+                     <!-- ng-options="cat as cat.name for cat in categories track by cat.id"> -->
+                     <option value="" ng-selected="true">All</option>
+                     <option ng-repeat="cat in categories" ng-value="{{cat.id}}">{{ cat.name }}</option>
+             </select>
+                 <h4>Towns</h4><span>{{ townId }}</span>
+                 <select class="form-control selectpicker" ng-model="townId" ng-change="filterItemChnaged()">
+                     <!-- ng-options="twn as twn.name for twn in towns track by twn.id"> -->
+                     <option value="" ng-selected="true">All</option>
+                     <option ng-repeat="town in towns" ng-value="{{town.id}}">{{ town.name }}</option>                     
+                 </select>
+            </div>
+        </div>
+    </aside>

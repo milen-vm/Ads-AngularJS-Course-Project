@@ -26,6 +26,12 @@ app.factory('httpRequest', function($http, $q) {
         return httpRequest(url, 'GET');
     };
     
+    var getFilteredAds = function(categorieId, townId) {
+           var url = baseUrl + 'ads?townid=' + townId + '&categoryid=' + categorieId;
+            
+        return httpRequest(url, 'GET');
+    };
+    
     var getFilterData = function(type) {
         var url = baseUrl + type;
         
@@ -34,6 +40,7 @@ app.factory('httpRequest', function($http, $q) {
     
     return {
         getAds: getAllAds,
-        getFilterData: getFilterData
+        getFilterData: getFilterData,
+        getFilteredAds: getFilteredAds
     };
 });

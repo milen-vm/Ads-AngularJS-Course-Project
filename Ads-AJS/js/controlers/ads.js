@@ -7,11 +7,14 @@ app.controller('AdsList', function($scope, $log, httpRequest) {
     $scope.currentPage = 1;
     $scope.maxSize = PAGER_MAX_SIZE;
     $scope.adsPerPage = ADS_PER_PAGE;
+    $scope.categorie = {};
+    $scope.town = {};
     
     loadAds(ADS_PER_PAGE, $scope.currentPage);
     loadFilterData('categories');
     loadFilterData('towns');
-       
+     
+    // Loading content   
     function loadAds(pageSize, startPage) {
         httpRequest.getAds(pageSize, startPage).then(
             function(data) {
@@ -31,9 +34,24 @@ app.controller('AdsList', function($scope, $log, httpRequest) {
             function(error) {
                 console.log(error);
             });
-    }   
+    }
     
-    // pagination
+    // Filtering ads
+    $scope.filterItemChnaged = function() {
+        var categorieId = $scope.categorieId || '',
+            townId = $scope.townId || '';
+
+        httpRequest.getFilteredAds(categorieId, townId).then(
+            function(data) {
+                $scope.adsList = data;
+                $scope.totalAds = $scope.adsList.numItems;
+            },
+            function(error) {
+                console.log(error);
+            });
+    };
+    
+    // Pagination
     $scope.setPage = function (pageNo) {
         console.log(pageNo);
         $scope.currentPage = pageNo;

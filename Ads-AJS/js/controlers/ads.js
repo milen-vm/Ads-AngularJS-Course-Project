@@ -56,7 +56,7 @@ app.controller('AdsList', function($scope, $log, httpRequest) {
         console.log(pageNo);
         $scope.currentPage = pageNo;
     };
-
+    // TODO fix pagination on filtered ads
     $scope.pageChanged = function() {
         // console.log('Page changed to: ' + $scope.currentPage);
         loadAds(ADS_PER_PAGE, $scope.currentPage);

@@ -13,6 +13,46 @@
         <link rel="stylesheet" href="css/ads-style.css" />
     </head>
     <body ng-app="adsApp">
+        <!-- Head navigation -->
+        <nav class="navbar navbar-default" id="head-nav">
+            <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://softuni.bg/" target="_blank">SoftUni</a>
+            </div>
+        
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                
+                <ul class="nav navbar-nav">
+                    <li><a href="#/">Login<span class="sr-only">(current)</span></a></li>
+                    <li><a href="#/">Register</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                 <div>
+                    <p class="navbar-text">Ads</p>
+                 </div>              
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>      
         <div class="container">
             <!-- Header -->
             <header>
@@ -20,18 +60,24 @@
             </header>
             <div class="row">
                 <!-- Left side bar -->
-                <aside id="login-register" class="col-sm-2 navbar navbar-side">
+                <aside id="login-register" class="hidden-xs hidden-sm col-md-2 navbar navbar-side">
                     <span>To publish a new ad, please login.</span>
                     <a class="btn btn-primary btn-block" href="#/">Login</a>
                     <a class="btn btn-primary btn-block" href="#/">Register</a>
                 </aside>
                 <section ng-view></section>
             </div>
-            <!-- Footer -->
+            
+           
+        </div>
+        <!-- Footer -->
+        <div id="footer-container" class="container-fluid">
             <footer class="text-center">
-                <p>
-                    &copy; 2014 by Software University Foundation, No Rights Reserved
-                </p>
+                <div id="site-footer" class="panel panel-default">
+                    <div class="panel-body">
+                        <p>&copy; 2014 by Software University Foundation, No Rights Reserved</p>
+                    </div>
+                </div>          
             </footer>
         </div>
 

@@ -25,3 +25,18 @@ img {
 .title {
     font-size: 13pt;
 }
+
+#site-footer {
+    margin-bottom: 0;
+}
+
+/*#head-nav {
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+}*/
+
+#footer-container {
+    padding: 0;
+
+}

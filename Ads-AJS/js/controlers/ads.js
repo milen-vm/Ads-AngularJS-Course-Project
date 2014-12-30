@@ -3,7 +3,8 @@
 app.controller('AdsList', function($scope, $log, httpRequest) {
     var ADS_PER_PAGE = 10,
         PAGER_MAX_SIZE = 5;
-        
+    
+    $scope.viewName = 'Home';
     $scope.currentPage = 1;
     $scope.maxSize = PAGER_MAX_SIZE;
     $scope.adsPerPage = ADS_PER_PAGE;

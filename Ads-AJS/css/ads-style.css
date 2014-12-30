@@ -18,6 +18,7 @@ div, li {
     margin: 10px;
     padding: 10px;
 }
+
 img {
     max-height: 300px;
 }
@@ -26,17 +27,41 @@ img {
     font-size: 13pt;
 }
 
+.navbar-brand
+{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin: auto;
+}
+
+#top-navbar {
+    margin-bottom: 50px;
+}
+
+#left-buttons {
+    margin-left: -15px;
+}
+
+#footer-container {
+    padding: 0;
+    margin-top: 40px;
+}
+
 #site-footer {
     margin-bottom: 0;
 }
 
-/*#head-nav {
-    position: fixed;
-    width: 100%;
-    z-index: 999;
-}*/
-
-#footer-container {
-    padding: 0;
-
+#site-footer p {
+    margin: 0;
 }
+
+#site-footer > div {
+    padding: 0;
+}
+
+#reg-form input, select {
+    margin-bottom: 15px;
+}
+

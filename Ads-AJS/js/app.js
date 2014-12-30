@@ -7,6 +7,15 @@ app.config(function($routeProvider) {
         templateUrl: 'templates/ads-list.html',
         controller: 'AdsList'
     });
+    
+    $routeProvider.when('/registration-form', {
+        templateUrl: 'templates/registration-form.html',
+        controller: 'AdsList'
+    });
+    
+    $routeProvider.otherwise({
+        redirectTo: '/'
+    });
 });
 
 

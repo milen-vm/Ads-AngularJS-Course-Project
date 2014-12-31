@@ -17,7 +17,6 @@ app.controller('RegistrationForm', ['$scope', '$rootScope', 'townsData',
         
         // Event trigger. Set view name to TopNavBar controller
         $scope.viewChangedToHome = function() {
-            var selectedCategorieId = $scope.categorieId || '';
             $rootScope.$broadcast('viewNameChanged', REGISTER_VIEW_NAME);
         };
         

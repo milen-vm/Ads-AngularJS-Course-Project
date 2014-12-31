@@ -4,7 +4,7 @@ app.controller('AdsList', ['$scope', '$rootScope', 'adsData',
     function($scope, $rootScope, adsData) {
         var ADS_PER_PAGE = 10,
             PAGER_MAX_SIZE = 5,
-            VIEW_NAME = 'Home';
+            HOME_VIEW_NAME = 'Home';
         
         $scope.adsParams = {
             categoryId: '',
@@ -43,11 +43,11 @@ app.controller('AdsList', ['$scope', '$rootScope', 'adsData',
         // Event trigger. Set view name to TopNavBar controller
         $scope.viewChangedToHome = function() {
             var selectedCategorieId = $scope.categorieId || '';
-            $rootScope.$broadcast('viewNameChanged', VIEW_NAME);
+            $rootScope.$broadcast('viewNameChanged', HOME_VIEW_NAME);
         };
         
         // Pagination
-        $scope.setPage = function (pageNo) {
+        $scope.setPage = function (pageNo) {    // not needed
             console.log(pageNo);
             $scope.currentPage = pageNo;
         };

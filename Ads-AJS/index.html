@@ -14,7 +14,7 @@
     </head>
     <body ng-app="adsApp">
         <!-- Head navigation -->
-        <nav id="top-navbar" ng-controller="AdsList" class="navbar navbar-default" role="navigation">
+        <nav id="top-navbar"  class="navbar navbar-default" role="navigation">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
@@ -23,7 +23,7 @@
                 </button>    
             </div>
             <!-- Left buttons -->
-            <section class="navbar-brand">Ads - <span>{{ viewName }}</span></section>
+            <a class="navbar-brand" href="#/">Ads - <span>{{ viewName }}</span></a>
             <div class="navbar-collapse collapse">
             <ul id="left-buttons" class="nav navbar-nav navbar-left">
                 <li><a href="/#">Login</a></li>

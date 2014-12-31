@@ -11,9 +11,9 @@ app.controller('AdsList', function($scope, $log, httpRequest) {
     $scope.categorie = {};
     $scope.town = {};
     
-    loadAds(ADS_PER_PAGE, $scope.currentPage);
-    loadFilterData('categories');
-    loadFilterData('towns');
+    // loadAds(ADS_PER_PAGE, $scope.currentPage);
+    // loadFilterData('categories');
+    // loadFilterData('towns');
      
     // Loading content   
     function loadAds(pageSize, startPage) {

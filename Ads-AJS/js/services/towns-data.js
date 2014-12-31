@@ -1,12 +1,12 @@
 'use strict';
 
-app.factory('categoriesData', 
+app.factory('townsData', 
     function($http, $q) {
-        var url = 'http://softuni-ads.azurewebsites.net/api/categories';
+        var url = 'http://softuni-ads.azurewebsites.net/api/towns';
         
-        function getAllCategories() {
+        function getAllTowns() {
             var defer = $q.defer();
-            console.log('in getAllCategories');
+            
             $http({
                 method: 'GET',
                 url: url
@@ -22,7 +22,7 @@ app.factory('categoriesData',
         }
     
         return {
-            getCategories: getAllCategories
+            getTowns: getAllTowns
         };
     }
 );

@@ -37,30 +37,30 @@
     </nav>
 </section>
 <!-- Filters side bar -->
-    <aside class="col-sm-12 col-md-2">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <strong class="title">Filters</strong>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <section class="col-xs-12 col-sm-6 col-md-12">
-                        <h4>Categories</h4>
-                        <select class="form-control selectpicker col-md-12" ng-model="categorieId" ng-change="filterItemChnaged()">
-                            <!-- ng-options="cat as cat.name for cat in categories track by cat.id"> -->
-                            <option value="" ng-selected="true">All</option>
-                            <option ng-repeat="cat in categories" ng-value="{{ cat.id }}">{{ cat.name }}</option>
-                        </select>
-                    </section>
-                    <section class="col-xs-12 col-sm-6 col-md-12"> 
-                        <h4>Towns</h4>
-                        <select class="form-control selectpicker" ng-model="townId" ng-change="filterItemChnaged()">
-                            <!-- ng-options="twn as twn.name for twn in towns track by twn.id"> -->
-                            <option value="" ng-selected="true">All</option>
-                            <option ng-repeat="town in towns" ng-value="{{ town.id }}">{{ town.name }}</option>                     
-                        </select>
-                    </section>
-                 </div>
-            </div>
+<aside ng-controller="RightSideBarFilters" class="col-sm-12 col-md-2">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <strong class="title">Filters</strong>
         </div>
-    </aside>
+        <div class="panel-body">
+            <div class="row">
+                <section class="col-xs-12 col-sm-6 col-md-12">
+                    <h4>Categories</h4>
+                    <select class="form-control selectpicker col-md-12" ng-model="categorieId" ng-change="filterItemChnaged()">
+                        <!-- ng-options="cat as cat.name for cat in categories track by cat.id"> -->
+                        <option value="" ng-selected="true">All</option>
+                        <option ng-repeat="cat in categories" ng-value="{{ cat.id }}">{{ cat.name }}</option>
+                    </select>
+                </section>
+                <section class="col-xs-12 col-sm-6 col-md-12"> 
+                    <h4>Towns</h4>
+                    <select class="form-control selectpicker" ng-model="townId" ng-change="filterItemChnaged()">
+                        <!-- ng-options="twn as twn.name for twn in towns track by twn.id"> -->
+                        <option value="" ng-selected="true">All</option>
+                        <option ng-repeat="town in towns" ng-value="{{ town.id }}">{{ town.name }}</option>                     
+                    </select>
+                </section>
+             </div>
+        </div>
+    </div>
+</aside>

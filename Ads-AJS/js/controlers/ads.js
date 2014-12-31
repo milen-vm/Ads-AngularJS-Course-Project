@@ -1,66 +1,54 @@
 'use strict';
 
-app.controller('AdsList', function($scope, $log, httpRequest) {
-    var ADS_PER_PAGE = 10,
-        PAGER_MAX_SIZE = 5;
-    
-    $scope.viewName = 'Home';
-    $scope.currentPage = 1;
-    $scope.maxSize = PAGER_MAX_SIZE;
-    $scope.adsPerPage = ADS_PER_PAGE;
-    $scope.categorie = {};
-    $scope.town = {};
-    
-    // loadAds(ADS_PER_PAGE, $scope.currentPage);
-    // loadFilterData('categories');
-    // loadFilterData('towns');
-     
-    // Loading content   
-    function loadAds(pageSize, startPage) {
-        httpRequest.getAds(pageSize, startPage).then(
-            function(data) {
-                $scope.adsList = data;
-                $scope.totalAds = $scope.adsList.numItems;
-            },
-            function(error) {
-                console.log(error);
-            });           
-    }
-    
-    function loadFilterData(type) {
-        httpRequest.getFilterData(type).then(
-            function(data) {
-                $scope[type] = data;
-            },
-            function(error) {
-                console.log(error);
-            });
-    }
-    
-    // Filtering ads
-    $scope.filterItemChnaged = function() {
-        var categorieId = $scope.categorieId || '',
-            townId = $scope.townId || '';
+app.controller('AdsList', ['$scope', '$rootScope', 'adsData',
+    function($scope, $rootScope, adsData) {
+        var ADS_PER_PAGE = 10,
+            PAGER_MAX_SIZE = 5;
+        
+        $scope.adsParams = {
+            categoryId: '',
+            townId: ''        
+        };        
+        $scope.currentPage = 1;
+        $scope.pagerMaxSize = PAGER_MAX_SIZE;
+        $scope.adsPerPage = ADS_PER_PAGE;
 
-        httpRequest.getFilteredAds(categorieId, townId).then(
-            function(data) {
-                $scope.adsList = data;
-                $scope.totalAds = $scope.adsList.numItems;
-            },
-            function(error) {
-                console.log(error);
-            });
-    };
-    
-    // Pagination
-    $scope.setPage = function (pageNo) {
-        console.log(pageNo);
-        $scope.currentPage = pageNo;
-    };
-    // TODO fix pagination on filtered ads
-    $scope.pageChanged = function() {
-        // console.log('Page changed to: ' + $scope.currentPage);
-        loadAds(ADS_PER_PAGE, $scope.currentPage);
-    };
+         // EventListeners
+         $scope.$on('categorySelectionChanged', function(ev, selectedCategorieId) {
+             $scope.adsParams.categoryId = selectedCategorieId;
+             $scope.loadAds();
+         });
+         
+         $scope.$on('townSelectionChanged', function(ev, selectedTownId) {
+             $scope.adsParams.townId = selectedTownId;
+             $scope.loadAds();
+         });
+        
+        // Loading ads   
+        $scope.loadAds = function () {
+            var categoryId = $scope.adsParams.categoryId,
+                townId = $scope.adsParams.townId;
+                
+            adsData.getAds(categoryId, townId, $scope.adsPerPage, $scope.currentPage).then(
+                function(data) {
+                    $scope.adsList = data;
+                    $scope.totalAds = $scope.adsList.numItems;
+                },
+                function(error) {
+                    console.log(error);
+                });           
+        };
+        
+        // Pagination
+        $scope.setPage = function (pageNo) {
+            console.log(pageNo);
+            $scope.currentPage = pageNo;
+        };
 
-});
+        $scope.pageChanged = function() {
+            $scope.loadAds();
+        };
+        
+        $scope.loadAds();
+    }
+]);

@@ -6,7 +6,7 @@ app.factory('categoriesData',
         
         function getAllCategories() {
             var defer = $q.defer();
-            console.log('in getAllCategories');
+
             $http({
                 method: 'GET',
                 url: url

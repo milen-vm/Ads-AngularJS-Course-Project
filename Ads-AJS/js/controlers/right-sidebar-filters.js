@@ -6,12 +6,10 @@ app.controller('RightSideBarFilters', ['$scope', '$rootScope', 'categoriesData',
         $scope.towns = {};
         
         categoriesData.getCategories().then(
-            function(data) {
-                
+            function(data) {                
                 $scope.categories = data;
             },
             function(error) {
-                console.log('in error categ');
                 console.log(error);
             }
         );
@@ -24,5 +22,15 @@ app.controller('RightSideBarFilters', ['$scope', '$rootScope', 'categoriesData',
                 console.log(error);
             }
         );
+        
+        $scope.categorieChnaged = function() {
+            var selectedCategorieId = $scope.categorieId || '';
+            $rootScope.$broadcast('categorySelectionChanged', selectedCategorieId);
+        };
+        
+        $scope.townChnaged = function() {
+            var selectedTownId = $scope.townId || '';
+            $rootScope.$broadcast('townSelectionChanged', selectedTownId);
+        };
     }
 ]);

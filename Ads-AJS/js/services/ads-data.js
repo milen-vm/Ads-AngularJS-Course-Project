@@ -1,13 +1,15 @@
 'use strict';
 
-app.factory('httpRequest', function($http, $q) {
+app.factory('adsData', function($http, $q) {
     var baseUrl = 'http://softuni-ads.azurewebsites.net/api/';       // http://localhost:1337
 
-    function httpRequest(url, method) {
-        var defer = $q.defer();
+    function getAds(categoryId, townId, pageSize, startPage) {
+        var defer = $q.defer(),
+            url = baseUrl + 'Ads?CategoryId=' + categoryId + '&TownId=' + townId +
+                '&StartPage=' + startPage + '&PageSize=' + pageSize;
         
         $http({
-            method: method,
+            method: 'GET',
             url: url
         })
         .success(function(data, status, headers, config) {
@@ -20,27 +22,7 @@ app.factory('httpRequest', function($http, $q) {
         return defer.promise;
     }
     
-    var getAllAds = function(pageSize, startPage) {
-        var url = baseUrl + 'ads?pagesize=' + pageSize + '&startpage=' + startPage;
-                
-        return httpRequest(url, 'GET');
-    };
-    
-    var getFilteredAds = function(categorieId, townId) {
-           var url = baseUrl + 'ads?townid=' + townId + '&categoryid=' + categorieId;
-            
-        return httpRequest(url, 'GET');
-    };
-    
-    // var getFilterData = function(type) {
-        // var url = baseUrl + type;
-//         
-        // return httpRequest(url, 'GET');
-    // };
-    
     return {
-        getAds: getAllAds,
-        // getFilterData: getFilterData,
-        getFilteredAds: getFilteredAds
+        getAds: getAds
     };
 });

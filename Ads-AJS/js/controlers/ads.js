@@ -3,7 +3,8 @@
 app.controller('AdsList', ['$scope', '$rootScope', 'adsData',
     function($scope, $rootScope, adsData) {
         var ADS_PER_PAGE = 10,
-            PAGER_MAX_SIZE = 5;
+            PAGER_MAX_SIZE = 5,
+            VIEW_NAME = 'Home';
         
         $scope.adsParams = {
             categoryId: '',
@@ -12,7 +13,7 @@ app.controller('AdsList', ['$scope', '$rootScope', 'adsData',
         $scope.currentPage = 1;
         $scope.pagerMaxSize = PAGER_MAX_SIZE;
         $scope.adsPerPage = ADS_PER_PAGE;
-
+        
          // EventListeners
          $scope.$on('categorySelectionChanged', function(ev, selectedCategorieId) {
              $scope.adsParams.categoryId = selectedCategorieId;
@@ -39,6 +40,12 @@ app.controller('AdsList', ['$scope', '$rootScope', 'adsData',
                 });           
         };
         
+        // Event trigger. Set view name to TopNavBar controller
+        $scope.viewChangedToHome = function() {
+            var selectedCategorieId = $scope.categorieId || '';
+            $rootScope.$broadcast('viewNameChanged', VIEW_NAME);
+        };
+        
         // Pagination
         $scope.setPage = function (pageNo) {
             console.log(pageNo);
@@ -50,5 +57,6 @@ app.controller('AdsList', ['$scope', '$rootScope', 'adsData',
         };
         
         $scope.loadAds();
+        $scope.viewChangedToHome();
     }
 ]);

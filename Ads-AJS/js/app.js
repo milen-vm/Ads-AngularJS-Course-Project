@@ -10,7 +10,7 @@ app.config(function($routeProvider) {
     
     $routeProvider.when('/registration-form', {
         templateUrl: 'templates/registration-form.html',
-        controller: 'AdsList'
+        controller: 'AdsList'   // must add another controller
     });
     
     $routeProvider.otherwise({

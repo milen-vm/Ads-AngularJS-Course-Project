@@ -23,12 +23,13 @@ app.controller('RightSideBarFilters', ['$scope', '$rootScope', 'categoriesData',
             }
         );
         
-        $scope.categorieChnaged = function() {
+        // Event triggers
+        $scope.categorieChanged = function() {
             var selectedCategorieId = $scope.categorieId || '';
             $rootScope.$broadcast('categorySelectionChanged', selectedCategorieId);
         };
         
-        $scope.townChnaged = function() {
+        $scope.townChanged = function() {
             var selectedTownId = $scope.townId || '';
             $rootScope.$broadcast('townSelectionChanged', selectedTownId);
         };

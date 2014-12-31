@@ -46,16 +46,14 @@
             <div class="row">
                 <section class="col-xs-12 col-sm-6 col-md-12">
                     <h4>Categories</h4>
-                    <select class="form-control selectpicker col-md-12" ng-model="categorieId" ng-change="categorieChnaged()">
-                        <!-- ng-options="cat as cat.name for cat in categories track by cat.id"> -->
+                    <select class="form-control selectpicker col-md-12" ng-model="categorieId" ng-change="categorieChanged()">
                         <option value="" ng-selected="true">All</option>
                         <option ng-repeat="cat in categories" ng-value="{{ cat.id }}">{{ cat.name }}</option>
                     </select>
                 </section>
                 <section class="col-xs-12 col-sm-6 col-md-12"> 
                     <h4>Towns</h4>
-                    <select class="form-control selectpicker" ng-model="townId" ng-change="townChnaged()">
-                        <!-- ng-options="twn as twn.name for twn in towns track by twn.id"> -->
+                    <select class="form-control selectpicker" ng-model="townId" ng-change="townChanged()">
                         <option value="" ng-selected="true">All</option>
                         <option ng-repeat="town in towns" ng-value="{{ town.id }}">{{ town.name }}</option>                     
                     </select>

@@ -27,7 +27,14 @@ app.factory('userData', function($http, $q) {
         return userDataRequest(url, data);
     }
     
+    function registerUser(data) {
+        var url = baseUrl + 'register';
+        
+        return userDataRequest(url, data);
+    }
+    
     return {
-        loginUser: loginUser
+        loginUser: loginUser,
+        registerUser: registerUser
     };
 });

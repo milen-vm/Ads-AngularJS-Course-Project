@@ -1,16 +1,15 @@
 'use strict';
 
-app.controller('loginForm', ['$scope', '$rootScope', 'userData',
-    function($scope, $rootScope, userData) {
+app.controller('loginForm', ['$scope', '$rootScope', '$cookieStore', 'userData',
+    function($scope, $rootScope, $cookieStore, userData) {
         var LOGIN_VIEW_NAME = 'Login';
         
         $scope.loginUserData = {};
         
         $scope.loginUser = function() {
-            console.log($scope.loginUserData);
             userData.loginUser($scope.loginUserData).then(
                 function(data) {
-                    console.log(data);
+                    $cookieStore.put('accessToken',data.access_token);
                 },
                 function(error) {
                     console.log(error);

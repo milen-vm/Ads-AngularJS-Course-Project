@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('adsApp', ['ngRoute', 'ui.bootstrap', 'ui.bootstrap.tpls']);
+var app = angular.module('adsApp', ['ngRoute', 'ngCookies', 'ui.bootstrap', 'ui.bootstrap.tpls']);
 
 app.config(function($routeProvider) {
     $routeProvider.when('/', {

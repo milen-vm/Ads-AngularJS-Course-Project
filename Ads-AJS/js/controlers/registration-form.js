@@ -19,7 +19,7 @@ app.controller('RegistrationForm', ['$scope', '$rootScope', 'townsData',
         $scope.registerUser = function() {
             console.log($scope.registerForm);
             console.log('registration success');
-            // TODO fix bug on click sends two requests
+            // TODO
         };
         
         // Event trigger. Set view name to TopNavBar controller

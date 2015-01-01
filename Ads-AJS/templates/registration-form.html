@@ -16,7 +16,7 @@
                             </span>
                             <span 
                                 ng-show="registerForm.username.$error.pattern">
-                                The username cannot contain white space.
+                                The username can't contain white space.
                             </span>
                         </span>
                         <input type="text"
@@ -40,11 +40,11 @@
                             </span>
                             <span 
                                 ng-show="registerForm.password.$error.minlength">
-                                 The password is to weak.
+                                 The password must be at least 3 characters.
                             </span>
                             <span 
                                 ng-show="registerForm.password.$error.pattern">
-                                The password cannot contain white space.
+                                The password can't contain white space.
                             </span>
                         </span>
                         <input type="password"
@@ -70,7 +70,7 @@
                             placeholder="Confirm password"
                             class="form-control"
                             name="confirmPassword"
-                            ng-model="confPassword"
+                            ng-model="userData.confirmPassword"
                             password-match="userData.password"/>
                     </div>
                 </div>
@@ -142,7 +142,8 @@
                     </div>
                     <div class="col-xs-12 col-sm-6">
                         <span>Town:</span>
-                        <select class="form-control selectpicker" ng-model="townId">
+                        <select class="form-control selectpicker"
+                            name="townId" ng-model="userData.townId">
                             <option value="" ng-selected="true">Choose town</option>
                             <option ng-repeat="town in towns" ng-value="{{ town.id }}">{{ town.name }}</option>                     
                         </select>
@@ -150,7 +151,7 @@
                 </div> 
                 <div class="row text-center">
                     <div class="col-xs-6">
-                        <button type="submit" class="btn btn-primary"
+                        <button type="button" class="btn btn-primary"
                             ng-disabled="registerForm.$invalid"
                             ng-click="registerUser()">Register</button>
                     </div>

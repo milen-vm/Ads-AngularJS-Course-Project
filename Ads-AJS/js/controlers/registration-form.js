@@ -20,7 +20,6 @@ app.controller('RegistrationForm', ['$scope', '$rootScope', '$cookieStore', 'tow
             console.log($scope.regUserData);
             userData.registerUser($scope.regUserData).then(
                 function(data) {
-                    console.log(data);
                     $cookieStore.put('accessToken',data.access_token);
                 },
                 function(error) {

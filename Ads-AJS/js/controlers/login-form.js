@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('loginForm', ['$scope', '$rootScope', '$cookieStore', 'userData',
-    function($scope, $rootScope, $cookieStore, userData) {
+app.controller('loginForm', ['$scope', '$rootScope','userData', 'userSession',
+    function($scope, $rootScope, userData, userSession) {
         var LOGIN_VIEW_NAME = 'Login';
         
         $scope.loginUserData = {};
@@ -9,7 +9,13 @@ app.controller('loginForm', ['$scope', '$rootScope', '$cookieStore', 'userData',
         $scope.loginUser = function() {
             userData.loginUser($scope.loginUserData).then(
                 function(data) {
-                    $cookieStore.put('accessToken',data.access_token);
+                    var username = $scope.loginUserData.username,
+                        accessToken = data.access_token;
+                        
+                    // $cookieStore.put('accessToken', data.access_token);
+                    userSession.saveUser(username, accessToken);
+                    console.log(userSession.getUsername());
+                    console.log(userSession.getAccessToken());
                 },
                 function(error) {
                     console.log(error);

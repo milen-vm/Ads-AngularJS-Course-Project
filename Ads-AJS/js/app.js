@@ -18,7 +18,7 @@ app.config(function($routeProvider) {
     });
 });
 
-app.directive('passwordMatch', [function () {
+app.directive('passwordMatch', [function () {   // http://rogeralsing.com/2013/08/26/angularjs-directive-to-check-that-passwords-match-followup/
     return {
         restrict: 'A',
         scope:true,
@@ -27,17 +27,18 @@ app.directive('passwordMatch', [function () {
             var checker = function () {
  
                 //get the value of the first password
-                var e1 = scope.$eval(attrs.ngModel);
+                var firstPassword = scope.$eval(attrs.ngModel);
  
                 //get the value of the other password 
-                var e2 = scope.$eval(attrs.passwordMatch);
-                return e1 == e2;
+                var secondPassword = scope.$eval(attrs.passwordMatch);
+                return firstPassword == secondPassword;
             };
+            
             scope.$watch(checker, function (n) {
  
                 //set the form control to valid if both
                 //passwords are the same, else invalid
-                control.$setValidity("unique", n);
+                control.$setValidity('passwordmatch', n);
             });
         }
     };

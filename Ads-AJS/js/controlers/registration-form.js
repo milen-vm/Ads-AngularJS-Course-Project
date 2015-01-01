@@ -5,6 +5,7 @@ app.controller('RegistrationForm', ['$scope', '$rootScope', 'townsData',
         var REGISTER_VIEW_NAME = 'Registration';
                 
         $scope.towns = {};
+        $scope.userData = {};
         
         townsData.getTowns().then(
             function(data) {
@@ -14,6 +15,12 @@ app.controller('RegistrationForm', ['$scope', '$rootScope', 'townsData',
                 console.log(error);
             }
         );
+        
+        $scope.registerUser = function() {
+            console.log($scope.registerForm);
+            console.log('registration success');
+            // TODO fix bug on click sends two requests
+        };
         
         // Event trigger. Set view name to TopNavBar controller
         $scope.viewChangedToHome = function() {

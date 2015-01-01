@@ -15,10 +15,6 @@
                                 The username is required.
                             </span>
                             <span 
-                                ng-show="registerForm.username.$error.minlength">
-                                The username must be at least 3 characters.
-                            </span>
-                            <span 
                                 ng-show="registerForm.username.$error.pattern">
                                 The username cannot contain white space.
                             </span>
@@ -28,7 +24,6 @@
                             class="form-control"
                             name="username"
                             ng-model="userData.username"
-                            ng-minlength="3"
                             ng-trim="false"
                             ng-pattern="/^[\S]*$/"
                             required="required" />
@@ -64,26 +59,86 @@
                     </div>
                     <div class="col-xs-12 col-sm-6">
                         <span>Confirm password:</span>
+                        <span class="text-danger"
+                            ng-show="registerForm.confirmPassword.$invalid">
+                            <span 
+                                ng-show="registerForm.confirmPassword.$error.passwordmatch">
+                                The password do not match.
+                            </span>
+                        </span>
                         <input type="password"
                             placeholder="Confirm password"
                             class="form-control"
-                             />
+                            name="confirmPassword"
+                            ng-model="confPassword"
+                            password-match="userData.password"/>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-6">
-                        <span>Full name:</span>
-                        <input type="text" class="form-control" placeholder="Enter full name">
+                        <span>Name:</span>
+                        <span class="text-danger"
+                            ng-show="registerForm.name.$dirty && registerForm.name.$invalid">
+                            <span 
+                                ng-show="registerForm.name.$error.required">
+                                The name is required.
+                            </span>
+                            <span 
+                                ng-show="registerForm.name.$error.pattern">
+                                Name must be in format 'Jon Doe'.
+                            </span>
+                        </span>
+                        <input type="text"
+                            placeholder="Enter first and second name"
+                            class="form-control"
+                            name="name"
+                            ng-model="userData.name"
+                            ng-pattern="/[A-Za-z]+ [A-Za-z]+/"
+                            required="required" />
                     </div>
                     <div class="col-xs-12 col-sm-6">
-                        <span for="exampleInputEmail1">Email:</span>
-                        <input type="email" class="form-control" placeholder="Enter email">
+                        <span>Email:</span>
+                        <span class="text-danger"
+                            ng-show="registerForm.email.$dirty && registerForm.email.$invalid">
+                            <span 
+                                ng-show="registerForm.email.$error.required">
+                                The email is required.
+                            </span>
+                            <span 
+                                ng-show="registerForm.email.$error.pattern">
+                                Enter valid email.
+                            </span>
+                        </span>
+                        <input type="email"
+                            placeholder="Enter email"
+                            class="form-control"
+                            name="email"
+                            ng-model="userData.email"
+                            ng-pattern="/\S+@\S+\.\S+/"
+                            required="required"/>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-6">
-                        <span for="exampleInputPassword1">Phone:</span>
-                        <input type="text" class="form-control" placeholder="Enter phone">
+                        <span>Phone:</span>
+                        <span class="text-danger"
+                            ng-show="registerForm.phone.$dirty && registerForm.phone.$invalid">
+                            <span 
+                                ng-show="registerForm.phone.$error.required">
+                                The phone is required.
+                            </span>
+                            <span 
+                                ng-show="registerForm.phone.$error.pattern">
+                                The phone must be in format '0999 99 99 99'.
+                            </span>
+                        </span>
+                        <input type="text"
+                            placeholder="Enter phone"
+                            class="form-control"
+                            name="phone"
+                            ng-model="userData.phone"
+                            ng-pattern="/(\d{4}) (\d{2}) (\d{2}) (\d{2})/"
+                            required="required" />
                     </div>
                     <div class="col-xs-12 col-sm-6">
                         <span>Town:</span>
@@ -95,7 +150,9 @@
                 </div> 
                 <div class="row text-center">
                     <div class="col-xs-6">
-                        <button type="submit" class="btn btn-primary">Register</button>
+                        <button type="submit" class="btn btn-primary"
+                            ng-disabled="registerForm.$invalid"
+                            ng-click="registerUser()">Register</button>
                     </div>
                     <div class="col-xs-6">
                         <a class="btn btn-link" href="">Login here</a>                        

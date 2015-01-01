@@ -5,7 +5,7 @@ app.controller('RegistrationForm', ['$scope', '$rootScope', 'townsData',
         var REGISTER_VIEW_NAME = 'Registration';
                 
         $scope.towns = {};
-        $scope.userData = {};
+        $scope.regUserData = {};
         
         townsData.getTowns().then(
             function(data) {
@@ -17,8 +17,8 @@ app.controller('RegistrationForm', ['$scope', '$rootScope', 'townsData',
         );
         
         $scope.registerUser = function() {
+            console.log($scope.regUserData);
             console.log($scope.registerForm);
-            console.log('registration success');
             // TODO
         };
         

@@ -15,7 +15,7 @@ app.config(function($routeProvider) {
     
     $routeProvider.when('/login-form', {
         templateUrl: 'templates/login-form.html',
-        // controller: 'RegistrationForm'
+        controller: 'loginForm'
     });
     
     $routeProvider.otherwise({

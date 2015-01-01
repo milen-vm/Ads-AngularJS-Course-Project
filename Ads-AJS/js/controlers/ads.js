@@ -42,7 +42,6 @@ app.controller('AdsList', ['$scope', '$rootScope', 'adsData',
         
         // Event trigger. Set view name to TopNavBar controller
         $scope.viewChangedToHome = function() {
-            var selectedCategorieId = $scope.categorieId || '';
             $rootScope.$broadcast('viewNameChanged', HOME_VIEW_NAME);
         };
         

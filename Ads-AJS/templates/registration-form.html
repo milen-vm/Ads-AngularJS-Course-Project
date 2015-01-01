@@ -23,7 +23,7 @@
                             placeholder="Enter username"
                             class="form-control"
                             name="username"
-                            ng-model="userData.username"
+                            ng-model="regUserData.username"
                             ng-trim="false"
                             ng-pattern="/^[\S]*$/"
                             required="required" />
@@ -51,7 +51,7 @@
                             placeholder="Enter password"
                             class="form-control"
                             name="password"
-                            ng-model="userData.password"
+                            ng-model="regUserData.password"
                             ng-minlength="3"
                             ng-trim="false"
                             ng-pattern="/^[\S]*$/"
@@ -70,8 +70,8 @@
                             placeholder="Confirm password"
                             class="form-control"
                             name="confirmPassword"
-                            ng-model="userData.confirmPassword"
-                            password-match="userData.password"/>
+                            ng-model="regUserData.confirmPassword"
+                            password-match="regUserData.password"/>
                     </div>
                 </div>
                 <div class="row">
@@ -92,7 +92,7 @@
                             placeholder="Enter first and second name"
                             class="form-control"
                             name="name"
-                            ng-model="userData.name"
+                            ng-model="regUserData.name"
                             ng-pattern="/[A-Za-z]+ [A-Za-z]+/"
                             required="required" />
                     </div>
@@ -113,7 +113,7 @@
                             placeholder="Enter email"
                             class="form-control"
                             name="email"
-                            ng-model="userData.email"
+                            ng-model="regUserData.email"
                             ng-pattern="/\S+@\S+\.\S+/"
                             required="required"/>
                     </div>
@@ -136,14 +136,14 @@
                             placeholder="Enter phone"
                             class="form-control"
                             name="phone"
-                            ng-model="userData.phone"
+                            ng-model="regUserData.phone"
                             ng-pattern="/(\d{4}) (\d{2}) (\d{2}) (\d{2})/"
                             required="required" />
                     </div>
                     <div class="col-xs-12 col-sm-6">
                         <span>Town:</span>
                         <select class="form-control selectpicker"
-                            name="townId" ng-model="userData.townId">
+                            name="townId" ng-model="regUserData.townId">
                             <option value="" ng-selected="true">Choose town</option>
                             <option ng-repeat="town in towns" ng-value="{{ town.id }}">{{ town.name }}</option>                     
                         </select>

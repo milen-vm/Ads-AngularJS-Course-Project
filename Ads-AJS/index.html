@@ -26,7 +26,7 @@
             <a class="navbar-brand" href="#/">Ads - <span>{{ viewName }}</span></a>
             <div class="navbar-collapse collapse">
             <ul id="left-buttons" class="nav navbar-nav navbar-left">
-                <li><a href="/#">Login</a></li>
+                <li><a href="/#/login-form">Login</a></li>
                 <li><a href="#/registration-form">Register</a></li>
                 <!-- Drop down menu -->
                 <li class="dropdown">
@@ -55,7 +55,7 @@
                 <!-- Left side bar -->
                 <aside id="login-register" class="hidden-xs hidden-sm col-md-2 navbar navbar-side">
                     <span>To publish a new ad, please login.</span>
-                    <a class="btn btn-primary btn-block" href="">Login</a>
+                    <a class="btn btn-primary btn-block" href="/#/login-form">Login</a>
                     <a class="btn btn-primary btn-block" href="#/registration-form">Register</a>
                 </aside>
                 <!-- Views container -->
@@ -80,9 +80,11 @@
         <script src="libs/bootstrap/js/ui-bootstrap-tpls-0.12.0.min.js"></script>        
         <!-- My scripts -->
         <script src="js/app.js"></script>
+        <script src="js/directives/password-match.js"></script>
         <script src="js/services/ads-data.js"></script>
         <script src="js/services/categories-data.js"></script>
         <script src="js/services/towns-data.js"></script>
+        <script src="js/services/user-data.js"></script>
         <script src="js/controlers/ads.js"></script>
         <script src="js/controlers/right-sidebar-filters.js"></script>
         <script src="js/controlers/top-navbar.js"></script>

@@ -1,0 +1,75 @@
+<section class="col-md-10">
+    <div class="row">
+    <div id="login-form" class="col-sm-6 col-sm-offset-3 col-md-5 col-md-offset-3"> 
+    <div class="panel panel-primary">
+        <div class="panel-heading text-center">
+            <strong class="title">Login</strong>
+        </div>
+        <div class="panel-body">
+            <form name="loginForm" class="form-group" novalidate="novalidate" ng-submit="loginUser()">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <span>Username:</span>
+                        <span class="text-danger"
+                            ng-show="loginForm.username.$dirty && loginForm.username.$invalid">
+                            <span 
+                                ng-show="loginForm.username.$error.required">
+                                The username is required.
+                            </span>
+                            <span 
+                                ng-show="loginForm.username.$error.pattern">
+                                The username can't contain white space.
+                            </span>
+                        </span>
+                        <input type="text"
+                            placeholder="Enter username"
+                            class="form-control"
+                            name="username"
+                            ng-model="loginUserData.username"
+                            ng-trim="false"
+                            ng-pattern="/^[\S]*$/"
+                            required="required" />
+                    </div>
+                    <div class="col-xs-12">
+                        <span>Password:</span>
+                        <span class="text-danger"
+                            ng-show="loginForm.password.$dirty && loginForm.password.$invalid">
+                            <span 
+                                ng-show="loginForm.password.$error.required">
+                                The password is required.
+                            </span>
+                            <span 
+                                ng-show="loginForm.password.$error.minlength">
+                                 The password must be at least 3 characters.
+                            </span>
+                            <span 
+                                ng-show="loginForm.password.$error.pattern">
+                                The password can't contain white space.
+                            </span>
+                        </span>
+                        <input type="password"
+                            placeholder="Enter password"
+                            class="form-control"
+                            name="password"
+                            ng-model="loginUserData.password"
+                            ng-minlength="3"
+                            ng-trim="false"
+                            ng-pattern="/^[\S]*$/"
+                            required="required" />
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-xs-6">
+                        <button type="submit" class="btn btn-primary"
+                            ng-disabled="loginForm.$invalid">Login</button>
+                    </div>
+                    <div class="col-xs-6">
+                        <a class="btn btn-link" href="/#/registration-form">Register here</a>                        
+                    </div>
+                </div>              
+            </form>
+        </div>
+    </div>  
+    </div>
+    </div>
+</section>

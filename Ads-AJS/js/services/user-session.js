@@ -27,6 +27,16 @@ app.factory('userSession', function($cookieStore) {
         };
     }
     
+    function hasUserData() {
+        var user = $cookieStore.get('user');
+        
+        if (user) {
+            return true;
+        } else {
+            return false;
+        };
+    }
+    
     function removeUserData() {
         $cookieStore.remove('user');
     }
@@ -35,6 +45,7 @@ app.factory('userSession', function($cookieStore) {
         saveUser: saveUserData,
         getUsername: getUsername,
         getAccessToken: getAccessToken,
+        hasUser: hasUserData,
         removeUser: removeUserData
     };
 });

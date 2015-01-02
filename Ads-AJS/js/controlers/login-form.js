@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('loginForm', ['$scope', '$rootScope','userData', 'userSession',
-    function($scope, $rootScope, userData, userSession) {
+app.controller('loginForm', ['$scope', '$rootScope', '$location','userData', 'userSession',
+    function($scope, $rootScope, $location, userData, userSession) {
         var LOGIN_VIEW_NAME = 'Login';
         
         $scope.loginUserData = {};
@@ -12,19 +12,22 @@ app.controller('loginForm', ['$scope', '$rootScope','userData', 'userSession',
                     var username = $scope.loginUserData.username,
                         accessToken = data.access_token;
                         
-                    // $cookieStore.put('accessToken', data.access_token);
                     userSession.saveUser(username, accessToken);
-                    console.log(userSession.getUsername());
-                    console.log(userSession.getAccessToken());
+                    $scope.userLoggedIn();
+                    $location.path('#/');
                 },
                 function(error) {
                     console.log(error);
                 });
         };
         
-        // Event trigger. Set view name to TopNavBar controller
+        // Events
         $scope.viewChangedToLogin = function() {
             $rootScope.$broadcast('viewNameChanged', LOGIN_VIEW_NAME);
+        };
+        
+        $scope.userLoggedIn = function() {
+            $rootScope.$broadcast('userLoggedIn');
         };
         
         $scope.viewChangedToLogin();

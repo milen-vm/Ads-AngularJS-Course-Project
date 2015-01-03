@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('loginForm', ['$scope', '$rootScope', '$location','userData', 'userSession',
+app.controller('LoginForm', ['$scope', '$rootScope', '$location','userData', 'userSession',
     function($scope, $rootScope, $location, userData, userSession) {
         var LOGIN_VIEW_NAME = 'Login';
         

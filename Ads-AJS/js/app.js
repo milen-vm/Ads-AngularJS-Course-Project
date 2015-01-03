@@ -15,7 +15,12 @@ app.config(function($routeProvider) {
     
     $routeProvider.when('/login-form', {
         templateUrl: 'templates/login-form.html',
-        controller: 'loginForm'
+        controller: 'LoginForm'
+    });
+    
+    $routeProvider.when('/publish-new-ad', {
+        templateUrl: 'templates/publish-new-ad.html',
+        controller: 'PublishNewAd'
     });
     
     $routeProvider.otherwise({

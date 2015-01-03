@@ -1,22 +1,28 @@
 'use strict';
 
-app.controller('TopNavBar', ['$scope', '$rootScope', 'userSession',
-    function($scope, $rootScope, userSession) {
+app.controller('NavigationBars', ['$scope', '$rootScope', '$location', 'userSession',
+    function($scope, $rootScope, $location, userSession) {
         $scope.viewName = '';
         $scope.username = '';        
-        $scope.showUsername = false;
+        $scope.hasUser = false;
         
         $scope.isUserLoggedIn = function() {
-            var hasUser = userSession.hasUser();
-            if (hasUser) {
+            if (userSession.hasUser()) {
                 $scope.username = userSession.getUsername();
-                $scope.showUsername = true;
-            } else{};
+                $scope.hasUser = true;
+            };
         };
         
         $scope.logoutUser = function() {
             userSession.removeUser();
-            $scope.showUsername = false;
+            $scope.hasUser = false;
+        };
+        
+        // Adds active state on navigation buttons
+        $scope.isActive = function (viewLocation) {
+            var active = (viewLocation === $location.path());
+            
+            return active;
         };
         
         // EventListeners
@@ -26,7 +32,7 @@ app.controller('TopNavBar', ['$scope', '$rootScope', 'userSession',
         
         $scope.$on('userLoggedIn', function(ev) {
             $scope.username = userSession.getUsername();
-            $scope.showUsername = true;
+            $scope.hasUser = true;
         });
         
         $scope.isUserLoggedIn();

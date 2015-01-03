@@ -75,6 +75,28 @@ img {
 #left-nav header {
     padding: 5px 0;
 }
+
+#ad-data input, #ad-data textarea {
+    margin-bottom: 15px;
+}
+
+
+#image-box {
+    min-height: 200px;
+}
+
+#browse {
+    margin: 15px 0;
+}
+
+#submit-ad {
+    margin-right: 5%;
+}
+
+#cancel-ad {
+    margin-left: 5%;
+}
+
 /*input.ng-invalid {
   border: 1px solid red;
 }

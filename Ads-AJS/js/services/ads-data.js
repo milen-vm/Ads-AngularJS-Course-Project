@@ -3,14 +3,14 @@
 app.factory('adsData', function($http, $q) {
     var baseUrl = 'http://softuni-ads.azurewebsites.net/api/';       // http://localhost:1337
 
-    function getAds(categoryId, townId, pageSize, startPage) {
-        var defer = $q.defer(),
-            url = baseUrl + 'Ads?CategoryId=' + categoryId + '&TownId=' + townId +
-                '&StartPage=' + startPage + '&PageSize=' + pageSize;
+    function adsDataRequest(url, method, data, headers) {
+        var defer = $q.defer();
         
         $http({
-            method: 'GET',
-            url: url
+            method: method,
+            url: url,
+            headers: headers,
+            data: data
         })
         .success(function(data, status, headers, config) {
             defer.resolve(data);
@@ -22,7 +22,22 @@ app.factory('adsData', function($http, $q) {
         return defer.promise;
     }
     
+    function getAds(categoryId, townId, pageSize, startPage) {
+        var url = baseUrl + 'Ads?CategoryId=' + categoryId + '&TownId=' + townId +
+                '&StartPage=' + startPage + '&PageSize=' + pageSize;
+                
+        return adsDataRequest(url, 'GET', null, null);
+    }
+    
+    function createNewAd(data, accessToken) {
+        var url = baseUrl + 'user/ads',
+            headers = { 'Authorization': 'Bearer ' + accessToken };
+        
+        return adsDataRequest(url, 'POST', data, headers);
+    }
+    
     return {
-        getAds: getAds
+        getAds: getAds,
+        createNewAd: createNewAd
     };
 });

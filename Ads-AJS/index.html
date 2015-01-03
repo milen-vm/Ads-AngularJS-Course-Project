@@ -30,7 +30,7 @@
                 <li ng-hide="hasUser"><a href="#/registration-form">Register</a></li>
                 <!-- Drop down menu -->
                 <li class="dropdown" ng-show="hasUser">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#/">Home</a></li>                           
                         <li><a href="#/">My Ads</a></li>
@@ -45,7 +45,7 @@
             </ul>
             <!-- Right buttons -->
             <ul class="nav navbar-nav navbar-right" ng-show="hasUser">
-                <li><p class="navbar-text">{{ username }}</p></li>
+                <li><p id="username" class="navbar-text">{{ username }}</p></li>
                <li><a href="#/" ng-click="logoutUser()">Logout</a></li>
             </ul>
             </div>
@@ -54,30 +54,49 @@
             <div class="row">
                 <!-- Left side bar -->
                 <aside class="hidden-xs hidden-sm col-md-3 col-lg-2" ng-controller="NavigationBars" >
+                    <!-- Login - Register -->
                     <nav id="login-register" class="navbar navbar-side" ng-hide="hasUser">
                         <span>To publish a new ad, please login.</span>
                         <a class="btn btn-primary btn-block" href="#/login-form">Login</a>
                         <a class="btn btn-primary btn-block" href="#/registration-form">Register</a>
                     </nav>
-                    <nav id="left-nav" class="navbar" ng-show="hasUser">
-                        <header class="text-center">
-                            <strong class="title">Navigation</strong>
-                        </header>                        
-                        <ul class="nav nav-pills nav-stacked">
-                            <li ng-class="{ active: isActive('/')}">
-                                <a href="#/">Home</a>
-                            </li>                           
-                            <li ng-class="{ active: isActive('/#')}">
-                                <a href="#/">My Ads</a>
-                            </li>
-                            <li ng-class="{ active: isActive('/publish-new-ad')}">
-                                <a href="#/publish-new-ad">Publish New Ad</a>
-                            </li>
-                            <li ng-class="{ active: isActive('/#')}">
-                                <a href="#/">Edit Profile</a>
-                            </li>
-                        </ul>
-                    </nav>                  
+                    <!-- User -->
+                    <section ng-show="hasUser">
+                        <nav class="user-nav navbar">
+                            <!-- Navigation -->
+                            <header class="text-center">
+                                <strong class="title">Navigation</strong>
+                            </header>                        
+                            <ul id="tree" class="nav nav-pills nav-stacked">
+                                <li ng-class="{ active: isActive('/')}">
+                                    <a href="#/">Home</a>
+                                </li>                           
+                                <li type="button" class="btn btn-primary" ng-class="{ active: isActive('')}">
+                                    My Ads
+                                    <ul class="nav nav-pills nav-stacked">
+                                        <li ng-class="{ active: isActive('')}">
+                                            <a href="#/">1</a>
+                                        </li>                           
+                                        <li ng-class="{ active: isActive('')}">
+                                            <a href="#/">2</a>
+                                        </li>
+                                        <li ng-class="{ active: isActive('')}">
+                                            <a href="#/publish-new-ad">3</a>
+                                        </li>
+                                        <li ng-class="{ active: isActive('')}">
+                                            <a href="#/">4</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li ng-class="{ active: isActive('/publish-new-ad')}">
+                                    <a href="#/publish-new-ad">Publish New Ad</a>
+                                </li>
+                                <li ng-class="{ active: isActive('/#')}">
+                                    <a href="#/">Edit Profile</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </section>                  
                 </aside>
                 <!-- Views container -->
                 <section ng-view></section>
@@ -97,9 +116,10 @@
         <script src="libs/angular-cookies.min.js"></script>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="libs/jQuery/jquery-tree-view.js"></script>
         <!-- Bootstrap plugins -->
         <script src="libs/bootstrap/js/bootstrap.min.js"></script>
-        <script src="libs/bootstrap/js/ui-bootstrap-tpls-0.12.0.min.js"></script>
+        <script src="libs/bootstrap/js/ui-bootstrap-tpls-0.12.0.min.js"></script>      
         <!-- My scripts -->
         <script src="js/app.js"></script>
         <script src="js/directives/password-match.js"></script>

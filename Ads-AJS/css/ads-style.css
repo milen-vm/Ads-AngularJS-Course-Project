@@ -35,6 +35,10 @@ img {
     margin: auto;
 }
 
+#username {
+    margin-left: 15px;
+}
+
 #top-navbar {
     margin-bottom: 50px;
 }
@@ -68,12 +72,16 @@ img {
     margin-bottom: 15px;
 }
 
-#left-nav {
+.user-nav {
     padding: 5px;
 }
 
-#left-nav header {
+.user-nav header {
     padding: 5px 0;
+}
+
+li > ul {
+    display: none;
 }
 
 #ad-data input, #ad-data textarea {
@@ -96,6 +104,7 @@ img {
 #cancel-ad {
     margin-left: 5%;
 }
+
 
 /*input.ng-invalid {
   border: 1px solid red;

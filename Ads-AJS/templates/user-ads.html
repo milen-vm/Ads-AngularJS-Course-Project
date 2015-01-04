@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-3">
                     <a href="{{ ad.imageDataUrl }}" class="thumbnail">
-                        <img src="" ng-src="{{ ad.imageDataUrl }}" alt="image" />
+                        <img src="" alt="image" ng-src="{{ ad.imageDataUrl }}" err-src="../img/no-image.gif" />
                     </a>
                 </div>
                 <div class="col-xs-12 col-sm-9 col-md-6">
@@ -19,12 +19,22 @@
                         <li class="list-group-item">Town: <span>{{ ad.townName }}</span></li>                                
                     </ul>
                 </div>
-                <div id="ad-status" class="col-xs-12 col-sm-12 col-md-3 text-center">
+                <div class="col-md-3 text-center">
                     <strong>Status:</strong>
-                    <div class="well well-sm"><span class="title">Active</span></div>
-                    <button class="btn btn-primary" ng-click="deactivateAd(ad.id)">Deactive</button>
-                </div>                          
-            </div>
+                    <div class="well well-sm status-box">
+                        <span class="title">{{ ad.status }}</span>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary ad-status-btn" ng-hide="ad.status == 'Inactive'"
+                        ng-click="deactivateAd(ad.id)">Deactive</button>
+                    </div>                    
+                    <section ng-show="ad.status == 'Inactive'">
+                        <button class="btn btn-primary ad-status-btn" ng-click="editAd(ad.id)">Edit</button>
+                        <button class="btn btn-primary ad-status-btn" ng-click="publishAgainAd(ad.id)">Publish Again</button>
+                        <button class="btn btn-primary ad-status-btn" ng-click="deleteAd(ad.id)">Delete</button>                    
+                    </section>
+                </div>
+            </div>                          
         </div>
     </div>
     <!-- Paging -->

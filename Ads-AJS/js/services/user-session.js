@@ -7,6 +7,7 @@ app.factory('userSession', function($cookieStore) {
             userName: userName,
             accessToken: accessToken
         };
+        console.log(accessToken);
         
         $cookieStore.put('user', user);
     }

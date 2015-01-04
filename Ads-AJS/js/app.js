@@ -23,9 +23,9 @@ app.config(function($routeProvider) {
         controller: 'PublishNewAd'
     });
     
-    $routeProvider.when('/user-all-ads', {
-        templateUrl: 'templates/user-all-ads.html',
-        controller: 'UserAllAds'
+    $routeProvider.when('/user-ads', {
+        templateUrl: 'templates/user-ads.html',
+        controller: 'UserAds'
     });
     
     $routeProvider.otherwise({

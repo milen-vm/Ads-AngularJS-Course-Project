@@ -25,6 +25,11 @@ app.controller('NavigationBars', ['$scope', '$rootScope', '$location', 'userSess
             return active;
         };
         
+        //Event
+        $scope.inactiveClicked = function() {
+            $rootScope.$broadcast('inactiveAdsSelected');
+        }
+        
         // EventListeners
         $scope.$on('viewNameChanged', function(ev, viewName) {
             $scope.viewName = viewName;

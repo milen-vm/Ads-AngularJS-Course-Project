@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('UserAllAds', ['$scope', '$rootScope', 'adsData', 'userSession',
+app.controller('UserAds', ['$scope', '$rootScope', 'adsData', 'userSession',
     function($scope, $rootScope, adsData, userSession) {
         var USER_ADS_VIEW_NAME = 'My Ads',
             ADS_PER_PAGE = 10,
@@ -14,7 +14,7 @@ app.controller('UserAllAds', ['$scope', '$rootScope', 'adsData', 'userSession',
         $scope.loadUserAds = function () {
             var accessToken = userSession.getAccessToken();   
             
-            adsData.getUserAds($scope.adsPerPage, $scope.currentPage, accessToken).then(
+            adsData.getUserAds($scope.adsPerPage, $scope.currentPage, accessToken, '').then(
                 function(data) {
                     $scope.userAds = data;
                     $scope.totalAds = $scope.userAds.numItems;
@@ -36,10 +36,15 @@ app.controller('UserAllAds', ['$scope', '$rootScope', 'adsData', 'userSession',
                 });
         };
         
-        // Events
+        // Event
         $scope.viewChangedToUserAllAds = function() {
             $rootScope.$broadcast('viewNameChanged', USER_ADS_VIEW_NAME);
         };
+        
+        // EventListener
+        $scope.$on('inactiveAdsSelected', function(ev) {
+            $scope.viewName = viewName;
+        });
         
         // Pagination
         $scope.pageChanged = function() {
@@ -48,9 +53,5 @@ app.controller('UserAllAds', ['$scope', '$rootScope', 'adsData', 'userSession',
         
         $scope.loadUserAds();
         $scope.viewChangedToUserAllAds();
-        
-        // $('img').error(function(){
-            // $(this).attr('src', '../img/photo-default.gif');
-        // });
     }
 ]);

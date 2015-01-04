@@ -74,16 +74,16 @@
                                 <li>
                                     <a href>My Ads</a>
                                     <ul id="sub-menu" class="nav nav-pills nav-stacked">
-                                        <li ng-class="{ active: isActive('/user-all-ads')}">
-                                            <a href="#/user-all-ads">All</a>
+                                        <li ng-class="{ active: isActive('/user-ads')}">
+                                            <a href="#/user-ads">All</a>
                                         </li>                           
                                         <li ng-class="{ active: isActive('')}">
                                             <a href="#/">2</a>
                                         </li>
                                         <li ng-class="{ active: isActive('')}">
-                                            <a href="#/publish-new-ad">3</a>
+                                            <a href="#/user-ads" ng-click="inactiveClicked()">Inactive</a>
                                         </li>
-                                        <li ng-class="{ active: isActive('')}">
+                                        <li ng-class="{ active: isActive('/user-inactive-ads')}">
                                             <a href="#/">4</a>
                                         </li>
                                     </ul>
@@ -119,7 +119,7 @@
         <script src="libs/jQuery/jquery-tree-view.js"></script>
         <!-- Bootstrap plugins -->
         <script src="libs/bootstrap/js/bootstrap.min.js"></script>
-        <script src="libs/bootstrap/js/ui-bootstrap-tpls-0.12.0.min.js"></script>      
+        <script src="libs/bootstrap/js/ui-bootstrap-tpls-0.12.0.min.js"></script> 
         <!-- My scripts -->
         <script src="js/app.js"></script>
         <script src="js/directives/password-match.js"></script>
@@ -135,6 +135,6 @@
         <script src="js/controlers/navigation-bars.js"></script>
         <script src="js/controlers/registration-form.js"></script>
         <script src="js/controlers/login-form.js"></script>
-        <script src="js/controlers/user-all-ads.js"></script>
+        <script src="js/controlers/user-ads.js"></script>
     </body>
 </html>

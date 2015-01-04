@@ -109,11 +109,21 @@ li > ul {
     margin-left: 5%;
 }
 
-#ad-status div {
-    max-width: 200px;
-    margin: 15px auto;
+.status-box {
+    margin-top: 5px;
+    margin-bottom: 0;
 }
 
+.ad-status-btn {
+    margin-top: 10px;
+    width: 100%;
+}
+
+@media screen and (max-width: 992px) {
+    .ad-status-btn {
+        width: 32.8%;       
+    }
+}
 
 /*input.ng-invalid {
   border: 1px solid red;

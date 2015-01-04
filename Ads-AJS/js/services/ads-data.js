@@ -36,8 +36,9 @@ app.factory('adsData', function($http, $q) {
         return adsDataRequest(url, 'POST', data, headers);
     }
 
-    function getUserAds(pageSize, startPage, accessToken) {
-        var url = baseUrl + 'user/ads?pagesize=' + pageSize + '&startpage=' + startPage,
+    function getUserAds(pageSize, startPage, accessToken, status) {
+        var url = baseUrl + 'user/ads?pagesize=' + pageSize + '&startpage=' + startPage +
+                '&status=' + status,
             headers = { 'Authorization': 'Bearer ' + accessToken };
         
         return adsDataRequest(url, 'GET', null, headers);

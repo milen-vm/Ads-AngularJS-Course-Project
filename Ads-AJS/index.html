@@ -71,20 +71,23 @@
                                 <li ng-class="{ active: isActive('/')}">
                                     <a href="#/">Home</a>
                                 </li>                           
-                                <li>
-                                    <a href>My Ads</a>
+                                <li ng-class="{ active: isActive('/user-ads')}">
+                                    <a href="#/user-ads">My Ads<span class="caret"></span></a>
                                     <ul id="sub-menu" class="nav nav-pills nav-stacked">
-                                        <li ng-class="{ active: isActive('/user-ads')}">
-                                            <a href="#/user-ads">All</a>
+                                        <li>
+                                            <a href="#/user-ads" ng-click="allClicked()">All</a>
                                         </li>                           
-                                        <li ng-class="{ active: isActive('')}">
-                                            <a href="#/">2</a>
+                                        <li>
+                                            <a href="#/user-ads" ng-click="publishedCliked()">Published</a>
                                         </li>
-                                        <li ng-class="{ active: isActive('')}">
+                                        <li>
+                                            <a href="#/user-ads" ng-click="waitingApprovalClicked()">Waiting Approval</a>
+                                        </li>
+                                        <li>
                                             <a href="#/user-ads" ng-click="inactiveClicked()">Inactive</a>
                                         </li>
-                                        <li ng-class="{ active: isActive('/user-inactive-ads')}">
-                                            <a href="#/">4</a>
+                                        <li>
+                                            <a href="#/user-ads" ng-click="rejectedClicked()">Rejected</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -136,5 +139,6 @@
         <script src="js/controlers/registration-form.js"></script>
         <script src="js/controlers/login-form.js"></script>
         <script src="js/controlers/user-ads.js"></script>
+        <script src="js/controlers/delete-ad.js"></script>
     </body>
 </html>

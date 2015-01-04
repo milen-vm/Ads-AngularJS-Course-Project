@@ -26,9 +26,25 @@ app.controller('NavigationBars', ['$scope', '$rootScope', '$location', 'userSess
         };
         
         //Event
+        $scope.allClicked = function() {
+            $rootScope.$broadcast('adsStatusChanged', '');
+        };
+        
+        $scope.publishedCliked = function() {
+            $rootScope.$broadcast('adsStatusChanged', 'Published');
+        };
+        
         $scope.inactiveClicked = function() {
-            $rootScope.$broadcast('inactiveAdsSelected');
-        }
+            $rootScope.$broadcast('adsStatusChanged', 'Inactive');
+        };
+        
+        $scope.waitingApprovalClicked = function() {
+            $rootScope.$broadcast('adsStatusChanged', 'WaitingApproval');
+        };
+        
+        $scope.rejectedClicked = function() {
+            $rootScope.$broadcast('adsStatusChanged', 'Rejected');
+        };     
         
         // EventListeners
         $scope.$on('viewNameChanged', function(ev, viewName) {
@@ -41,5 +57,6 @@ app.controller('NavigationBars', ['$scope', '$rootScope', '$location', 'userSess
         });
         
         $scope.isUserLoggedIn();
+        // console.log(userSession.getAccessToken());
     }
 ]);

@@ -6,7 +6,8 @@ app.controller('UserAds', ['$scope', '$rootScope', 'adsData', 'userSession',
             ADS_PER_PAGE = 10,
             PAGER_MAX_SIZE = 5;
         
-        $scope.userAds = {};    
+        $scope.userAds = {}; 
+        $scope.adsStatus = '';   
         $scope.currentPage = 1;
         $scope.pagerMaxSize = PAGER_MAX_SIZE;
         $scope.adsPerPage = ADS_PER_PAGE;
@@ -14,7 +15,7 @@ app.controller('UserAds', ['$scope', '$rootScope', 'adsData', 'userSession',
         $scope.loadUserAds = function () {
             var accessToken = userSession.getAccessToken();   
             
-            adsData.getUserAds($scope.adsPerPage, $scope.currentPage, accessToken, '').then(
+            adsData.getUserAds($scope.adsPerPage, $scope.currentPage, accessToken, $scope.adsStatus).then(
                 function(data) {
                     $scope.userAds = data;
                     $scope.totalAds = $scope.userAds.numItems;
@@ -42,8 +43,9 @@ app.controller('UserAds', ['$scope', '$rootScope', 'adsData', 'userSession',
         };
         
         // EventListener
-        $scope.$on('inactiveAdsSelected', function(ev) {
-            $scope.viewName = viewName;
+        $scope.$on('adsStatusChanged', function(ev, status) {
+            $scope.adsStatus = status;
+            $scope.loadUserAds();
         });
         
         // Pagination

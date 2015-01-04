@@ -23,6 +23,11 @@ app.config(function($routeProvider) {
         controller: 'PublishNewAd'
     });
     
+    $routeProvider.when('/user-all-ads', {
+        templateUrl: 'templates/user-all-ads.html',
+        controller: 'UserAllAds'
+    });
+    
     $routeProvider.otherwise({
         redirectTo: '/'
     });

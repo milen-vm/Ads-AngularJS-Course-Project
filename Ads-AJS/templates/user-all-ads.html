@@ -1,0 +1,42 @@
+<section class="col-sm-12 col-md-10">
+    <!-- Ads list -->
+    <div class="panel panel-primary" ng-repeat="ad in userAds.ads">
+        <div class="panel-heading">
+            <strong class="title">{{ ad.title }}</strong><span class="pull-right">{{ ad.date | date: 'd MMM yyyy' }}</span>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3">
+                    <a href="{{ ad.imageDataUrl }}" class="thumbnail">
+                        <img src="" ng-src="{{ ad.imageDataUrl }}" alt="image" />
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-9 col-md-6">
+                    <p>{{ ad.text }}</p>
+                    <ul class="list-group">
+                        <li class="list-group-item">Category: <span>{{ ad.categoryName }}</span></li>
+                        <li class="list-group-item">Town: <span>{{ ad.townName }}</span></li>                                
+                    </ul>
+                </div>
+                <div id="ad-status" class="col-xs-12 col-sm-12 col-md-3 text-center">
+                    <strong>Status:</strong>
+                    <div class="well well-sm"><span class="title">Active</span></div>
+                    <button class="btn btn-primary" ng-click="deactivateAd(ad.id)">Deactive</button>
+                </div>                          
+            </div>
+        </div>
+    </div>
+    <!-- Paging -->
+    <nav class="text-center">
+        <ul pagination
+            total-items="totalAds"
+            items-per-page="adsPerPage"
+            ng-model="currentPage"
+            max-size="pagerMaxSize"
+            ng-change="pageChanged()"
+            boundary-links="true"
+            previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+        </ul>
+    </nav>
+</section>

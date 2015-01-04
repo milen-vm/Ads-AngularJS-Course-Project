@@ -55,6 +55,8 @@ app.controller('AdsList', ['$scope', '$rootScope', 'adsData',
             $scope.loadAds();
         };
         
+        
+        
         $scope.loadAds();
         $scope.viewChangedToHome();
     }

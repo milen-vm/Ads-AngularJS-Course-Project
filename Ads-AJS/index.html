@@ -53,7 +53,7 @@
         <div class="container">           
             <div class="row">
                 <!-- Left side bar -->
-                <aside class="hidden-xs hidden-sm col-md-3 col-lg-2" ng-controller="NavigationBars" >
+                <aside class="hidden-xs hidden-sm col-md-2 col-lg-2" ng-controller="NavigationBars" >
                     <!-- Login - Register -->
                     <nav id="login-register" class="navbar navbar-side" ng-hide="hasUser">
                         <span>To publish a new ad, please login.</span>
@@ -71,11 +71,11 @@
                                 <li ng-class="{ active: isActive('/')}">
                                     <a href="#/">Home</a>
                                 </li>                           
-                                <li type="button" class="btn btn-primary" ng-class="{ active: isActive('')}">
-                                    My Ads
-                                    <ul class="nav nav-pills nav-stacked">
-                                        <li ng-class="{ active: isActive('')}">
-                                            <a href="#/">1</a>
+                                <li>
+                                    <a href>My Ads</a>
+                                    <ul id="sub-menu" class="nav nav-pills nav-stacked">
+                                        <li ng-class="{ active: isActive('/user-all-ads')}">
+                                            <a href="#/user-all-ads">All</a>
                                         </li>                           
                                         <li ng-class="{ active: isActive('')}">
                                             <a href="#/">2</a>
@@ -123,6 +123,7 @@
         <!-- My scripts -->
         <script src="js/app.js"></script>
         <script src="js/directives/password-match.js"></script>
+        <script src="js/directives/load-default-image.js"></script>
         <script src="js/services/ads-data.js"></script>
         <script src="js/services/categories-data.js"></script>
         <script src="js/services/towns-data.js"></script>
@@ -134,5 +135,6 @@
         <script src="js/controlers/navigation-bars.js"></script>
         <script src="js/controlers/registration-form.js"></script>
         <script src="js/controlers/login-form.js"></script>
+        <script src="js/controlers/user-all-ads.js"></script>
     </body>
 </html>

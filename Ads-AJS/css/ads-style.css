@@ -1,5 +1,5 @@
 body {
-    background-image: url("../img/thumb07.jpg");
+    background-image: url("../img/background.jpg");
     background-repeat: repeat;
     background-attachment: fixed;
 }
@@ -84,6 +84,10 @@ li > ul {
     display: none;
 }
 
+#sub-menu {
+    margin: 2px 0 5px 0;
+}
+
 #ad-data input, #ad-data textarea {
     margin-bottom: 15px;
 }
@@ -103,6 +107,11 @@ li > ul {
 
 #cancel-ad {
     margin-left: 5%;
+}
+
+#ad-status div {
+    max-width: 200px;
+    margin: 15px auto;
 }
 
 

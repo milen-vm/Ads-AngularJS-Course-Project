@@ -35,9 +35,25 @@ app.factory('adsData', function($http, $q) {
         
         return adsDataRequest(url, 'POST', data, headers);
     }
+
+    function getUserAds(pageSize, startPage, accessToken) {
+        var url = baseUrl + 'user/ads?pagesize=' + pageSize + '&startpage=' + startPage,
+            headers = { 'Authorization': 'Bearer ' + accessToken };
+        
+        return adsDataRequest(url, 'GET', null, headers);
+    }
+    
+    function deactiveAd(id, accessToken) {
+        var url = baseUrl + 'user/ads/deactivate/' + id,
+            headers = { 'Authorization': 'Bearer ' + accessToken };
+            
+        return adsDataRequest(url, 'PUT', null, headers);
+    }
     
     return {
         getAds: getAds,
-        createNewAd: createNewAd
+        createNewAd: createNewAd,
+        getUserAds: getUserAds,
+        deactiveAd: deactiveAd
     };
 });

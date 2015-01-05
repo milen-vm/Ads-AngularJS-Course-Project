@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('UserAds', ['$scope', '$rootScope', '$location', 'adsData', 'userSession',
-    function($scope, $rootScope, $location, adsData, userSession) {
+app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsData', 'userSession',
+    function($scope, $rootScope, $location, $route, adsData, userSession) {
         var USER_ADS_VIEW_NAME = 'My Ads',
             ADS_PER_PAGE = 10,
             PAGER_MAX_SIZE = 5;
@@ -32,6 +32,7 @@ app.controller('UserAds', ['$scope', '$rootScope', '$location', 'adsData', 'user
             adsData.deactiveAd(id, accessToken).then(
                 function(data) {
                     console.log(data);
+                    $route.reload();
                 },
                 function(error) {
                    console.log(error); 
@@ -48,9 +49,7 @@ app.controller('UserAds', ['$scope', '$rootScope', '$location', 'adsData', 'user
            adsData.deleteAd(id, accessToken).then(
                 function(data) {
                     console.log(data);
-                    // $location.path('/user-ads');
-                    // $route.reload();
-                    $window.location.reload();
+                    $route.reload();
                 },
                 function(error) {
                    console.log(error); 

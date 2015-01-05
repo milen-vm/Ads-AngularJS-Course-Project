@@ -6,7 +6,8 @@ app.controller('UserAds', ['$scope', '$rootScope', '$location', 'adsData', 'user
             ADS_PER_PAGE = 10,
             PAGER_MAX_SIZE = 5;
         
-        $scope.userAds = {}; 
+        $scope.userAds = {};
+        $scope.adForDeleting = {};
         $scope.adsStatus = '';   
         $scope.currentPage = 1;
         $scope.pagerMaxSize = PAGER_MAX_SIZE;
@@ -37,20 +38,28 @@ app.controller('UserAds', ['$scope', '$rootScope', '$location', 'adsData', 'user
                 });
         };
         
-        $scope.deleteAdClicked = function(id) {
-            
-            $scope.adSelectedForDeleting(id);
-            $location.path('/delete-ad');
+        $scope.deleteAdClicked = function(ad) {
+            $scope.adForDeleting = ad;
+        };
+        
+        $scope.deleteAdConfirmed = function(id) {
+           var accessToken = userSession.getAccessToken();
+                        
+           adsData.deleteAd(id, accessToken).then(
+                function(data) {
+                    console.log(data);
+                    // $location.path('/user-ads');
+                    // $route.reload();
+                    $window.location.reload();
+                },
+                function(error) {
+                   console.log(error); 
+                });            
         };
         
         // Events
         $scope.viewChangedToUserAllAds = function() {
             $rootScope.$broadcast('viewNameChanged', USER_ADS_VIEW_NAME);
-        };
-        
-        $scope.adSelectedForDeleting = function(id) {
-            console.log(id + 'from events');
-            $rootScope.$broadcast('adForDeleting', id);
         };
         
         // EventListener

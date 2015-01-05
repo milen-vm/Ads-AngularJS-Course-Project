@@ -19,15 +19,14 @@ div, li {
 }
 
 img {
-    max-height: 300px;
+    max-height: 250px;
 }
 
 .title {
     font-size: 13pt;
 }
 
-.navbar-brand
-{
+.navbar-brand {
     position: absolute;
     width: 100%;
     left: 0;
@@ -123,6 +122,15 @@ li > ul {
     .ad-status-btn {
         width: 32.8%;       
     }
+}
+
+.head-ad {
+    padding: 10px;
+}
+
+.mod-cnt {
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 /*input.ng-invalid {

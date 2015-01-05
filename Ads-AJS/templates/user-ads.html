@@ -32,7 +32,9 @@
                     <section ng-show="ad.status == 'Inactive' || ad.status == 'Rejected'">
                         <button class="btn btn-primary ad-status-btn" ng-click="editAd(ad.id)">Edit</button>
                         <button class="btn btn-primary ad-status-btn" ng-click="publishAgainAd(ad.id)">Publish Again</button>
-                        <button class="btn btn-primary ad-status-btn" ng-click="deleteAdClicked(ad.id)">Delete</button>                    
+                        <button type="button" class="btn btn-primary ad-status-btn"
+                            ng-click="deleteAdClicked(ad)"
+                            data-toggle="modal" data-target="#myModal">Delete</button>                    
                     </section>
                 </div>
             </div>                          
@@ -50,4 +52,52 @@
             previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
         </ul>
     </nav>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Deleting Ad?</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="head-ad">
+                        <strong class="title">Title{{ adForDeleting.title }}</strong>
+                        <span class="pull-right">{{ adForDeleting.date | date: 'd MMM yyyy' }}</span>
+                    </div>
+                    <div class="row">
+                        <div class="mod-cnt">
+                            <div class="col-xs-12 col col-sm-4">
+                                <a href="" class="thumbnail"> <img src="" alt="image"
+                                    ng-src="{{ adForDeleting.imageDataUrl }}"
+                                    err-src="../img/no-image.gif" /> </a>
+                            </div>
+                            <div class="col-xs-12 col-sm-8">
+                                <p>{{ adForDeleting.text }}</p>
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        Category: <span>{{ adForDeleting.categoryName }}</span>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Town: <span>{{ adForDeleting.townName }}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary"  data-dismiss="modal"
+                        ng-click="deleteAdConfirmed(adForDeleting.id)">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

@@ -16,6 +16,8 @@ app.controller('NavigationBars', ['$scope', '$rootScope', '$location', 'userSess
         $scope.logoutUser = function() {
             userSession.removeUser();
             $scope.hasUser = false;
+            $location.path('/');
+            $window.location.reload();
         };
         
         // Adds active state on navigation buttons

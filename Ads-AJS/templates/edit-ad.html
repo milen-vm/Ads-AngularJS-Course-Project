@@ -1,0 +1,67 @@
+<section class="col-sm-12 col-md-10">
+    <div class="panel panel-primary" ng-repeat="ad in userAds.ads">
+        <div class="panel-heading text-center">
+            <strong class="title">Edit Ad</strong>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <form name="editAdForm" class="form-horizontal" novalidate="novalidate" ng-submit="editAd()">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <span>Title:</span>
+                            <span class="text-danger"
+                                ng-show="editAdForm.title.$dirty && editAdForm.title.$invalid">
+                                <span ng-show="editAdForm.title.$error.required">
+                                     The title is required.
+                                </span> 
+                            </span>                            
+                            <input type="text"
+                                placeholder="Title"
+                                class="form-control"
+                                name="title"
+                                ng-model="adForEditing.title"
+                                required="required" />
+                            <span>Text:</span>
+                            <span class="text-danger"
+                                ng-show="editAdForm.text.$dirty && editAdForm.text.$invalid">
+                                <span ng-show="editAdForm.text.$error.minlength">
+                                     The text must be at least 50 characters.
+                                </span>
+                            </span>                                                       
+                            <textarea class="form-control"                  
+                                name="text"
+                                ng-model="adForEditing.text"
+                                ng-minlength="50"
+                                required="required"></textarea>
+                        </div>
+                        <div class="col-md-3">
+                            <div id="image-box" class="text-center">
+                                <a href="{{ ad.imageDataUrl }}" class="thumbnail">
+                                    <img src="" alt="image" ng-src="{{ adForEditing.imageDataUrl }}" err-src="../img/no-image.gif" />
+                                </a>
+                            </div>                                
+                        </div>
+                        <div>
+                            <div>
+                                <span>Image:</span>
+                                <label class="btn btn-primary" for="file-browse">
+                                    <input id="file-browse" type="file" style="display: none;"
+                                        onchange="angular.element(this).scope().fileSelected(this)" />
+                                    Browse...
+                                </label>                            
+                            </div>
+                            <label>
+                                <input type="checkbox" ng-model="adForEditing.changeimage" />
+                                Change                                    
+                            </label>
+                            <label>
+                                <input type="checkbox" ng-model="deleteImage" />
+                                Delete                                   
+                            </label>                               
+                        </div>
+                    </div>
+                </form>                    
+            </div>                          
+        </div>
+    </div>
+</section>

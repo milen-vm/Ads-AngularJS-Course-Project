@@ -22,7 +22,7 @@
                 <div class="col-md-3 text-center">
                     <strong>Status:</strong>
                     <div class="well well-sm status-box">
-                        <span class="title">{{ ad.status }} {{ad.id}}</span>
+                        <span class="title">{{ ad.status }}</span>
                     </div>
                     <div>
                         <button class="btn btn-primary ad-status-btn"
@@ -30,11 +30,13 @@
                             ng-click="deactivateAd(ad.id)">Deactive</button>
                     </div>                    
                     <section ng-show="ad.status == 'Inactive' || ad.status == 'Rejected'">
-                        <button class="btn btn-primary ad-status-btn" ng-click="editAd(ad.id)">Edit</button>
-                        <button class="btn btn-primary ad-status-btn" ng-click="publishAgainAd(ad.id)">Publish Again</button>
+                        <a href="#/edit-ad" class="btn btn-primary ad-status-btn"
+                            ng-click="editAdClicked(ad.id)">Edit</a>
+                        <button type="button" class="btn btn-primary ad-status-btn"
+                            ng-click="publishAgainAd(ad.id)">Publish Again</button>
                         <button type="button" class="btn btn-primary ad-status-btn"
                             ng-click="deleteAdClicked(ad)"
-                            data-toggle="modal" data-target="#myModal">Delete</button>                    
+                            data-toggle="modal" data-target="#delete-modal">Delete</button>                    
                     </section>
                 </div>
             </div>                          
@@ -53,18 +55,19 @@
         </ul>
     </nav>
     <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- Delete ad -->
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal-label" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">Confirm Deleting Ad?</h4>
+                    <h4 class="modal-title" id="delete-modal-label">Confirm Deleting Ad?</h4>
                 </div>
                 <div class="modal-body">
                     <div class="head-ad">
-                        <strong class="title">Title{{ adForDeleting.title }}</strong>
+                        <strong class="title">{{ adForDeleting.title }}</strong>
                         <span class="pull-right">{{ adForDeleting.date | date: 'd MMM yyyy' }}</span>
                     </div>
                     <div class="row">
@@ -100,4 +103,30 @@
             </div>
         </div>
     </div>
+    <!-- Edit ad -->
+        <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-model-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="edit-model-label">Edit Ad</h4>
+                </div>
+                <div class="modal-body">                                            
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary"  data-dismiss="modal"
+                        ng-click="deleteAdConfirmed(adForDeleting.id)">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </section>

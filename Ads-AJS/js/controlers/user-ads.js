@@ -1,13 +1,15 @@
 'use strict';
 
-app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsData', 'userSession',
-    function($scope, $rootScope, $location, $route, adsData, userSession) {
+app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsData', 'userSession', 'adIdTransfer',
+    function($scope, $rootScope, $location, $route, adsData, userSession, adIdTransfer) {
         var USER_ADS_VIEW_NAME = 'My Ads',
             ADS_PER_PAGE = 10,
             PAGER_MAX_SIZE = 5;
         
         $scope.userAds = {};
         $scope.adForDeleting = {};
+        $scope.adForEditing = {};
+        $scope.deleteImage = false;
         $scope.adsStatus = '';   
         $scope.currentPage = 1;
         $scope.pagerMaxSize = PAGER_MAX_SIZE;
@@ -41,6 +43,10 @@ app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsDa
         
         $scope.deleteAdClicked = function(ad) {
             $scope.adForDeleting = ad;
+        };
+        
+        $scope.editAdClicked = function(id) {
+            adIdTransfer.id = id;
         };
         
         $scope.deleteAdConfirmed = function(id) {

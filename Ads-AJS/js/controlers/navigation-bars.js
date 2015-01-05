@@ -13,11 +13,10 @@ app.controller('NavigationBars', ['$scope', '$rootScope', '$location', 'userSess
             };
         };
         
-        $scope.logoutUser = function() {
+        $scope.logoutUser = function() {    // on logout left user menu is not hide
             userSession.removeUser();
             $scope.hasUser = false;
             $location.path('/');
-            $window.location.reload();
         };
         
         // Adds active state on navigation buttons

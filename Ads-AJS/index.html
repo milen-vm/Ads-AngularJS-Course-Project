@@ -20,37 +20,72 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>    
+                </button>
             </div>
             <!-- Left buttons -->
             <a class="navbar-brand" href="#/">Ads - <span>{{ viewName }}</span></a>
             <div class="navbar-collapse collapse">
-            <ul id="left-buttons" class="nav navbar-nav navbar-left hidden-md hidden-lg">
-                <li ng-hide="hasUser"><a href="#/login-form">Login</a></li>
-                <li ng-hide="hasUser"><a href="#/registration-form">Register</a></li>
-                <!-- Drop down menu -->
-                <li class="dropdown" ng-show="hasUser">
-                    <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#/">Home</a></li>                           
-                        <li><a href="#/">My Ads</a></li>
-                        <li><a href="#/publish-new-ad">Publish New Ad</a></li>
-                        <li><a href="#/">Edit Profile</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- Right buttons -->
-            <ul class="nav navbar-nav navbar-right" ng-show="hasUser">
-                <li><p id="username" class="navbar-text">{{ username }}</p></li>
-               <li><a href="#/" ng-click="logoutUser()">Logout</a></li>
-            </ul>
+                <ul id="left-buttons" class="nav navbar-nav navbar-left hidden-md hidden-lg">
+                    <li ng-hide="hasUser">
+                        <a href="#/login-form">Login</a>
+                    </li>
+                    <li ng-hide="hasUser">
+                        <a href="#/registration-form">Register</a>
+                    </li>
+                    <!-- Drop down menu -->
+                    <li class="dropdown" ng-show="hasUser">
+                        <a href class="dropdown-toggle" data-toggle="dropdown"
+                        role="button" aria-expanded="false">Navigation <span class="caret"></span></a>
+                        <!-- Navigation -->
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#/">Home</a>
+                            </li>
+                            <li>
+                                <a href="#/publish-new-ad">Publish New Ad</a>
+                            </li>
+                            <li>
+                                <a href="#/edit-profile">Edit Profile</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" ng-show="hasUser">
+                        <a href class="dropdown-toggle" data-toggle="dropdown"
+                        role="button" aria-expanded="false">My Ads <span class="caret"></span></a>
+                        <!-- My ads -->
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#/user-ads" ng-click="allClicked()">All</a>
+                            </li>
+                            <li>
+                                <a href="#/user-ads" ng-click="publishedCliked()">Published</a>
+                            </li>
+                            <li>
+                                <a href="#/user-ads" ng-click="waitingApprovalClicked()">Waiting Approval</a>
+                            </li>
+                            <li>
+                                <a href="#/user-ads" ng-click="inactiveClicked()">Inactive</a>
+                            </li>
+                            <li>
+                                <a href="#/user-ads" ng-click="rejectedClicked()">Rejected</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- Right buttons -->
+                <ul class="nav navbar-nav navbar-right" ng-show="hasUser">
+                    <li>
+                        <p id="username" class="navbar-text">
+                            {{ username }}
+                        </p>
+                    </li>
+                    <li>
+                        <a href="#/" ng-click="logoutUser()">Logout</a>
+                    </li>
+                </ul>
             </div>
         </nav>
-        <div class="container">           
+        <div class="container">
             <div class="row">
                 <!-- Left side bar -->
                 <aside class="hidden-xs hidden-sm col-md-2 col-lg-2" ng-controller="NavigationBars" >
@@ -66,17 +101,19 @@
                             <!-- Navigation -->
                             <header class="text-center">
                                 <strong class="title">Navigation</strong>
-                            </header>                        
+                            </header>
                             <ul id="tree" class="nav nav-pills nav-stacked">
                                 <li ng-class="{ active: isActive('/')}">
                                     <a href="#/">Home</a>
-                                </li>                           
+                                </li>
+                                <!-- My ads -->
                                 <li ng-class="{ active: isActive('/user-ads')}">
-                                    <a href="#/user-ads">My Ads<span class="caret"></span></a>
+                                    <a href="">My Ads <span class="caret"></span></a>
                                     <ul id="sub-menu" class="nav nav-pills nav-stacked">
+                                        <!-- must be radio buttons -->
                                         <li>
                                             <a href="#/user-ads" ng-click="allClicked()">All</a>
-                                        </li>                           
+                                        </li>
                                         <li>
                                             <a href="#/user-ads" ng-click="publishedCliked()">Published</a>
                                         </li>
@@ -95,23 +132,25 @@
                                     <a href="#/publish-new-ad">Publish New Ad</a>
                                 </li>
                                 <li ng-class="{ active: isActive('/#')}">
-                                    <a href="#/">Edit Profile</a>
+                                    <a href="#/edit-profile">Edit Profile</a>
                                 </li>
                             </ul>
                         </nav>
-                    </section>                  
+                    </section>
                 </aside>
                 <!-- Views container -->
                 <section ng-view></section>
-            </div> 
+            </div>
         </div>
         <!-- Footer -->
         <div id="footer-container" class="container-fluid">
             <div id="site-footer" class="panel panel-default text-center navbar-fixed-bottom">
                 <div class="panel-body">
-                    <p>&copy; 2014 by Software University Foundation, No Rights Reserved</p>
+                    <p>
+                        &copy; 2014 by Software University Foundation, No Rights Reserved
+                    </p>
                 </div>
-            </div>          
+            </div>
         </div>
         <!-- Angular libs -->
         <script src="libs/angular.js"></script>
@@ -120,9 +159,10 @@
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="libs/jQuery/jquery-tree-view.js"></script>
+        <script src="libs/jQuery/jquery-checkbox.js"></script>
         <!-- Bootstrap plugins -->
         <script src="libs/bootstrap/js/bootstrap.min.js"></script>
-        <script src="libs/bootstrap/js/ui-bootstrap-tpls-0.12.0.min.js"></script> 
+        <script src="libs/bootstrap/js/ui-bootstrap-tpls-0.12.0.min.js"></script>
         <!-- My scripts -->
         <script src="js/app.js"></script>
         <script src="js/directives/password-match.js"></script>
@@ -132,6 +172,7 @@
         <script src="js/services/towns-data.js"></script>
         <script src="js/services/user-data.js"></script>
         <script src="js/services/user-session.js"></script>
+        <script src="js/services/ad-id-transfer.js"></script>
         <script src="js/controlers/ads.js"></script>
         <script src="js/controlers/publish-new-ad.js"></script>
         <script src="js/controlers/right-sidebar-filters.js"></script>
@@ -139,5 +180,6 @@
         <script src="js/controlers/registration-form.js"></script>
         <script src="js/controlers/login-form.js"></script>
         <script src="js/controlers/user-ads.js"></script>
+        <script src="js/controlers/edit-ad.js"></script>
     </body>
 </html>

@@ -84,7 +84,7 @@ li > ul {
 }
 
 #sub-menu {
-    margin: 5px 0 5px 0;
+    margin: 2px 0 8px 0;
 }
 
 #ad-data input, #ad-data textarea {
@@ -131,6 +131,11 @@ li > ul {
 .mod-cnt {
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.modal-dialog {
+    max-height: 800px;
+    width: 800px;
 }
 
 /*input.ng-invalid {

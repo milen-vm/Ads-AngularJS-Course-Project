@@ -9,6 +9,12 @@
                     <div id="ad-data" class="col-sm-6">
                         <div>
                             <span>Title:</span>
+                            <span class="text-danger"
+                                ng-show="publishNewForm.title.$dirty && publishNewForm.title.$invalid">
+                                <span ng-show="publishNewForm.title.$error.required">
+                                     The title is required.
+                                </span> 
+                            </span>                            
                             <input type="text"
                                 placeholder="Title"
                                 class="form-control"
@@ -17,13 +23,19 @@
                                 required="required" />
                         </div>                   
                         <div>
-                            <span>Text:</span>                           
+                            <span>Text:</span>
+                            <span class="text-danger"
+                                ng-show="publishNewForm.text.$dirty && publishNewForm.text.$invalid">
+                                <span ng-show="publishNewForm.text.$error.minlength">
+                                     The text must be at least 50 characters.
+                                </span>
+                            </span>                                                       
                             <textarea class="form-control"                  
                                 name="text"
                                 ng-model="newAdData.text"
+                                ng-minlength="50"
                                 required="required"></textarea>
-                        </div>
-                               
+                        </div>                              
                         <div>
                             <span>Category:</span>
                             <select class="form-control selectpicker" ng-model="newAdData.categoryId">

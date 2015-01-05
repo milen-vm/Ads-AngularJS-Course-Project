@@ -22,16 +22,17 @@
                 <div class="col-md-3 text-center">
                     <strong>Status:</strong>
                     <div class="well well-sm status-box">
-                        <span class="title">{{ ad.status }}</span>
+                        <span class="title">{{ ad.status }} {{ad.id}}</span>
                     </div>
                     <div>
-                        <button class="btn btn-primary ad-status-btn" ng-hide="ad.status == 'Inactive'"
-                        ng-click="deactivateAd(ad.id)">Deactive</button>
+                        <button class="btn btn-primary ad-status-btn"
+                            ng-hide="ad.status == 'Inactive' || ad.status == 'Rejected'"
+                            ng-click="deactivateAd(ad.id)">Deactive</button>
                     </div>                    
-                    <section ng-show="ad.status == 'Inactive'">
+                    <section ng-show="ad.status == 'Inactive' || ad.status == 'Rejected'">
                         <button class="btn btn-primary ad-status-btn" ng-click="editAd(ad.id)">Edit</button>
                         <button class="btn btn-primary ad-status-btn" ng-click="publishAgainAd(ad.id)">Publish Again</button>
-                        <button class="btn btn-primary ad-status-btn" ng-click="deleteAd(ad.id)">Delete</button>                    
+                        <button class="btn btn-primary ad-status-btn" ng-click="deleteAdClicked(ad.id)">Delete</button>                    
                     </section>
                 </div>
             </div>                          

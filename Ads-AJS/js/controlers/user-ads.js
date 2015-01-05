@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('UserAds', ['$scope', '$rootScope', 'adsData', 'userSession',
-    function($scope, $rootScope, adsData, userSession) {
+app.controller('UserAds', ['$scope', '$rootScope', '$location', 'adsData', 'userSession',
+    function($scope, $rootScope, $location, adsData, userSession) {
         var USER_ADS_VIEW_NAME = 'My Ads',
             ADS_PER_PAGE = 10,
             PAGER_MAX_SIZE = 5;
@@ -37,9 +37,20 @@ app.controller('UserAds', ['$scope', '$rootScope', 'adsData', 'userSession',
                 });
         };
         
-        // Event
+        $scope.deleteAdClicked = function(id) {
+            
+            $scope.adSelectedForDeleting(id);
+            $location.path('/delete-ad');
+        };
+        
+        // Events
         $scope.viewChangedToUserAllAds = function() {
             $rootScope.$broadcast('viewNameChanged', USER_ADS_VIEW_NAME);
+        };
+        
+        $scope.adSelectedForDeleting = function(id) {
+            console.log(id + 'from events');
+            $rootScope.$broadcast('adForDeleting', id);
         };
         
         // EventListener

@@ -9,7 +9,6 @@ app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsDa
         $scope.userAds = {};
         $scope.adForDeleting = {};
         $scope.adForEditing = {};
-        $scope.deleteImage = false;
         $scope.adsStatus = '';   
         $scope.currentPage = 1;
         $scope.pagerMaxSize = PAGER_MAX_SIZE;

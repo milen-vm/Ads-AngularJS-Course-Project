@@ -133,11 +133,34 @@ li > ul {
     padding-right: 10px;
 }
 
-.modal-dialog {
-    max-height: 800px;
-    width: 800px;
+.btn-edit {
+    width: 72px;
+    margin: 25px 10px;
 }
 
+.brws-edit {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.label-edit {
+    font-weight: normal;
+    display: block;
+}
+
+@media screen and (max-width: 992px) {
+    .label-edit {
+        display: inline-block;       
+    }
+}
+
+.label-edit input {
+    margin-left: 10px;
+}
+
+.text-edit {
+    margin-bottom: 10px;
+}
 /*input.ng-invalid {
   border: 1px solid red;
 }

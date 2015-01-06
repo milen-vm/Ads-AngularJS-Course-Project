@@ -1,102 +1,115 @@
-<section class="col-sm-12 col-md-8 col-md-offset-1">
-    <div class="panel panel-primary">
-        <div class="panel-heading text-center">
-            <strong class="title">Edit Ad</strong>
-        </div>
-        <div class="panel-body">            
-            <form name="editAdForm" class="form-horizontal" novalidate="novalidate" ng-submit="editAdClicked()">
-                <div class="row">  
-                    <div class="col-md-8">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <span>Title:</span>
-                                <span class="text-danger"
-                                    ng-show="editAdForm.title.$dirty && editAdForm.title.$invalid">
-                                    <span ng-show="editAdForm.title.$error.required">
-                                         The title is required.
-                                    </span> 
-                                </span>                            
-                                <input type="text"
-                                    placeholder="Title"
-                                    class="form-control text-edit"
-                                    name="title"
-                                    ng-model="adForEditing.title"
-                                    required="required" />
-                                <span>Text:</span>
-                                <span class="text-danger"
-                                    ng-show="editAdForm.text.$dirty && editAdForm.text.$invalid">
-                                    <span ng-show="editAdForm.text.$error.minlength">
-                                         The text must be at least 50 characters.
-                                    </span>
-                                </span>                                                       
-                                <textarea class="form-control text-edit"                  
-                                    name="text"
-                                    ng-model="adForEditing.text"
-                                    ng-minlength="50"
-                                    required="required"></textarea>
-                            </div>
-                            <div class="col-xs-12">
-                                <div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <span>Category:</span>
-                                            <select class="form-control selectpicker"
-                                                ng-model="adForEditing.categoryId">
-                                                <option ng-repeat="cat in categories"
-                                                    ng-selected="adForEditing.categoryId==cat.id"
-                                                    ng-value="{{ cat.id }}">{{ cat.name }}</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <span for="town">Town:</span>
-                                            <select class="form-control selectpicker"
-                                                ng-model="adForEditing.townId">
-                                                <option ng-repeat="town in towns"
-                                                    ng-selected="adForEditing.townId==town.id"
-                                                    ng-value="{{ town.id }}">{{ town.name }}</option>                     
-                                            </select>
+<div class="row">
+    <!-- Left side bar -->
+    <aside class="hidden-xs hidden-sm col-md-2 col-lg-2" ng-controller="NavigationBars" >
+        <!-- Login - Register -->
+        <nav id="login-register" class="navbar navbar-side" ng-hide="hasUser">
+            <span>To publish a new ad, please login.</span>
+            <a class="btn btn-primary btn-block" href="#/login-form">Login</a>
+            <a class="btn btn-primary btn-block" href="#/registration-form">Register</a>
+        </nav>
+        <div ng-include="'templates/user-sidenav-menu.html'"></div>
+    </aside>
+    <!-- Edit form -->
+    <section class="col-sm-12 col-md-8 col-md-offset-1">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <strong class="title">Edit Ad</strong>
+            </div>
+            <div class="panel-body">            
+                <form name="editAdForm" class="form-horizontal" novalidate="novalidate" ng-submit="editAdClicked()">
+                    <div class="row">  
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <span>Title:</span>
+                                    <span class="text-danger"
+                                        ng-show="editAdForm.title.$dirty && editAdForm.title.$invalid">
+                                        <span ng-show="editAdForm.title.$error.required">
+                                             The title is required.
+                                        </span> 
+                                    </span>                            
+                                    <input type="text"
+                                        placeholder="Title"
+                                        class="form-control text-edit"
+                                        name="title"
+                                        ng-model="adForEditing.title"
+                                        required="required" />
+                                    <span>Text:</span>
+                                    <span class="text-danger"
+                                        ng-show="editAdForm.text.$dirty && editAdForm.text.$invalid">
+                                        <span ng-show="editAdForm.text.$error.minlength">
+                                             The text must be at least 50 characters.
+                                        </span>
+                                    </span>                                                       
+                                    <textarea class="form-control text-edit"                  
+                                        name="text"
+                                        ng-model="adForEditing.text"
+                                        ng-minlength="50"
+                                        required="required"></textarea>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <span>Category:</span>
+                                                <select class="form-control selectpicker"
+                                                    ng-model="adForEditing.categoryId">
+                                                    <option ng-repeat="cat in categories"
+                                                        ng-selected="adForEditing.categoryId==cat.id"
+                                                        ng-value="{{ cat.id }}">{{ cat.name }}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <span for="town">Town:</span>
+                                                <select class="form-control selectpicker"
+                                                    ng-model="adForEditing.townId">
+                                                    <option ng-repeat="town in towns"
+                                                        ng-selected="adForEditing.townId==town.id"
+                                                        ng-value="{{ town.id }}">{{ town.name }}</option>                     
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>                        
+                        </div>                   
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <a id="image-edit" href="" class="thumbnail">
+                                    <img src="" alt="image" ng-src="{{ adForEditing.imageDataUrl }}"
+                                        err-src="../img/no-image.gif" />
+                                </a>
                             </div>
-                        </div>                        
-                    </div>                   
-                    <div class="col-md-4">
-                        <div class="text-center">
-                            <a id="image-edit" href="" class="thumbnail">
-                                <img src="" alt="image" ng-src="{{ adForEditing.imageDataUrl }}"
-                                    err-src="../img/no-image.gif" />
-                            </a>
+                            <div>
+                                <div class="brws-edit">
+                                    <label class="btn btn-primary" for="file-browse">
+                                        <input id="file-browse" type="file" style="display: none;"
+                                            onchange="angular.element(this).scope().fileSelected(this)" />
+                                        Image...
+                                    </label>                            
+                                </div>
+                                <div class="brws-edit">
+                                    <label class="label-edit">
+                                        <input type="checkbox" ng-model="adForEditing.changeimage" />
+                                        Change                                    
+                                    </label>
+                                    <label class="label-edit">
+                                        <input type="checkbox" ng-model="deleteImage" />
+                                        Delete                                   
+                                    </label>
+                                </div>
+                                       
+                            </div>
+                                                            
                         </div>
-                        <div>
-                            <div class="brws-edit">
-                                <label class="btn btn-primary" for="file-browse">
-                                    <input id="file-browse" type="file" style="display: none;"
-                                        onchange="angular.element(this).scope().fileSelected(this)" />
-                                    Image...
-                                </label>                            
-                            </div>
-                            <div class="brws-edit">
-                                <label class="label-edit">
-                                    <input type="checkbox" ng-model="adForEditing.changeimage" />
-                                    Change                                    
-                                </label>
-                                <label class="label-edit">
-                                    <input type="checkbox" ng-model="deleteImage" />
-                                    Delete                                   
-                                </label>
-                            </div>
-                                   
-                        </div>
-                                                        
                     </div>
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary btn-edit"
-                        ng-disabled="editAdForm.$invalid">Edit</button>
-                    <a class="btn btn-primary btn-edit" href="#/user-ads">Cancel</a>                        
-                </div> 
-            </form>                                            
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-edit"
+                            ng-disabled="editAdForm.$invalid">Edit</button>
+                        <a class="btn btn-primary btn-edit" href="#/user-ads">Cancel</a>                        
+                    </div> 
+                </form>                                            
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>

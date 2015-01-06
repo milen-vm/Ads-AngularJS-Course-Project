@@ -1,65 +1,78 @@
-<section class="col-sm-12 col-md-8">
-    <!-- Ads list -->
-    <div ng-repeat="ad in adsList.ads" class="panel panel-primary">
-        <div class="panel-heading">
-            <strong class="title">{{ ad.title }}</strong><span class="pull-right">{{ ad.date | date: 'd MMM yyyy' }}</span>
-            <div class="clearfix"></div>
-        </div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-xs-12 col-sm-3">
-                    <a href="{{ ad.imageDataUrl }}" class="thumbnail">
-                        <img src="" alt="image" ng-src="{{ ad.imageDataUrl }}"
-                            err-src="../img/no-image.gif" />
-                    </a>
+<div class="row">
+    <!-- Left side bar -->
+    <aside class="hidden-xs hidden-sm col-md-2 col-lg-2" ng-controller="NavigationBars" >
+        <!-- Login - Register -->
+        <nav id="login-register" class="navbar navbar-side" ng-hide="hasUser">
+            <span>To publish a new ad, please login.</span>
+            <a class="btn btn-primary btn-block" href="#/login-form">Login</a>
+            <a class="btn btn-primary btn-block" href="#/registration-form">Register</a>
+        </nav>
+        <div ng-include="'templates/user-sidenav-menu.html'"></div>
+    </aside>
+    <!-- Content -->
+    <section class="col-sm-12 col-md-8">
+        <!-- Ads list -->
+        <div ng-repeat="ad in adsList.ads" class="panel panel-primary">
+            <div class="panel-heading">
+                <strong class="title">{{ ad.title }}</strong><span class="pull-right">{{ ad.date | date: 'd MMM yyyy' }}</span>
+                <div class="clearfix"></div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3">
+                        <a href="{{ ad.imageDataUrl }}" class="thumbnail">
+                            <img src="" alt="image" ng-src="{{ ad.imageDataUrl }}"
+                                err-src="../img/no-image.gif" />
+                        </a>
+                    </div>
+                    <div class="col-xs-12 col-sm-9">
+                        <p>{{ ad.text }}</p>
+                        <ul class="list-group">
+                            <li class="list-group-item">Name: <span>{{ ad.ownerName }}</span></li>
+                            <li class="list-group-item">Email: <span><a href="mailto:{{ ad.ownerEmail }}">{{ ad.ownerEmail }}</a></span></li>
+                            <li class="list-group-item">Phone: <span>{{ ad.ownerPhone }}</span></li>                                  
+                        </ul>
+                    </div>                            
                 </div>
-                <div class="col-xs-12 col-sm-9">
-                    <p>{{ ad.text }}</p>
-                    <ul class="list-group">
-                        <li class="list-group-item">Name: <span>{{ ad.ownerName }}</span></li>
-                        <li class="list-group-item">Email: <span><a href="mailto:{{ ad.ownerEmail }}">{{ ad.ownerEmail }}</a></span></li>
-                        <li class="list-group-item">Phone: <span>{{ ad.ownerPhone }}</span></li>                                  
-                    </ul>
-                </div>                            
             </div>
         </div>
-    </div>
-    <!-- Paging -->
-    <nav class="text-center">
-        <ul pagination
-            total-items="totalAds"
-            items-per-page="adsPerPage"
-            ng-model="currentPage"
-            max-size="pagerMaxSize"
-            ng-change="pageChanged()"
-            boundary-links="true"
-            previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
-        </ul>
-    </nav>
-</section>
-<!-- Filters side bar -->
-<aside ng-controller="RightSideBarFilters" class="col-sm-12 col-md-2">
-    <div class="panel panel-primary">
-        <div class="panel-heading text-center">
-            <strong class="title">Filters</strong>
+        <!-- Paging -->
+        <nav class="text-center">
+            <ul pagination
+                total-items="totalAds"
+                items-per-page="adsPerPage"
+                ng-model="currentPage"
+                max-size="pagerMaxSize"
+                ng-change="pageChanged()"
+                boundary-links="true"
+                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+            </ul>
+        </nav>
+    </section>
+    <!-- Filters side bar -->
+    <aside ng-controller="RightSideBarFilters" class="col-sm-12 col-md-2">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <strong class="title">Filters</strong>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <section class="col-xs-12 col-sm-6 col-md-12">
+                        <h4>Categories</h4>
+                        <select class="form-control selectpicker col-md-12" ng-model="categorieId" ng-change="categorieChanged()">
+                            <option value="" ng-selected="true">All</option>
+                            <option ng-repeat="cat in categories" ng-value="{{ cat.id }}">{{ cat.name }}</option>
+                        </select>
+                    </section>
+                    <section class="col-xs-12 col-sm-6 col-md-12"> 
+                        <h4>Towns</h4>
+                        <select class="form-control selectpicker" ng-model="townId" ng-change="townChanged()">
+                            <option value="" ng-selected="true">All</option>
+                            <option ng-repeat="town in towns" ng-value="{{ town.id }}">{{ town.name }}</option>                     
+                        </select>
+                    </section>
+                 </div>
+            </div>
         </div>
-        <div class="panel-body">
-            <div class="row">
-                <section class="col-xs-12 col-sm-6 col-md-12">
-                    <h4>Categories</h4>
-                    <select class="form-control selectpicker col-md-12" ng-model="categorieId" ng-change="categorieChanged()">
-                        <option value="" ng-selected="true">All</option>
-                        <option ng-repeat="cat in categories" ng-value="{{ cat.id }}">{{ cat.name }}</option>
-                    </select>
-                </section>
-                <section class="col-xs-12 col-sm-6 col-md-12"> 
-                    <h4>Towns</h4>
-                    <select class="form-control selectpicker" ng-model="townId" ng-change="townChanged()">
-                        <option value="" ng-selected="true">All</option>
-                        <option ng-repeat="town in towns" ng-value="{{ town.id }}">{{ town.name }}</option>                     
-                    </select>
-                </section>
-             </div>
-        </div>
-    </div>
-</aside>
+    </aside>
+</div>

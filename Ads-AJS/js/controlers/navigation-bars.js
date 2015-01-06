@@ -5,6 +5,7 @@ app.controller('NavigationBars', ['$scope', '$rootScope', '$location', 'userSess
         $scope.viewName = '';
         $scope.username = '';        
         $scope.hasUser = false;
+        $scope.isHidedMyAds = true;
         
         $scope.isUserLoggedIn = function() {
             if (userSession.hasUser()) {
@@ -19,6 +20,10 @@ app.controller('NavigationBars', ['$scope', '$rootScope', '$location', 'userSess
             $location.path('/');
         };
         
+        $scope.myAdsClicked = function() {
+            $scope.isHidedMyAds = !$scope.isHidedMyAds;
+        };
+
         // Adds active state on navigation buttons
         $scope.isActive = function (viewLocation) {
             var active = (viewLocation === $location.path());

@@ -2,12 +2,12 @@
 
 app.factory('userSession', function($cookieStore) {
     
-    function saveUserData(userName, accessToken) {
+    function saveUserData(username, accessToken) {
         var user = {
-            userName: userName,
+            username: username,
             accessToken: accessToken
         };
-        console.log(accessToken);
+        // console.log(accessToken);
         
         $cookieStore.put('user', user);
     }
@@ -15,8 +15,8 @@ app.factory('userSession', function($cookieStore) {
     function getUsername() {
         var user = $cookieStore.get('user');
         
-        if (user.userName) {
-            return user.userName;
+        if (user.username) {
+            return user.username;
         };
     }
     

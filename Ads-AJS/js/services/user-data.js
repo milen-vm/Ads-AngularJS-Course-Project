@@ -1,10 +1,8 @@
 'use strict';
 
 app.factory('userData', function($http, $q, userSession) {
-    var baseUrl = 'http://softuni-ads.azurewebsites.net/api/user/',
-        accessToken = userSession.getAccessToken(),
-        headers = { 'Authorization': 'Bearer ' + accessToken }; 
-    
+    var baseUrl = 'http://softuni-ads.azurewebsites.net/api/user/';
+            
     function userDataRequest(url, method, data, headers) {
         var defer = $q.defer();
         
@@ -24,6 +22,12 @@ app.factory('userData', function($http, $q, userSession) {
         return defer.promise;
     }
     
+    function getAuthorizationHeaders() {
+        var accessToken = userSession.getAccessToken();
+        
+        return { 'Authorization': 'Bearer ' + accessToken };
+    }
+    
     function loginUser(data) {
         var url = baseUrl + 'login';
         
@@ -37,14 +41,23 @@ app.factory('userData', function($http, $q, userSession) {
     }
     
     function getUserData() {
-        var url = baseUrl + 'profile';
+        var url = baseUrl + 'profile',
+            headers = getAuthorizationHeaders();
         
         return userDataRequest(url, 'GET', null, headers);
+    }
+    
+    function editUserProfile(data) {
+        var url = baseUrl + 'profile',
+            headers = getAuthorizationHeaders();
+
+        return userDataRequest(url, 'PUT', data, headers);      // request must be PUT but server returns error
     }
     
     return {
         loginUser: loginUser,
         registerUser: registerUser,
-        getUser: getUserData
+        getUser: getUserData,
+        editUser: editUserProfile
     };
 });

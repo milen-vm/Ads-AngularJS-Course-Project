@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('UserProfileEdit', ['$scope', '$rootScope', 'userData', 'townsData',
-    function($scope, $rootScope, userData, townsData) {
+app.controller('UserProfileEdit', ['$scope', '$rootScope', '$route', 'userData', 'townsData',
+    function($scope, $rootScope, $route, userData, townsData) {
         var EDIT_USER_PROFILE_VIEW_NAME = 'Edit User Profile';
         $scope.userData = {};
         $scope.towns = {};
@@ -10,12 +10,24 @@ app.controller('UserProfileEdit', ['$scope', '$rootScope', 'userData', 'townsDat
             userData.getUser().then(
                 function(data) {
                     $scope.userData = data;
-                    console.log(data);
                 },
                 function(error) {
                     console.log(error);
                 });
-        };        
+        };
+        
+        $scope.editUserProfile = function() {
+            // $scope.userData.townId = parseInt($scope.userData.townId);
+            console.log($scope.userData.townId);
+            userData.editUser($scope.userData).then(
+                function(data) {
+                    console.log(data);
+                    $route.reload();
+                },
+                function(error) {
+                    console.log(error);
+                });
+        };  
         
         // Load towns
         townsData.getTowns().then(

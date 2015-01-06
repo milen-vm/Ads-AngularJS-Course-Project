@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('RegistrationForm', ['$scope', '$rootScope', '$cookieStore', 'townsData', 'userData',
-    function($scope, $rootScope, $cookieStore, townsData, userData) {
+app.controller('RegistrationForm', ['$scope', '$rootScope', '$location', 'userSession', 'townsData', 'userData',
+    function($scope, $rootScope, $location, userSession, townsData, userData) {
         var REGISTER_VIEW_NAME = 'Registration';
                 
         $scope.towns = {};
@@ -11,7 +11,12 @@ app.controller('RegistrationForm', ['$scope', '$rootScope', '$cookieStore', 'tow
             console.log($scope.regUserData);
             userData.registerUser($scope.regUserData).then(
                 function(data) {
-                    $cookieStore.put('accessToken',data.access_token);
+                    var username = data.username,
+                        accessToken = data.access_token;
+                        
+                    userSession.saveUser(username, accessToken);
+                    $scope.userLoggedIn();
+                    $location.path('#/');
                 },
                 function(error) {
                     console.log(error);
@@ -27,9 +32,13 @@ app.controller('RegistrationForm', ['$scope', '$rootScope', '$cookieStore', 'tow
             }
         );
         
-        // Event trigger. Set view name to TopNavBar controller
+        // Events
         $scope.viewChangedToHome = function() {
             $rootScope.$broadcast('viewNameChanged', REGISTER_VIEW_NAME);
+        };
+        
+        $scope.userLoggedIn = function() {
+            $rootScope.$broadcast('userLoggedIn');
         };
         
         $scope.viewChangedToHome();

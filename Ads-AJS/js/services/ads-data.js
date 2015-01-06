@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('adsData', function($http, $q) {
+app.factory('adsData', function($http, $q, userSession) {
     var baseUrl = 'http://softuni-ads.azurewebsites.net/api/';       // http://localhost:1337
 
     function adsDataRequest(url, method, data, headers) {
@@ -20,6 +20,12 @@ app.factory('adsData', function($http, $q) {
         });
         
         return defer.promise;
+    }
+    
+    function getAuthorizationHeaders() {
+        var accessToken = userSession.getAccessToken();
+        
+        return { 'Authorization': 'Bearer ' + accessToken };
     }
     
     function getAds(categoryId, townId, pageSize, startPage) {

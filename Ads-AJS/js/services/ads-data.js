@@ -72,6 +72,13 @@ app.factory('adsData', function($http, $q) {
         return adsDataRequest(url, 'PUT', data, headers);
     }
     
+    function publishAgainAd(id, accessToken) {
+        var url = baseUrl + 'user/ads/publishagain/' + id,
+            headers = { 'Authorization': 'Bearer ' + accessToken };
+            
+        return adsDataRequest(url, 'PUT', null, headers);
+    }
+    
     return {
         getAds: getAds,
         createNewAd: createNewAd,
@@ -79,6 +86,7 @@ app.factory('adsData', function($http, $q) {
         deactiveAd: deactiveAd,
         deleteAd: deleteAd,
         getAdById: getAdById,
-        editAd: editAd
+        editAd: editAd,
+        publishAgainAd: publishAgainAd
     };
 });

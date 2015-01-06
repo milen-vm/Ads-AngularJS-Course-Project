@@ -13,15 +13,16 @@ app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', '
         
         $scope.loadAdForEdit = function() {
             var accessToken = userSession.getAccessToken();
+            
             if ($scope.adId) {
                 adsData.getAdById($scope.adId, accessToken).then(
                 function(data) {
-                    console.log(data);
                     $scope.adForEditing = data;                                    
                 },
                 function(error) {
                     console.log(error);
                 });
+                
             } else {
                 console.log('ad id is missing');
             };
@@ -32,12 +33,14 @@ app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', '
         $scope.fileSelected = function(fileInputField) {
             delete $scope.adForEditing.imageDataUrl;
             var file = fileInputField.files[0];
+            
             if (file.type.match(/image\/.*/)) {
                 var reader = new FileReader();
                 reader.onload = function() {
                     $scope.adForEditing.imageDataUrl = reader.result;
                     $("#image-edit").html("<img src='" + reader.result + "'>");
                 };
+                
                 reader.readAsDataURL(file);
             } else {
                 $("#image-edit").html("<p>File type not supported!</p>");

@@ -61,6 +61,20 @@ app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsDa
                 });            
         };
         
+        $scope.publishAgainClicked = function(id) {
+            var accessToken = userSession.getAccessToken();
+            
+            adsData.publishAgainAd(id, accessToken).then(
+                function(data) {
+                    console.log(data);
+                    $route.reload();
+                },
+                function(error) {
+                    console.log(error);                   
+                }
+            );
+        };
+        
         // Events
         $scope.viewChangedToUserAllAds = function() {
             $rootScope.$broadcast('viewNameChanged', USER_ADS_VIEW_NAME);

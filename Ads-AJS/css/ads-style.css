@@ -63,11 +63,7 @@ img {
     padding: 5px;
 }
 
-#reg-form input, select {
-    margin-bottom: 15px;
-}
-
-#login-form input {
+.form input, .form select, .form textarea {
     margin-bottom: 15px;
 }
 
@@ -80,17 +76,12 @@ img {
 }
 
 /*li > ul {
-    display: none;
-}*/
+ display: none;
+ }*/
 
 #sub-menu {
     margin: 2px 0 8px 0;
 }
-
-#ad-data input, #ad-data textarea {
-    margin-bottom: 15px;
-}
-
 
 #image-box {
     min-height: 200px;
@@ -120,7 +111,7 @@ img {
 
 @media screen and (max-width: 992px) {
     .ad-status-btn {
-        width: 32.8%;       
+        width: 32.8%;
     }
 }
 
@@ -150,7 +141,7 @@ img {
 
 @media screen and (max-width: 992px) {
     .label-edit {
-        display: inline-block;       
+        display: inline-block;
     }
 }
 
@@ -162,10 +153,10 @@ img {
     margin-bottom: 10px;
 }
 /*input.ng-invalid {
-  border: 1px solid red;
-}
+ border: 1px solid red;
+ }
 
-input.ng-valid {
-  border: 1px solid green;
-}*/
+ input.ng-valid {
+ border: 1px solid green;
+ }*/
 

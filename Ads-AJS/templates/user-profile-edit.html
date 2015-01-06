@@ -1,0 +1,202 @@
+<div class="row">
+    <!-- Left side bar -->
+    <aside class="hidden-xs hidden-sm col-md-2 col-lg-2" ng-controller="NavigationBars" >
+        <!-- Login - Register -->
+        <nav id="login-register" class="navbar navbar-side" ng-hide="hasUser">
+            <span>To publish a new ad, please login.</span>
+            <a class="btn btn-primary btn-block" href="#/login-form">Login</a>
+            <a class="btn btn-primary btn-block" href="#/registration-form">Register</a>
+        </nav>
+        <div ng-include="'templates/user-sidenav-menu.html'"></div>
+    </aside>
+    <!-- Content -->
+    <section class="col-sm-12 col-md-10">
+        <div class="row">
+            <!-- Edit profile -->
+            <div class="col-xs-12 col-sm-6 col-md-5 col-md-offset-1"> 
+                <div class="panel panel-primary">
+                    <div class="panel-heading text-center">
+                        <strong class="title">Edit Profile</strong>
+                    </div>
+                    <div class="panel-body form">
+                        <form name="editProfileForm" class="form-group" novalidate="novalidate" ng-submit="editUserProfile()">
+                            <div>
+                                <span>Name:</span>
+                                <span class="text-danger"
+                                    ng-show="editProfileForm.name.$dirty && editProfileForm.name.$invalid">
+                                    <span 
+                                        ng-show="editProfileForm.name.$error.required">
+                                        The name is required.
+                                    </span>
+                                    <span 
+                                        ng-show="editProfileForm.name.$error.pattern">
+                                        Name must be in format 'Jon Doe'.
+                                    </span>
+                                </span>
+                                <input type="text"
+                                    placeholder="Name"
+                                    class="form-control"
+                                    name="name"
+                                    ng-model="userData.name"
+                                    ng-pattern="/[A-Za-z]+ [A-Za-z]+/"
+                                    required="required" />
+                            </div>
+                            <div>
+                                <span>Email:</span>
+                                <span class="text-danger"
+                                    ng-show="editProfileForm.email.$dirty && editProfileForm.email.$invalid">
+                                    <span 
+                                        ng-show="editProfileForm.email.$error.required">
+                                        The email is required.
+                                    </span>
+                                    <span 
+                                        ng-show="editProfileForm.email.$error.pattern">
+                                        Enter valid email.
+                                    </span>
+                                </span>
+                                <input type="email"
+                                    placeholder="Email"
+                                    class="form-control"
+                                    name="email"
+                                    ng-model="userData.email"
+                                    ng-pattern="/\S+@\S+\.\S+/"
+                                    required="required"/>
+                            </div>
+                            <div>
+                                <span>Phone:</span>
+                                <span class="text-danger"
+                                    ng-show="editProfileForm.phone.$dirty && editProfileForm.phone.$invalid">
+                                    <span 
+                                        ng-show="editProfileForm.phone.$error.required">
+                                        The phone is required.
+                                    </span>
+                                    <span 
+                                        ng-show="editProfileForm.phone.$error.pattern">
+                                        The phone must be in format '0999 99 99 99'.
+                                    </span>
+                                </span>
+                                <input type="text"
+                                    placeholder="Enter phone"
+                                    class="form-control"
+                                    name="phone"
+                                    ng-model="userData.phoneNumber"
+                                    ng-pattern="/(\d{4}) (\d{2}) (\d{2}) (\d{2})/"
+                                    required="required" />
+                            </div>                            
+                            <div>
+                                <span>Town:</span>
+                                <select class="form-control selectpicker"
+                                    ng-model="adForEditing.townId">
+                                    <option ng-repeat="town in towns"
+                                        ng-selected="userData.townId==town.id"
+                                        ng-value="{{ town.id }}">{{ town.name }}</option>                     
+                                </select>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-xs-6">
+                                    <button type="submit" class="btn btn-primary"
+                                        ng-disabled="editProfileForm.$invalid">Update</button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <a class="btn btn-link" href="#/">Cancel</a>                        
+                                </div>
+                            </div>              
+                        </form>
+                    </div>
+                </div>  
+            </div>
+            <!-- Change password -->
+            <div class="col-xs-12 col-sm-6 col-md-5 col-md-offset-1"> 
+                <div class="panel panel-primary">
+                    <div class="panel-heading text-center">
+                        <strong class="title">Change Password</strong>
+                    </div>
+                    <div class="panel-body form">
+                        <form name="changePasswordForm" class="form-group" novalidate="novalidate" ng-submit="passwordChange()">
+                            <div>
+                                <span>Old password:</span>
+                                <span class="text-danger"
+                                    ng-show="changePasswordForm.password.$dirty && changePasswordForm.password.$invalid">
+                                    <span 
+                                        ng-show="changePasswordForm.password.$error.required">
+                                        The password is required.
+                                    </span>
+                                    <span 
+                                        ng-show="changePasswordForm.password.$error.minlength">
+                                         The password is at least 3 characters.
+                                    </span>
+                                    <span 
+                                        ng-show="changePasswordForm.password.$error.pattern">
+                                        The password can't contain white space.
+                                    </span>
+                                </span>
+                                <input type="password"
+                                    placeholder="Enter password"
+                                    class="form-control"
+                                    name="password"
+                                    ng-model="loginUserData.password"
+                                    ng-minlength="3"
+                                    ng-trim="false"
+                                    ng-pattern="/^[\S]*$/"
+                                    required="required" />
+                            </div>
+                            <div>
+                                <span>New password:</span>
+                                <span class="text-danger"
+                                    ng-show="changePasswordForm.password.$dirty && changePasswordForm.password.$invalid">
+                                    <span 
+                                        ng-show="changePasswordForm.password.$error.required">
+                                        The password is required.
+                                    </span>
+                                    <span 
+                                        ng-show="changePasswordForm.password.$error.minlength">
+                                         The password must be at least 3 characters.
+                                    </span>
+                                    <span 
+                                        ng-show="changePasswordForm.password.$error.pattern">
+                                        The password can't contain white space.
+                                    </span>
+                                </span>
+                                <input type="password"
+                                    placeholder="Enter password"
+                                    class="form-control"
+                                    name="password"
+                                    ng-model="regUserData.password"
+                                    ng-minlength="3"
+                                    ng-trim="false"
+                                    ng-pattern="/^[\S]*$/"
+                                    required="required" />
+                            </div>
+                            <div>
+                                <span>Confirm password:</span>
+                                <span class="text-danger"
+                                    ng-show="changePasswordForm.confirmPassword.$invalid">
+                                    <span 
+                                        ng-show="changePasswordForm.confirmPassword.$error.passwordmatch">
+                                        The password do not match.
+                                    </span>
+                                </span>
+                                <input type="password"
+                                    placeholder="Confirm password"
+                                    class="form-control"
+                                    name="confirmPassword"
+                                    ng-model="regUserData.confirmPassword"
+                                    password-match="regUserData.password"/>
+                            </div>
+
+                            <div class="row text-center">
+                                <div class="col-xs-6">
+                                    <button type="submit" class="btn btn-primary"
+                                        ng-disabled="changePasswordForm.$invalid">Change</button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <a class="btn btn-link" href="#/">Cancel</a>                        
+                                </div>
+                            </div>              
+                        </form>
+                    </div>
+                </div>  
+            </div>
+        </div>        
+    </section>
+</div>

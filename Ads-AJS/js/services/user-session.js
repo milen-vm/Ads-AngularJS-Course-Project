@@ -33,9 +33,9 @@ app.factory('userSession', function($cookieStore) {
         
         if (user) {
             return true;
-        } else {
-            return false;
-        };
+        }
+        
+        return false;
     }
     
     function removeUserData() {

@@ -6,16 +6,7 @@ app.controller('RegistrationForm', ['$scope', '$rootScope', '$cookieStore', 'tow
                 
         $scope.towns = {};
         $scope.regUserData = {};
-        
-        townsData.getTowns().then(
-            function(data) {
-                $scope.towns = data;
-            },
-            function(error) {
-                console.log(error);
-            }
-        );
-        
+    
         $scope.registerUser = function() {
             console.log($scope.regUserData);
             userData.registerUser($scope.regUserData).then(
@@ -26,6 +17,15 @@ app.controller('RegistrationForm', ['$scope', '$rootScope', '$cookieStore', 'tow
                     console.log(error);
                 });
         };
+        
+        townsData.getTowns().then(
+            function(data) {
+                $scope.towns = data;
+            },
+            function(error) {
+                console.log(error);
+            }
+        );
         
         // Event trigger. Set view name to TopNavBar controller
         $scope.viewChangedToHome = function() {

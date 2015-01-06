@@ -15,7 +15,7 @@
             <div class="panel-heading">
                 <strong class="title">User Registration</strong>
             </div>
-            <div class="panel-body">
+            <div class="panel-body form">
                 <form name="registerForm" class="form-group" novalidate="novalidate" ng-submit="registerUser()">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
@@ -101,7 +101,7 @@
                                 </span>
                             </span>
                             <input type="text"
-                                placeholder="Enter first and second name"
+                                placeholder="Name"
                                 class="form-control"
                                 name="name"
                                 ng-model="regUserData.name"
@@ -122,7 +122,7 @@
                                 </span>
                             </span>
                             <input type="email"
-                                placeholder="Enter email"
+                                placeholder="Email"
                                 class="form-control"
                                 name="email"
                                 ng-model="regUserData.email"
@@ -145,7 +145,7 @@
                                 </span>
                             </span>
                             <input type="text"
-                                placeholder="Enter phone"
+                                placeholder="Phone"
                                 class="form-control"
                                 name="phone"
                                 ng-model="regUserData.phone"
@@ -156,7 +156,7 @@
                             <span>Town:</span>
                             <select class="form-control selectpicker"
                                 name="townId" ng-model="regUserData.townId">
-                                <option value="" ng-selected="true">Choose town</option>
+                                <option value="" selected="selected">Choose town</option>
                                 <option ng-repeat="town in towns" ng-value="{{ town.id }}">{{ town.name }}</option>                     
                             </select>
                         </div>                    
@@ -167,7 +167,7 @@
                                 ng-disabled="registerForm.$invalid">Register</button>
                         </div>
                         <div class="col-xs-6">
-                            <a class="btn btn-link" href="/#/login-form">Login here</a>                        
+                            <a class="btn btn-link" href="#/login-form">Login here</a>                        
                         </div>
                     </div>              
                 </form>

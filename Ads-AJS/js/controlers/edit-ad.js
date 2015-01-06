@@ -1,10 +1,10 @@
 'use strict';
 
-app.controller('EditAd', ['$scope', '$rootScope', 'adIdTransfer', 'userSession', 'adsData', 'townsData', 'categoriesData',
-    function($scope, $rootScope, adIdTransfer, userSession, adsData, townsData, categoriesData) {
+app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', 'userSession', 'adsData', 'townsData', 'categoriesData',
+    function($scope, $rootScope, $location, adIdTransfer, userSession, adsData, townsData, categoriesData) {
         var EDIT_AD_VIEW_NAME = 'Edit Ad';
         
-        $scope.adId = 637; //adIdTransfer.id;
+        $scope.adId = adIdTransfer.id;
         adIdTransfer.id = null;
         $scope.adForEditing = {};
         $scope.deleteImage = false;
@@ -17,7 +17,7 @@ app.controller('EditAd', ['$scope', '$rootScope', 'adIdTransfer', 'userSession',
                 adsData.getAdById($scope.adId, accessToken).then(
                 function(data) {
                     console.log(data);
-                    $scope.adForEditing = data;                                     
+                    $scope.adForEditing = data;                                    
                 },
                 function(error) {
                     console.log(error);
@@ -45,7 +45,25 @@ app.controller('EditAd', ['$scope', '$rootScope', 'adIdTransfer', 'userSession',
         }; 
         
         $scope.editAdClicked = function() {
-            console.log($scope.adForEditing);
+            var accessToken = userSession.getAccessToken();
+            
+            if ($scope.deleteImage) {
+                delete $scope.adForEditing.imageDataUrl;
+            };
+            
+            delete $scope.adForEditing.categoryName;
+            delete $scope.adForEditing.townName;
+            delete $scope.adForEditing.id;
+
+            adsData.editAd($scope.adId, $scope.adForEditing, accessToken).then(
+                function(data) {
+                    console.log(data);
+                    $location.path('/user-ads');
+                },
+                function(error) {
+                    console.log(error);
+                }
+            );
         };
         
         // Load categories

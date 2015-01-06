@@ -65,12 +65,20 @@ app.factory('adsData', function($http, $q) {
         return adsDataRequest(url, 'GET', null, headers);
     }
     
+    function editAd(id, data, accessToken) {
+        var url = baseUrl + 'user/ads/' + id,
+            headers = { 'Authorization': 'Bearer ' + accessToken };
+            
+        return adsDataRequest(url, 'PUT', data, headers);
+    }
+    
     return {
         getAds: getAds,
         createNewAd: createNewAd,
         getUserAds: getUserAds,
         deactiveAd: deactiveAd,
         deleteAd: deleteAd,
-        getAdById: getAdById
+        getAdById: getAdById,
+        editAd: editAd
     };
 });

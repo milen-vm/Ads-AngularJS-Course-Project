@@ -4,7 +4,7 @@
             <strong class="title">Edit Ad</strong>
         </div>
         <div class="panel-body">            
-            <form name="editAdForm" class="form-horizontal" novalidate="novalidate" ng-submit="editAd()">
+            <form name="editAdForm" class="form-horizontal" novalidate="novalidate" ng-submit="editAdClicked()">
                 <div class="row">  
                     <div class="col-md-8">
                         <div class="row">
@@ -41,16 +41,18 @@
                                         <div class="col-sm-6">
                                             <span>Category:</span>
                                             <select class="form-control selectpicker"
-                                                ng-model="adForEditing.categoryName">
+                                                ng-model="adForEditing.categoryId">
                                                 <option ng-repeat="cat in categories"
+                                                    ng-selected="adForEditing.categoryId==cat.id"
                                                     ng-value="{{ cat.id }}">{{ cat.name }}</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-6">
                                             <span for="town">Town:</span>
                                             <select class="form-control selectpicker"
-                                                ng-model="adForEditing.townName">
+                                                ng-model="adForEditing.townId">
                                                 <option ng-repeat="town in towns"
+                                                    ng-selected="adForEditing.townId==town.id"
                                                     ng-value="{{ town.id }}">{{ town.name }}</option>                     
                                             </select>
                                         </div>
@@ -91,7 +93,6 @@
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary btn-edit"
-                        ng-click="editAdClicked()"
                         ng-disabled="editAdForm.$invalid">Edit</button>
                     <a class="btn btn-primary btn-edit" href="#/user-ads">Cancel</a>                        
                 </div> 

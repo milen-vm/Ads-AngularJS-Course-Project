@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('PublishNewAd', ['$scope', '$rootScope', 'categoriesData', 'townsData', 'adsData', 'userSession',
-    function($scope, $rootScope, categoriesData, townsData, adsData, userSession) {
+app.controller('PublishNewAd', ['$scope', '$rootScope', '$location', 'categoriesData', 'townsData', 'adsData', 'userSession',
+    function($scope, $rootScope, $location, categoriesData, townsData, adsData, userSession) {
         var PUBLISH_NEW_AD_NAME = 'Publish New Ad';
         
         $scope.newAdData = {townId: null, categoryId: null};
@@ -29,10 +29,11 @@ app.controller('PublishNewAd', ['$scope', '$rootScope', 'categoriesData', 'towns
             
             adsData.createNewAd($scope.newAdData, accessToken).then(
                 function(data) {
-                    console.log(data);
+                    $scope.successOccurred(data.message);
+                    $location.path('/user-ads');
                 },
                 function(error) {
-                    console.log(error);
+                    $scope.errorOccurred(error.message);
                 });
         };
         
@@ -58,6 +59,14 @@ app.controller('PublishNewAd', ['$scope', '$rootScope', 'categoriesData', 'towns
         // Events
         $scope.viewChangedToPublishNewAd = function() {
             $rootScope.$broadcast('viewNameChanged', PUBLISH_NEW_AD_NAME);
+        };
+        
+        $scope.successOccurred = function(message) {
+            $rootScope.$broadcast('operationSuccess', message);
+        };
+        
+        $scope.errorOccurred = function(message) {
+            $rootScope.$broadcast('operationFailure', message);
         };
         
         $scope.viewChangedToPublishNewAd();

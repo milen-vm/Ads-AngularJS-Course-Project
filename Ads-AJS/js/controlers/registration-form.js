@@ -8,7 +8,6 @@ app.controller('RegistrationForm', ['$scope', '$rootScope', '$location', 'userSe
         $scope.regUserData = {};
     
         $scope.registerUser = function() {
-            console.log($scope.regUserData);
             userData.registerUser($scope.regUserData).then(
                 function(data) {
                     var username = data.username,
@@ -19,7 +18,11 @@ app.controller('RegistrationForm', ['$scope', '$rootScope', '$location', 'userSe
                     $location.path('#/');
                 },
                 function(error) {
-                    console.log(error);
+                    var array = $.map(error.modelState, function(value, index) {
+                        return value;
+                    });
+                    
+                    $scope.errorOccurred(array.join(' '));
                 });
         };
         
@@ -39,6 +42,10 @@ app.controller('RegistrationForm', ['$scope', '$rootScope', '$location', 'userSe
         
         $scope.userLoggedIn = function() {
             $rootScope.$broadcast('userLoggedIn');
+        };
+        
+        $scope.errorOccurred = function(message) {
+            $rootScope.$broadcast('operationFailure', message);
         };
         
         $scope.viewChangedToHome();

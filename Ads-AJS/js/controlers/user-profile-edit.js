@@ -4,6 +4,7 @@ app.controller('UserProfileEdit', ['$scope', '$rootScope', '$route', 'userData',
     function($scope, $rootScope, $route, userData, townsData) {
         var EDIT_USER_PROFILE_VIEW_NAME = 'Edit User Profile';
         $scope.userData = {};
+        $scope.passData = {};
         $scope.towns = {};
         
         $scope.loadUserData = function() {
@@ -12,7 +13,7 @@ app.controller('UserProfileEdit', ['$scope', '$rootScope', '$route', 'userData',
                     $scope.userData = data;
                 },
                 function(error) {
-                    console.log(error);
+                    $scope.errorOccurred(error.message);
                 });
         };
         
@@ -21,13 +22,23 @@ app.controller('UserProfileEdit', ['$scope', '$rootScope', '$route', 'userData',
             console.log($scope.userData.townId);
             userData.editUser($scope.userData).then(
                 function(data) {
-                    console.log(data);
+                    $scope.successOccurred(data.message);
                     $route.reload();
                 },
                 function(error) {
-                    console.log(error);
+                    $scope.errorOccurred(error.message);
                 });
-        };  
+        };
+        
+        $scope.passwordChange = function() {
+            userData.changePassword($scope.passData).then(
+                function(data) {
+                    $scope.successOccurred(data.message);
+                },
+                function(error) {
+                    $scope.errorOccurred(error.message);
+                });
+        };
         
         // Load towns
         townsData.getTowns().then(
@@ -39,9 +50,17 @@ app.controller('UserProfileEdit', ['$scope', '$rootScope', '$route', 'userData',
             }
         );
         
-        // Event
+        // Events
         $scope.viewChangedToEditUserProfile = function() {
             $rootScope.$broadcast('viewNameChanged', EDIT_USER_PROFILE_VIEW_NAME);
+        };
+        
+        $scope.successOccurred = function(message) {
+            $rootScope.$broadcast('operationSuccess', message);
+        };
+        
+        $scope.errorOccurred = function(message) {
+            $rootScope.$broadcast('operationFailure', message);
         };
         
         $scope.viewChangedToEditUserProfile();

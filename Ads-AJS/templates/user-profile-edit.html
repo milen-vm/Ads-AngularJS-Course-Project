@@ -116,25 +116,25 @@
                             <div>
                                 <span>Old password:</span>
                                 <span class="text-danger"
-                                    ng-show="changePasswordForm.password.$dirty && changePasswordForm.password.$invalid">
+                                    ng-show="changePasswordForm.oldPassword.$dirty && changePasswordForm.oldPassword.$invalid">
                                     <span 
-                                        ng-show="changePasswordForm.password.$error.required">
+                                        ng-show="changePasswordForm.oldPassword.$error.required">
                                         The password is required.
                                     </span>
                                     <span 
-                                        ng-show="changePasswordForm.password.$error.minlength">
+                                        ng-show="changePasswordForm.oldPassword.$error.minlength">
                                          The password is at least 3 characters.
                                     </span>
                                     <span 
-                                        ng-show="changePasswordForm.password.$error.pattern">
+                                        ng-show="changePasswordForm.oldPassword.$error.pattern">
                                         The password can't contain white space.
                                     </span>
                                 </span>
                                 <input type="password"
                                     placeholder="Enter password"
                                     class="form-control"
-                                    name="password"
-                                    ng-model="loginUserData.password"
+                                    name="oldPassword"
+                                    ng-model="passData.oldPassword"
                                     ng-minlength="3"
                                     ng-trim="false"
                                     ng-pattern="/^[\S]*$/"
@@ -143,25 +143,25 @@
                             <div>
                                 <span>New password:</span>
                                 <span class="text-danger"
-                                    ng-show="changePasswordForm.password.$dirty && changePasswordForm.password.$invalid">
+                                    ng-show="changePasswordForm.newPassword.$dirty && changePasswordForm.newPassword.$invalid">
                                     <span 
                                         ng-show="changePasswordForm.password.$error.required">
                                         The password is required.
                                     </span>
                                     <span 
-                                        ng-show="changePasswordForm.password.$error.minlength">
+                                        ng-show="changePasswordForm.newPassword.$error.minlength">
                                          The password must be at least 3 characters.
                                     </span>
                                     <span 
-                                        ng-show="changePasswordForm.password.$error.pattern">
+                                        ng-show="changePasswordForm.newPassword.$error.pattern">
                                         The password can't contain white space.
                                     </span>
                                 </span>
                                 <input type="password"
                                     placeholder="Enter password"
                                     class="form-control"
-                                    name="password"
-                                    ng-model="regUserData.password"
+                                    name="newPassword"
+                                    ng-model="passData.newPassword"
                                     ng-minlength="3"
                                     ng-trim="false"
                                     ng-pattern="/^[\S]*$/"
@@ -180,10 +180,9 @@
                                     placeholder="Confirm password"
                                     class="form-control"
                                     name="confirmPassword"
-                                    ng-model="regUserData.confirmPassword"
-                                    password-match="regUserData.password"/>
+                                    ng-model="passData.confirmPassword"
+                                    password-match="passData.newPassword"/>
                             </div>
-
                             <div class="row text-center">
                                 <div class="col-xs-6">
                                     <button type="submit" class="btn btn-primary"

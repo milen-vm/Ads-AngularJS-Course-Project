@@ -36,21 +36,20 @@ app.controller('AdsList', ['$scope', '$rootScope', 'adsData',
                     $scope.totalAds = $scope.adsList.numItems;
                 },
                 function(error) {
-                    console.log(error);
+                    $scope.errorOccurred(error.message);
                 });           
         };
         
-        // Event trigger. Set view name to TopNavBar controller
+        // Event
         $scope.viewChangedToHome = function() {
             $rootScope.$broadcast('viewNameChanged', HOME_VIEW_NAME);
         };
         
-        // Pagination
-        $scope.setPage = function (pageNo) {    // not needed
-            console.log(pageNo);
-            $scope.currentPage = pageNo;
+        $scope.errorOccurred = function(message) {
+            $rootScope.$broadcast('operationFailure', message);
         };
-
+        
+        // Pagination
         $scope.pageChanged = function() {
             $scope.loadAds();
         };

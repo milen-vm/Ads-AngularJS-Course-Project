@@ -17,13 +17,17 @@ app.controller('LoginForm', ['$scope', '$rootScope', '$location','userData', 'us
                     $location.path('#/');
                 },
                 function(error) {
-                    console.log(error);
+                    $scope.errorOccurred(error.error_description);
                 });
         };
         
         // Events
         $scope.viewChangedToLogin = function() {
             $rootScope.$broadcast('viewNameChanged', LOGIN_VIEW_NAME);
+        };
+        
+        $scope.errorOccurred = function(message) {
+            $rootScope.$broadcast('operationFailure', message);
         };
         
         $scope.userLoggedIn = function() {

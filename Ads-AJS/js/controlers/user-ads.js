@@ -23,7 +23,7 @@ app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsDa
                     $scope.totalAds = $scope.userAds.numItems;
                 },
                 function(error) {
-                    console.log(error);
+                    $scope.errorOccurred(error.message);
                 });           
         };
         
@@ -32,11 +32,11 @@ app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsDa
             
             adsData.deactiveAd(id, accessToken).then(
                 function(data) {
-                    console.log(data);
+                    $scope.successOccurred(data.message);
                     $route.reload();
                 },
                 function(error) {
-                   console.log(error); 
+                   $scope.errorOccurred(error.message); 
                 });
         };
         
@@ -53,11 +53,11 @@ app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsDa
                         
            adsData.deleteAd(id, accessToken).then(
                 function(data) {
-                    console.log(data);
+                    $scope.successOccurred(data.message);
                     $route.reload();
                 },
                 function(error) {
-                   console.log(error); 
+                   $scope.errorOccurred(error.message);
                 });            
         };
         
@@ -66,11 +66,11 @@ app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsDa
             
             adsData.publishAgainAd(id, accessToken).then(
                 function(data) {
-                    console.log(data);
+                    $scope.successOccurred(data.message);
                     $route.reload();
                 },
                 function(error) {
-                    console.log(error);                   
+                    $scope.errorOccurred(error.message);                   
                 }
             );
         };
@@ -78,6 +78,14 @@ app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsDa
         // Events
         $scope.viewChangedToUserAllAds = function() {
             $rootScope.$broadcast('viewNameChanged', USER_ADS_VIEW_NAME);
+        };
+        
+        $scope.successOccurred = function(message) {
+            $rootScope.$broadcast('operationSuccess', message);
+        };
+        
+        $scope.errorOccurred = function(message) {
+            $rootScope.$broadcast('operationFailure', message);
         };
         
         // EventListener

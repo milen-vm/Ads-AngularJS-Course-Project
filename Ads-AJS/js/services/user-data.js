@@ -51,13 +51,21 @@ app.factory('userData', function($http, $q, userSession) {
         var url = baseUrl + 'profile',
             headers = getAuthorizationHeaders();
 
-        return userDataRequest(url, 'PUT', data, headers);      // request must be PUT but server returns error
+        return userDataRequest(url, 'PUT', data, headers);
+    }
+    
+    function changeUserPassword(data) {
+        var url = baseUrl + 'changepassword',
+            headers = getAuthorizationHeaders();
+            
+        return userDataRequest(url, 'PUT', data, headers);
     }
     
     return {
         loginUser: loginUser,
         registerUser: registerUser,
         getUser: getUserData,
-        editUser: editUserProfile
+        editUser: editUserProfile,
+        changePassword: changeUserPassword
     };
 });

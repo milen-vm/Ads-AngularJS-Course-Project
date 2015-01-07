@@ -23,7 +23,7 @@ app.controller('RightSideBarFilters', ['$scope', '$rootScope', 'categoriesData',
             }
         );
         
-        // Event triggers
+        // Events
         $scope.categorieChanged = function() {
             var selectedCategorieId = $scope.categorieId || '';
             $rootScope.$broadcast('categorySelectionChanged', selectedCategorieId);

@@ -14,12 +14,13 @@ app.controller('NavigationBars', ['$scope', '$rootScope', '$location', 'userSess
             };
         };
         
-        $scope.logoutUser = function() {    // on logout left user menu is not hide
+        $scope.logoutUser = function() {
             userSession.removeUser();
             $scope.hasUser = false;
             $location.path('/');
         };
         
+        // Expand My Ads sub menu
         $scope.myAdsClicked = function() {
             $scope.isHidedMyAds = !$scope.isHidedMyAds;
         };
@@ -31,7 +32,7 @@ app.controller('NavigationBars', ['$scope', '$rootScope', '$location', 'userSess
             return active;
         };
         
-        //Event
+        //Events
         $scope.allClicked = function() {
             $rootScope.$broadcast('adsStatusChanged', '');
         };
@@ -63,6 +64,5 @@ app.controller('NavigationBars', ['$scope', '$rootScope', '$location', 'userSess
         });
         
         $scope.isUserLoggedIn();
-        // console.log(userSession.getAccessToken());
     }
 ]);

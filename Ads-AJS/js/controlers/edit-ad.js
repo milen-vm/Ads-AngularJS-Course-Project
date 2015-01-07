@@ -20,11 +20,11 @@ app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', '
                     $scope.adForEditing = data;                                    
                 },
                 function(error) {
-                    console.log(error);
+                    $scope.errorOccurred(error.message);
                 });
                 
             } else {
-                console.log('ad id is missing');
+                $scope.errorOccurred('Ad for editing is not selected.');
             };
             
         };
@@ -60,11 +60,11 @@ app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', '
 
             adsData.editAd($scope.adId, $scope.adForEditing, accessToken).then(
                 function(data) {
-                    console.log(data);
+                    $scope.successOccurred(data.message);
                     $location.path('/user-ads');
                 },
                 function(error) {
-                    console.log(error);
+                    $scope.errorOccurred(error.message);
                 }
             );
         };
@@ -88,9 +88,17 @@ app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', '
             }
         );     
         
-        // Event
+        // Events
         $scope.viewChangedToEditAd = function() {
             $rootScope.$broadcast('viewNameChanged', EDIT_AD_VIEW_NAME);
+        };
+        
+        $scope.successOccurred = function(message) {
+            $rootScope.$broadcast('operationSuccess', message);
+        };
+        
+        $scope.errorOccurred = function(message) {
+            $rootScope.$broadcast('operationFailure', message);
         };
         
         $scope.viewChangedToEditAd();

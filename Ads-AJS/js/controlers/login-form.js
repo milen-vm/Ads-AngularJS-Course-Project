@@ -11,7 +11,7 @@ app.controller('LoginForm', ['$scope', '$rootScope', '$location','userData', 'us
                 function(data) {
                     var username = $scope.loginUserData.username,
                         accessToken = data.access_token;
-                        
+                        console.log(data);
                     userSession.saveUser(username, accessToken);
                     $scope.userLoggedIn();
                     $location.path('#/');

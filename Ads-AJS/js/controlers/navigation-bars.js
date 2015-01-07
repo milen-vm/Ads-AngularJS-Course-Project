@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('NavigationBars', ['$scope', '$rootScope', '$location', 'userSession',
-    function($scope, $rootScope, $location, userSession) {
+app.controller('NavigationBars', ['$scope', '$rootScope', '$location', '$route', 'userSession',
+    function($scope, $rootScope, $location, $route, userSession) {
         $scope.viewName = '';
         $scope.username = '';        
         $scope.hasUser = false;
@@ -17,7 +17,12 @@ app.controller('NavigationBars', ['$scope', '$rootScope', '$location', 'userSess
         $scope.logoutUser = function() {
             userSession.removeUser();
             $scope.hasUser = false;
-            $location.path('/');
+            
+            if ($location.path() === '/') {
+                $route.reload();
+            } else {
+                $location.path('/');
+            };           
         };
         
         // Expand My Ads sub menu

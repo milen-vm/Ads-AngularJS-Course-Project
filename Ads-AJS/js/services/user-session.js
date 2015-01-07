@@ -2,12 +2,12 @@
 
 app.factory('userSession', function($cookieStore) {
     
-    function saveUserData(username, accessToken) {
+    function saveUserData(username, accessToken, isAdmin) {
         var user = {
             username: username,
-            accessToken: accessToken
+            accessToken: accessToken,
+            isAdmin: isAdmin
         };
-        // console.log(accessToken);
         
         $cookieStore.put('user', user);
     }
@@ -42,11 +42,18 @@ app.factory('userSession', function($cookieStore) {
         $cookieStore.remove('user');
     }
     
+    function isUserAdmin() {
+        var user = $cookieStore.get('user');
+        
+        return user.isAdmin;
+    }
+    
     return {
         saveUser: saveUserData,
         getUsername: getUsername,
         getAccessToken: getAccessToken,
         hasUser: hasUserData,
-        removeUser: removeUserData
+        removeUser: removeUserData,
+        isAdmin: isUserAdmin
     };
 });

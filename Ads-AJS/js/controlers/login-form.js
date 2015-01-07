@@ -10,11 +10,17 @@ app.controller('LoginForm', ['$scope', '$rootScope', '$location','userData', 'us
             userData.loginUser($scope.loginUserData).then(
                 function(data) {
                     var username = $scope.loginUserData.username,
-                        accessToken = data.access_token;
+                        accessToken = data.access_token,
+                        isAdmin = data.isAdmin ? true : false;
                         console.log(data);
-                    userSession.saveUser(username, accessToken);
+                    userSession.saveUser(username, accessToken, isAdmin);
                     $scope.userLoggedIn();
-                    $location.path('#/');
+                    
+                    if (isAdmin) {
+                        $location.path('/admin');
+                    } else {
+                        $location.path('/');
+                    };                    
                 },
                 function(error) {
                     $scope.errorOccurred(error.error_description);

@@ -1,12 +1,6 @@
 <div class="row">
     <!-- Left side bar -->
     <aside class="hidden-xs hidden-sm col-md-2 col-lg-2" ng-controller="NavigationBars" >
-        <!-- Login - Register -->
-        <nav id="login-register" class="navbar navbar-side" ng-hide="hasUser">
-            <span>To publish a new ad, please login.</span>
-            <a class="btn btn-primary btn-block" href="#/login-form">Login</a>
-            <a class="btn btn-primary btn-block" href="#/registration-form">Register</a>
-        </nav>
         <div ng-include="'templates/user-sidenav-menu.html'"></div>
     </aside>
     <!-- Edit form -->

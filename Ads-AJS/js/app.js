@@ -44,3 +44,7 @@ app.config(['$routeProvider',
         });
     }
 ]);
+
+app.constant('constValue', {
+    baseUrl: 'http://softuni-ads.azurewebsites.net/api/'
+});

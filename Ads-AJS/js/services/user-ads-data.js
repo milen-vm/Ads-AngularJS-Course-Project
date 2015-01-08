@@ -1,10 +1,8 @@
 'use strict';
 
-app.factory('adsData', ['$http', '$q', 'httpData', 'userSession',
-    function($http, $q, httpData, userSession) {
-        var baseUrl = 'http://softuni-ads.azurewebsites.net/api/',
-            userUrl = baseUrl + 'user/ads/',
-            adminUrl = baseUrl + 'admin/';
+app.factory('userAds', ['httpData', 'userSession', 'constValue',
+    function(httpData, userSession, constValue) {
+        var userUrl = constValue.baseUrl + 'user/ads/';
         
         function getAuthorizationHeaders() {
             var accessToken = userSession.getAccessToken();
@@ -12,16 +10,8 @@ app.factory('adsData', ['$http', '$q', 'httpData', 'userSession',
             return { 'Authorization': 'Bearer ' + accessToken };
         }
         
-        function getMainUrl(isAdmin) {
-            if (isAdmin) {
-                return adminUrl;
-            };
-            
-            return userUrl;
-        }
-        
         function getAllAds(categoryId, townId, pageSize, startPage) {
-            var url = baseUrl + 'ads?categoryid=' + categoryId + '&townid=' + townId +
+            var url = constValue.baseUrl + 'ads?categoryid=' + categoryId + '&townid=' + townId +
                     '&startpage=' + startPage + '&pagesize=' + pageSize;
                     
             return httpData.request(url, 'GET', null, null);
@@ -32,14 +22,6 @@ app.factory('adsData', ['$http', '$q', 'httpData', 'userSession',
                 headers = getAuthorizationHeaders();               
             
             return httpData.request(url, 'GET', null, headers);
-        }
-        
-        function getAdminAds(categoryId, townId, pageSize, startPage) {
-            var url = adminUrl + 'ads?categoryid=' + categoryId + '&townid=' + townId +
-                    '&startpage=' + startPage + '&pagesize=' + pageSize,
-                headers = getAuthorizationHeaders();
-                
-                return httpData.request(url, 'GET', null, headers);
         }
         
         function createNewAd(data) {
@@ -87,7 +69,6 @@ app.factory('adsData', ['$http', '$q', 'httpData', 'userSession',
         return {
             getAds: getAllAds,           
             getUserAds: getUserAds,
-            getAdminAds: getAdminAds,
             createNewAd: createNewAd,
             deactiveAd: deactiveAd,
             deleteAd: deleteAd,

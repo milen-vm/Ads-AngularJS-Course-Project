@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('AdsList', ['$scope', '$rootScope', 'adsData', 'userSession',
-    function($scope, $rootScope, adsData, userSession) {
+app.controller('AdsList', ['$scope', '$rootScope', 'userAds', 'adminAds', 'userSession',
+    function($scope, $rootScope, userAds, adminAds, userSession) {
         var ADS_PER_PAGE = 10,
             PAGER_MAX_SIZE = 5,
             USER_VIEW_NAME = 'Home',
@@ -28,7 +28,7 @@ app.controller('AdsList', ['$scope', '$rootScope', 'adsData', 'userSession',
                 townId = $scope.adsParams.townId;
             
             if ($scope.isAdmin) {
-                adsData.getAdminAds(categoryId, townId, $scope.adsPerPage, $scope.currentPage).then(
+                adminAds.getAdminAds(categoryId, townId, $scope.adsPerPage, $scope.currentPage).then(
                 function(data) {
                     $scope.adsList = data;
                     $scope.totalAds = $scope.adsList.numItems;
@@ -38,7 +38,7 @@ app.controller('AdsList', ['$scope', '$rootScope', 'adsData', 'userSession',
                 });
                 
             } else {
-                adsData.getAds(categoryId, townId, $scope.adsPerPage, $scope.currentPage).then(
+                userAds.getAds(categoryId, townId, $scope.adsPerPage, $scope.currentPage).then(
                 function(data) {
                     $scope.adsList = data;
                     $scope.totalAds = $scope.adsList.numItems;

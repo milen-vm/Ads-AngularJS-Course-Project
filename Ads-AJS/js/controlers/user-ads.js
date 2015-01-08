@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsData', 'userSession', 'adIdTransfer',
-    function($scope, $rootScope, $location, $route, adsData, userSession, adIdTransfer) {
+app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsData', 'adIdTransfer',
+    function($scope, $rootScope, $location, $route, adsData, adIdTransfer) {
         var USER_ADS_VIEW_NAME = 'My Ads',
             ADS_PER_PAGE = 10,
             PAGER_MAX_SIZE = 5;
@@ -26,10 +26,8 @@ app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsDa
                 });           
         };
         
-        $scope.deactivateAd = function(id) {
-            var accessToken = userSession.getAccessToken();
-            
-            adsData.deactiveAd(id, accessToken).then(
+        $scope.deactivateAd = function(id) {            
+            adsData.deactiveAd(id).then(
                 function(data) {
                     $scope.successOccurred(data.message);
                     $route.reload();
@@ -47,10 +45,8 @@ app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsDa
             adIdTransfer.id = id;
         };
         
-        $scope.deleteAdConfirmed = function(id) {
-           var accessToken = userSession.getAccessToken();
-                        
-           adsData.deleteAd(id, accessToken).then(
+        $scope.deleteAdConfirmed = function(id) {                        
+           adsData.deleteAd(id).then(
                 function(data) {
                     $scope.successOccurred(data.message);
                     $route.reload();
@@ -61,9 +57,8 @@ app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsDa
         };
         
         $scope.publishAgainClicked = function(id) {
-            var accessToken = userSession.getAccessToken();
             
-            adsData.publishAgainAd(id, accessToken).then(
+            adsData.publishAgainAd(id).then(
                 function(data) {
                     $scope.successOccurred(data.message);
                     $route.reload();

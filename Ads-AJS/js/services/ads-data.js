@@ -3,7 +3,7 @@
 app.factory('adsData', ['$http', '$q', 'httpData', 'userSession',
     function($http, $q, httpData, userSession) {
         var baseUrl = 'http://softuni-ads.azurewebsites.net/api/',
-            userUrl = baseUrl + 'user/',
+            userUrl = baseUrl + 'user/ads/',
             adminUrl = baseUrl + 'admin/';
         
         function getAuthorizationHeaders() {
@@ -28,7 +28,7 @@ app.factory('adsData', ['$http', '$q', 'httpData', 'userSession',
         }
         
         function getUserAds(pageSize, startPage, status) {
-            var url = userUrl + 'ads?pagesize=' + pageSize + '&startpage=' + startPage + '&status=' + status,
+            var url = userUrl + '?pagesize=' + pageSize + '&startpage=' + startPage + '&status=' + status,
                 headers = getAuthorizationHeaders();               
             
             return httpData.request(url, 'GET', null, headers);
@@ -42,44 +42,44 @@ app.factory('adsData', ['$http', '$q', 'httpData', 'userSession',
                 return httpData.request(url, 'GET', null, headers);
         }
         
-        function createNewAd(data, accessToken) {
-            var url = baseUrl + 'user/ads',
-                headers = { 'Authorization': 'Bearer ' + accessToken };
+        function createNewAd(data) {
+            var url = userUrl,
+                headers = getAuthorizationHeaders();
             
             return httpData.request(url, 'POST', data, headers);
         }
       
-        function deactiveAd(id, accessToken) {
-            var url = baseUrl + 'user/ads/deactivate/' + id,
-                headers = { 'Authorization': 'Bearer ' + accessToken };
+        function deactiveAd(id) {
+            var url = userUrl + 'deactivate/' + id,
+                headers = getAuthorizationHeaders();
                 
             return httpData.request(url, 'PUT', null, headers);
         }
         
-        function deleteAd(id, accessToken) {
-            var url = baseUrl + 'user/ads/' + id,
-                headers = { 'Authorization': 'Bearer ' + accessToken };
+        function deleteAd(id) {
+            var url = userUrl + id,
+                headers = getAuthorizationHeaders();
                 
             return httpData.request(url, 'DELETE', null, headers);
         }
         
-        function getAdById(id, accessToken) {
-            var url = baseUrl + 'user/ads/' + id,
-                headers = { 'Authorization': 'Bearer ' + accessToken };
+        function getAdById(id) {
+            var url = userUrl + id,
+                headers = getAuthorizationHeaders();
                 
             return httpData.request(url, 'GET', null, headers);
         }
         
-        function editAd(id, data, accessToken) {
-            var url = baseUrl + 'user/ads/' + id,
-                headers = { 'Authorization': 'Bearer ' + accessToken };
+        function editAd(id, data) {
+            var url = userUrl + id,
+                headers = getAuthorizationHeaders();
                 
             return httpData.request(url, 'PUT', data, headers);
         }
         
         function publishAgainAd(id, accessToken) {
-            var url = baseUrl + 'user/ads/publishagain/' + id,
-                headers = { 'Authorization': 'Bearer ' + accessToken };
+            var url = userUrl + 'publishagain/' + id,
+                headers = getAuthorizationHeaders();
                 
             return httpData.request(url, 'PUT', null, headers);
         }

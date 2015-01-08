@@ -4,7 +4,8 @@ app.controller('AdsList', ['$scope', '$rootScope', 'adsData', 'userSession',
     function($scope, $rootScope, adsData, userSession) {
         var ADS_PER_PAGE = 10,
             PAGER_MAX_SIZE = 5,
-            HOME_VIEW_NAME = 'Home';
+            USER_VIEW_NAME = 'Home',
+            ADMIN_VIEW_NAME = 'Ads';
             
         $scope.isAdmin = false;
         $scope.adsParams = {
@@ -50,8 +51,10 @@ app.controller('AdsList', ['$scope', '$rootScope', 'adsData', 'userSession',
         };
         
         // Event
-        $scope.viewChangedToHome = function() {
-            $rootScope.$broadcast('viewNameChanged', HOME_VIEW_NAME);
+        $scope.viewNameChanged = function() {
+            var viewName = $scope.isAdmin ? ADMIN_VIEW_NAME : USER_VIEW_NAME;
+            
+            $rootScope.$broadcast('viewNameChanged', viewName);
         };
         
         $scope.errorOccurred = function(message) {
@@ -77,6 +80,6 @@ app.controller('AdsList', ['$scope', '$rootScope', 'adsData', 'userSession',
         
         $scope.isAdminLogedIn();
         $scope.loadAds();
-        $scope.viewChangedToHome();
+        $scope.viewNameChanged();
     }
 ]);

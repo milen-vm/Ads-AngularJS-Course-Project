@@ -1,0 +1,65 @@
+<a class="navbar-brand" href="#/">Ads Administration - <span>{{ viewName }}</span></a>
+<!-- Left buttons -->
+<div class="navbar-collapse collapse">
+    <ul id="left-buttons" class="nav navbar-nav navbar-left hidden-md hidden-lg">
+        <li ng-hide="hasUser">
+            <a href="#/login-form">Login</a>
+        </li>
+        <li ng-hide="hasUser">
+            <a href="#/registration-form">Register</a>
+        </li>
+        <!-- Drop down menu -->
+        <li class="dropdown" ng-show="hasUser">
+            <a href class="dropdown-toggle" data-toggle="dropdown"
+            role="button" aria-expanded="false">Navigation <span class="caret"></span></a>
+            <!-- Navigation -->
+            <ul class="dropdown-menu" role="menu">
+                <li>
+                    <a href="#/">Ads</a>
+                </li>
+                <li>
+                    <a href="#/">Users</a>
+                </li>
+                <li>
+                    <a href="#/">Categiries</a>
+                </li>
+                <li>
+                    <a href="#/">Towns</a>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown" ng-show="hasUser">
+            <a href class="dropdown-toggle" data-toggle="dropdown"
+            role="button" aria-expanded="false">Ads <span class="caret"></span></a>
+            <!-- Ads -->
+            <ul class="dropdown-menu" role="menu">
+                <li>
+                    <a href="#/user-ads" ng-click="allClicked()">All</a>
+                </li>
+                <li>
+                    <a href="#/user-ads" ng-click="publishedCliked()">Published</a>
+                </li>
+                <li>
+                    <a href="#/user-ads" ng-click="waitingApprovalClicked()">Waiting Approval</a>
+                </li>
+                <li>
+                    <a href="#/user-ads" ng-click="inactiveClicked()">Inactive</a>
+                </li>
+                <li>
+                    <a href="#/user-ads" ng-click="rejectedClicked()">Rejected</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <!-- Right buttons -->
+    <ul class="nav navbar-nav navbar-right" ng-show="hasUser">
+        <li>
+            <p id="username" class="navbar-text">
+                {{ username }}
+            </p>
+        </li>
+        <li>
+            <a href="#/" ng-click="logoutUser()">Logout</a>
+        </li>
+    </ul>
+</div>

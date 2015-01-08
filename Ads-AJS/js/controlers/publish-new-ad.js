@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('PublishNewAd', ['$scope', '$rootScope', '$location', 'categoriesData', 'townsData', 'adsData', 'userSession',
-    function($scope, $rootScope, $location, categoriesData, townsData, adsData, userSession) {
+app.controller('PublishNewAd', ['$scope', '$rootScope', '$location', 'categoriesData', 'townsData', 'adsData',
+    function($scope, $rootScope, $location, categoriesData, townsData, adsData) {
         var PUBLISH_NEW_AD_NAME = 'Publish New Ad';
         
         $scope.newAdData = {townId: null, categoryId: null};
@@ -24,10 +24,8 @@ app.controller('PublishNewAd', ['$scope', '$rootScope', '$location', 'categories
             }
         };
         
-        $scope.publishNewAd = function() {
-            var accessToken = userSession.getAccessToken();
-            
-            adsData.createNewAd($scope.newAdData, accessToken).then(
+        $scope.publishNewAd = function() {           
+            adsData.createNewAd($scope.newAdData).then(
                 function(data) {
                     $scope.successOccurred(data.message);
                     $location.path('/user-ads');

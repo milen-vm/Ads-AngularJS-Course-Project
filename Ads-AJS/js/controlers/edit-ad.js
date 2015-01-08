@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', 'userSession', 'adsData', 'townsData', 'categoriesData',
-    function($scope, $rootScope, $location, adIdTransfer, userSession, adsData, townsData, categoriesData) {
+app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', 'adsData', 'townsData', 'categoriesData',
+    function($scope, $rootScope, $location, adIdTransfer, adsData, townsData, categoriesData) {
         var EDIT_AD_VIEW_NAME = 'Edit Ad';
         
         $scope.adId = adIdTransfer.id;
@@ -11,11 +11,9 @@ app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', '
         $scope.categories = {};
         $scope.towns = {};
         
-        $scope.loadAdForEdit = function() {
-            var accessToken = userSession.getAccessToken();
-            
+        $scope.loadAdForEdit = function() {            
             if ($scope.adId) {
-                adsData.getAdById($scope.adId, accessToken).then(
+                adsData.getAdById($scope.adId).then(
                 function(data) {
                     $scope.adForEditing = data;                                    
                 },
@@ -47,18 +45,17 @@ app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', '
             }
         }; 
         
-        $scope.editAdClicked = function() {
-            var accessToken = userSession.getAccessToken();
-            
+        $scope.editAdClicked = function() {            
             if ($scope.deleteImage) {
                 delete $scope.adForEditing.imageDataUrl;
+                $scope.adForEditing.changeimage = true;
             };
             
             delete $scope.adForEditing.categoryName;
             delete $scope.adForEditing.townName;
             delete $scope.adForEditing.id;
 
-            adsData.editAd($scope.adId, $scope.adForEditing, accessToken).then(
+            adsData.editAd($scope.adId, $scope.adForEditing).then(
                 function(data) {
                     $scope.successOccurred(data.message);
                     $location.path('/user-ads');

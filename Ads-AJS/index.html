@@ -22,7 +22,8 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <div ng-include="'templates/user-topnav-menu.html'"></div>            
+            <div ng-hide="isAdmin" ng-include="'templates/user-topnav-menu.html'"></div>
+            <div ng-show="isAdmin" ng-include="'templates/admin/admin-topnav-menu.html'"></div>            
         </nav>
         <div class="container">
             <!-- Alert messages -->

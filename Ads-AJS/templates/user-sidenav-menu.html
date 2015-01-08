@@ -9,33 +9,39 @@
             <li ng-class="{ active: isActive('/')}">
                 <a href="#/">Home</a>
             </li>
-            <!-- My ads -->
+            
             <li ng-class="{ active: isActive('/user-ads')}">
-                <a href="" ng-click="myAdsClicked()">My Ads <span class="caret"></span></a>
-                <ul id="sub-menu" class="nav nav-pills nav-stacked" ng-hide="isHidedMyAds">
-                    <!-- must be radio buttons -->
-                    <li>
-                        <a href="#/user-ads" ng-click="allClicked()">All</a>
-                    </li>
-                    <li>
-                        <a href="#/user-ads" ng-click="publishedCliked()">Published</a>
-                    </li>
-                    <li>
-                        <a href="#/user-ads" ng-click="waitingApprovalClicked()">Waiting Approval</a>
-                    </li>
-                    <li>
-                        <a href="#/user-ads" ng-click="inactiveClicked()">Inactive</a>
-                    </li>
-                    <li>
-                        <a href="#/user-ads" ng-click="rejectedClicked()">Rejected</a>
-                    </li>
-                </ul>
+                <a href="#/user-ads">My Ads</a>
             </li>
             <li ng-class="{ active: isActive('/publish-new-ad')}">
                 <a href="#/publish-new-ad">Publish New Ad</a>
             </li>
             <li ng-class="{ active: isActive('/user-profile-edit')}">
                 <a href="#/user-profile-edit">Edit Profile</a>
+            </li>
+        </ul>
+    </nav>
+    <!-- My ads -->
+    <nav class="user-nav navbar" ng-show="isActive('/user-ads')">
+        <header class="text-center">
+            <strong class="title">My Ads</strong>
+        </header>
+        <!-- must be radio buttons -->
+        <ul class="nav nav-pills nav-stacked">
+            <li>
+                <a href="#/user-ads" ng-click="allClicked()">All</a>
+            </li>
+            <li>
+                <a href="#/user-ads" ng-click="publishedCliked()">Published</a>
+            </li>
+            <li>
+                <a href="#/user-ads" ng-click="waitingApprovalClicked()">Waiting Approval</a>
+            </li>
+            <li>
+                <a href="#/user-ads" ng-click="inactiveClicked()">Inactive</a>
+            </li>
+            <li>
+                <a href="#/user-ads" ng-click="rejectedClicked()">Rejected</a>
             </li>
         </ul>
     </nav>

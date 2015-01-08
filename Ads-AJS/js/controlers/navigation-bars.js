@@ -5,12 +5,13 @@ app.controller('NavigationBars', ['$scope', '$rootScope', '$location', '$route',
         $scope.viewName = '';
         $scope.username = '';        
         $scope.hasUser = false;
-        $scope.isHidedMyAds = true;
+        $scope.isAdmin = false;
         
         $scope.isUserLoggedIn = function() {
             if (userSession.hasUser()) {
                 $scope.username = userSession.getUsername();
                 $scope.hasUser = true;
+                $scope.isAdmin = userSession.isAdmin();
             };
         };
         
@@ -23,11 +24,6 @@ app.controller('NavigationBars', ['$scope', '$rootScope', '$location', '$route',
             } else {
                 $location.path('/');
             };           
-        };
-        
-        // Expand My Ads sub menu
-        $scope.myAdsClicked = function() {
-            $scope.isHidedMyAds = !$scope.isHidedMyAds;
         };
 
         // Adds active state on navigation buttons

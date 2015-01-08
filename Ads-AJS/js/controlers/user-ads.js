@@ -14,10 +14,9 @@ app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsDa
         $scope.pagerMaxSize = PAGER_MAX_SIZE;
         $scope.adsPerPage = ADS_PER_PAGE;
          
-        $scope.loadUserAds = function () {
-            var accessToken = userSession.getAccessToken();   
+        $scope.loadUserAds = function () {   
             
-            adsData.getUserAds($scope.adsPerPage, $scope.currentPage, accessToken, $scope.adsStatus).then(
+            adsData.getUserAds($scope.adsPerPage, $scope.currentPage, $scope.adsStatus).then(
                 function(data) {
                     $scope.userAds = data;
                     $scope.totalAds = $scope.userAds.numItems;

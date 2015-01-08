@@ -12,11 +12,34 @@ app.factory('adsData', ['$http', '$q', 'httpData', 'userSession',
             return { 'Authorization': 'Bearer ' + accessToken };
         }
         
-        function getAds(categoryId, townId, pageSize, startPage) {
+        function getMainUrl(isAdmin) {
+            if (isAdmin) {
+                return adminUrl;
+            };
+            
+            return userUrl;
+        }
+        
+        function getAllAds(categoryId, townId, pageSize, startPage) {
             var url = baseUrl + 'ads?categoryid=' + categoryId + '&townid=' + townId +
                     '&startpage=' + startPage + '&pagesize=' + pageSize;
                     
             return httpData.request(url, 'GET', null, null);
+        }
+        
+        function getUserAds(pageSize, startPage, status) {
+            var url = userUrl + 'ads?pagesize=' + pageSize + '&startpage=' + startPage + '&status=' + status,
+                headers = getAuthorizationHeaders();               
+            
+            return httpData.request(url, 'GET', null, headers);
+        }
+        
+        function getAdminAds(categoryId, townId, pageSize, startPage) {
+            var url = adminUrl + 'ads?categoryid=' + categoryId + '&townid=' + townId +
+                    '&startpage=' + startPage + '&pagesize=' + pageSize,
+                headers = getAuthorizationHeaders();
+                
+                return httpData.request(url, 'GET', null, headers);
         }
         
         function createNewAd(data, accessToken) {
@@ -25,15 +48,7 @@ app.factory('adsData', ['$http', '$q', 'httpData', 'userSession',
             
             return httpData.request(url, 'POST', data, headers);
         }
-    
-        function getUserAds(pageSize, startPage, accessToken, status) {
-            var url = baseUrl + 'user/ads?pagesize=' + pageSize + '&startpage=' + startPage +
-                    '&status=' + status,
-                headers = { 'Authorization': 'Bearer ' + accessToken };
-            
-            return httpData.request(url, 'GET', null, headers);
-        }
-        
+      
         function deactiveAd(id, accessToken) {
             var url = baseUrl + 'user/ads/deactivate/' + id,
                 headers = { 'Authorization': 'Bearer ' + accessToken };
@@ -70,9 +85,10 @@ app.factory('adsData', ['$http', '$q', 'httpData', 'userSession',
         }
         
         return {
-            getAds: getAds,
-            createNewAd: createNewAd,
+            getAds: getAllAds,           
             getUserAds: getUserAds,
+            getAdminAds: getAdminAds,
+            createNewAd: createNewAd,
             deactiveAd: deactiveAd,
             deleteAd: deleteAd,
             getAdById: getAdById,

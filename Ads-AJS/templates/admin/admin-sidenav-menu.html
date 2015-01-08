@@ -6,25 +6,26 @@
             <strong class="title">Navigation</strong>
         </header>
         <ul id="tree" class="nav nav-pills nav-stacked">
-            <li>
+            <li ng-class="{ active: isActive('/')}">
                 <a href="#/">Ads</a>
             </li>
             <li>
-                <a href="#/publish-new-ad">Users</a>
+                <a href="#/">Users</a>
             </li>
             <li>
-                <a href="#/user-profile-edit">Categiries</a>
+                <a href="#/">Categiries</a>
             </li>
             <li>
-                <a href="#/user-profile-edit">Towns</a>
+                <a href="#/">Towns</a>
             </li>
         </ul>
     </nav>
-    <nav class="user-nav navbar">
-        <!-- Ads -->
+    <!-- Ads -->
+    <nav class="user-nav navbar" ng-show="isActive('/')">        
         <header class="text-center">
             <strong class="title">Ads</strong>
         </header>
+        <!-- must be radio buttons -->
         <ul id="tree" class="nav nav-pills nav-stacked">
             <li>
                 <a href="">All</a>

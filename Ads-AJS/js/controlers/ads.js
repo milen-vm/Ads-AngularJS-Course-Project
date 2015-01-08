@@ -1,11 +1,12 @@
 'use strict';
 
-app.controller('AdsList', ['$scope', '$rootScope', 'adsData',
-    function($scope, $rootScope, adsData) {
+app.controller('AdsList', ['$scope', '$rootScope', 'adsData', 'userSession',
+    function($scope, $rootScope, adsData, userSession) {
         var ADS_PER_PAGE = 10,
             PAGER_MAX_SIZE = 5,
             HOME_VIEW_NAME = 'Home';
-        
+            
+        $scope.isAdmin = false;
         $scope.adsParams = {
             categoryId: '',
             townId: ''        
@@ -13,6 +14,49 @@ app.controller('AdsList', ['$scope', '$rootScope', 'adsData',
         $scope.currentPage = 1;
         $scope.pagerMaxSize = PAGER_MAX_SIZE;
         $scope.adsPerPage = ADS_PER_PAGE;
+        
+        $scope.isAdminLogedIn = function() {
+            if (userSession.hasUser()) {
+                $scope.isAdmin = userSession.isAdmin();
+            };
+        };
+     
+        // Loading ads   
+        $scope.loadAds = function () {
+            var categoryId = $scope.adsParams.categoryId,
+                townId = $scope.adsParams.townId;
+            
+            if ($scope.isAdmin) {
+                adsData.getAdminAds(categoryId, townId, $scope.adsPerPage, $scope.currentPage).then(
+                function(data) {
+                    $scope.adsList = data;
+                    $scope.totalAds = $scope.adsList.numItems;
+                },
+                function(error) {
+                    $scope.errorOccurred(error.message);
+                });
+                
+            } else {
+                adsData.getAds(categoryId, townId, $scope.adsPerPage, $scope.currentPage).then(
+                function(data) {
+                    $scope.adsList = data;
+                    $scope.totalAds = $scope.adsList.numItems;
+                },
+                function(error) {
+                    $scope.errorOccurred(error.message);
+                });
+            };    
+                       
+        };
+        
+        // Event
+        $scope.viewChangedToHome = function() {
+            $rootScope.$broadcast('viewNameChanged', HOME_VIEW_NAME);
+        };
+        
+        $scope.errorOccurred = function(message) {
+            $rootScope.$broadcast('operationFailure', message);
+        };
         
          // EventListeners
          $scope.$on('categorySelectionChanged', function(ev, selectedCategorieId) {
@@ -25,37 +69,13 @@ app.controller('AdsList', ['$scope', '$rootScope', 'adsData',
              $scope.loadAds();
          });
         
-        // Loading ads   
-        $scope.loadAds = function () {
-            var categoryId = $scope.adsParams.categoryId,
-                townId = $scope.adsParams.townId;
-                
-            adsData.getAds(categoryId, townId, $scope.adsPerPage, $scope.currentPage).then(
-                function(data) {
-                    $scope.adsList = data;
-                    $scope.totalAds = $scope.adsList.numItems;
-                },
-                function(error) {
-                    $scope.errorOccurred(error.message);
-                });           
-        };
-        
-        // Event
-        $scope.viewChangedToHome = function() {
-            $rootScope.$broadcast('viewNameChanged', HOME_VIEW_NAME);
-        };
-        
-        $scope.errorOccurred = function(message) {
-            $rootScope.$broadcast('operationFailure', message);
-        };
-        
         // Pagination
         $scope.pageChanged = function() {
             $scope.loadAds();
         };
         
         
-        
+        $scope.isAdminLogedIn();
         $scope.loadAds();
         $scope.viewChangedToHome();
     }

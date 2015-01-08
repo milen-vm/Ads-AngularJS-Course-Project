@@ -7,7 +7,8 @@
             <a class="btn btn-primary btn-block" href="#/login-form">Login</a>
             <a class="btn btn-primary btn-block" href="#/registration-form">Register</a>
         </nav>
-        <div ng-include="'templates/user-sidenav-menu.html'"></div>
+        <div ng-hide="isAdmin" ng-include="'templates/user-sidenav-menu.html'"></div>
+        <div ng-show="isAdmin" ng-include="'templates/admin/admin-sidenav-menu.html'"></div>
     </aside>
     <!-- Content -->
     <section class="col-sm-12 col-md-8">
@@ -23,17 +24,62 @@
                         <a href="{{ ad.imageDataUrl }}" class="thumbnail">
                             <img src="" alt="image" ng-src="{{ ad.imageDataUrl }}"
                                 err-src="../img/no-image.gif" />
-                        </a>
+                        </a>                       
                     </div>
                     <div class="col-xs-12 col-sm-9">
-                        <p>{{ ad.text }}</p>
-                        <ul class="list-group">
-                            <li class="list-group-item">Name: <span>{{ ad.ownerName }}</span></li>
-                            <li class="list-group-item">Email: <span><a href="mailto:{{ ad.ownerEmail }}">{{ ad.ownerEmail }}</a></span></li>
-                            <li class="list-group-item">Phone: <span>{{ ad.ownerPhone }}</span></li>                                  
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <p>{{ ad.text }}</p>
+                            </div>
+                            <div class="col-xs-12">
+                                <ul class="list-group">
+                                    <li class="list-group-item">Name: <span>{{ ad.ownerName }}</span></li>
+                                    <li class="list-group-item">Email: <span><a href="mailto:{{ ad.ownerEmail }}">{{ ad.ownerEmail }}</a></span></li>
+                                    <li class="list-group-item">Phone: <span>{{ ad.ownerPhone }}</span></li>                                  
+                                </ul>
+                            </div>
+                            
+                        </div>                                                                       
+                    </div>
+                </div>                     
+                <!-- Admin things -->
+                <div class="row" ng-show="isAdmin">
+                    <div class="col-xs-12 col-sm-3">
+                        <strong>Status:</strong>
+                        <div class="well well-sm status-box text-center admin-staus-ad">
+                            <span class="title">{{ ad.status }}</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-9">
+                        <ul class="list-group" >
+                            <li class="list-group-item">Username: <span>{{ ad.ownerUsername }}</span></li>
+                            <li class="list-group-item">Categiry: <span>{{ ad.categoryName }}</span></li>
+                            <li class="list-group-item">Town: <span>{{ ad.townName }}</span></li>                                  
                         </ul>
-                    </div>                            
-                </div>
+                    </div>
+                    <div class="col-xs-12">                        
+                        <div class="row text-center">
+                            <div class="col-xs-6 col-sm-3">
+                                <button type="button" class="btn btn-primary admin-btn"
+                                ng-click="publishAgainClicked(ad.id)">Approve</button>
+                            </div>
+                            <div class="col-xs-6 col-sm-3">
+                                <button type="button" class="btn btn-primary admin-btn admin-btn"
+                                ng-click="deleteAdClicked(ad)"
+                                data-toggle="modal" data-target="#delete-modal ">Reject</button>
+                            </div>
+                            <div class="col-xs-6 col-sm-3">
+                                <a href="#/edit-ad" class="btn btn-primary admin-btn"
+                                ng-click="editAdClicked(ad.id)">Edit</a>
+                            </div>                           
+                            <div class="col-xs-6 col-sm-3">
+                                <button type="button" class="btn btn-primary admin-btn"
+                                ng-click="deleteAdClicked(ad)"
+                                data-toggle="modal" data-target="#delete-modal">Delete</button>
+                            </div>                                                
+                        </div>
+                    </div>
+                </div>                                  
             </div>
         </div>
         <!-- Paging -->

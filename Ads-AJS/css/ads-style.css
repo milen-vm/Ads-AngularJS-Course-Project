@@ -152,6 +152,16 @@ img {
 .text-edit {
     margin-bottom: 10px;
 }
+
+.admin-btn {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.admin-staus-ad {
+    margin-bottom: 15px;
+}
+
 /*input.ng-invalid {
  border: 1px solid red;
  }

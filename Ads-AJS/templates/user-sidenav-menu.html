@@ -21,28 +21,6 @@
             </li>
         </ul>
     </nav>
-    <!-- My ads -->
-    <nav class="user-nav navbar" ng-show="isActive('/user-ads')">
-        <header class="text-center">
-            <strong class="title">My Ads</strong>
-        </header>
-        <!-- must be radio buttons -->
-        <ul class="nav nav-pills nav-stacked">
-            <li>
-                <a href="#/user-ads" ng-click="allClicked()">All</a>
-            </li>
-            <li>
-                <a href="#/user-ads" ng-click="publishedCliked()">Published</a>
-            </li>
-            <li>
-                <a href="#/user-ads" ng-click="waitingApprovalClicked()">Waiting Approval</a>
-            </li>
-            <li>
-                <a href="#/user-ads" ng-click="inactiveClicked()">Inactive</a>
-            </li>
-            <li>
-                <a href="#/user-ads" ng-click="rejectedClicked()">Rejected</a>
-            </li>
-        </ul>
-    </nav>
+    <!-- Ads status filter -->
+    <div ng-include="'templates/ads-status-menu.html'" ng-show="isActive('/user-ads')"></div>
 </section>

@@ -20,28 +20,6 @@
             </li>
         </ul>
     </nav>
-    <!-- Ads -->
-    <nav class="user-nav navbar" ng-show="isActive('/')">        
-        <header class="text-center">
-            <strong class="title">Ads</strong>
-        </header>
-        <!-- must be radio buttons -->
-        <ul id="tree" class="nav nav-pills nav-stacked">
-            <li>
-                <a href="">All</a>
-            </li>
-            <li>
-                <a href="">Published</a>
-            </li>
-            <li>
-                <a href="">Waiting Approval</a>
-            </li>
-            <li>
-                <a href="">Inactive</a>
-            </li>
-            <li>
-                <a href="">Rejected</a>
-            </li>
-        </ul>
-    </nav>    
+    <!-- Ads status filter -->
+    <div ng-include="'templates/ads-status-menu.html'" ng-show="isActive('/')"></div>   
 </section>

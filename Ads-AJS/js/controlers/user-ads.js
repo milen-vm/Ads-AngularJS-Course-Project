@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsData', 'adIdTransfer',
-    function($scope, $rootScope, $location, $route, adsData, adIdTransfer) {
+app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'userAds', 'adIdTransfer',
+    function($scope, $rootScope, $location, $route, userAds, adIdTransfer) {
         var USER_ADS_VIEW_NAME = 'My Ads',
             ADS_PER_PAGE = 10,
             PAGER_MAX_SIZE = 5;
@@ -16,7 +16,7 @@ app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsDa
          
         $scope.loadUserAds = function () {   
             
-            adsData.getUserAds($scope.adsPerPage, $scope.currentPage, $scope.adsStatus).then(
+            userAds.getUserAds($scope.adsPerPage, $scope.currentPage, $scope.adsStatus).then(
                 function(data) {
                     $scope.userAds = data;
                     $scope.totalAds = $scope.userAds.numItems;
@@ -27,7 +27,7 @@ app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsDa
         };
         
         $scope.deactivateAd = function(id) {            
-            adsData.deactiveAd(id).then(
+            userAds.deactiveAd(id).then(
                 function(data) {
                     $scope.successOccurred(data.message);
                     $route.reload();
@@ -46,7 +46,7 @@ app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsDa
         };
         
         $scope.deleteAdConfirmed = function(id) {                        
-           adsData.deleteAd(id).then(
+           userAds.deleteAd(id).then(
                 function(data) {
                     $scope.successOccurred(data.message);
                     $route.reload();
@@ -58,7 +58,7 @@ app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'adsDa
         
         $scope.publishAgainClicked = function(id) {
             
-            adsData.publishAgainAd(id).then(
+            userAds.publishAgainAd(id).then(
                 function(data) {
                     $scope.successOccurred(data.message);
                     $route.reload();

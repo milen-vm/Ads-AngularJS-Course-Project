@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', 'adsData', 'townsData', 'categoriesData',
-    function($scope, $rootScope, $location, adIdTransfer, adsData, townsData, categoriesData) {
+app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', 'userAds', 'townsData', 'categoriesData',
+    function($scope, $rootScope, $location, adIdTransfer, userAds, townsData, categoriesData) {
         var EDIT_AD_VIEW_NAME = 'Edit Ad';
         
         $scope.adId = adIdTransfer.id;
@@ -13,7 +13,7 @@ app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', '
         
         $scope.loadAdForEdit = function() {            
             if ($scope.adId) {
-                adsData.getAdById($scope.adId).then(
+                userAds.getAdById($scope.adId).then(
                 function(data) {
                     $scope.adForEditing = data;                                    
                 },
@@ -55,7 +55,7 @@ app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', '
             delete $scope.adForEditing.townName;
             delete $scope.adForEditing.id;
 
-            adsData.editAd($scope.adId, $scope.adForEditing).then(
+            userAds.editAd($scope.adId, $scope.adForEditing).then(
                 function(data) {
                     $scope.successOccurred(data.message);
                     $location.path('/user-ads');

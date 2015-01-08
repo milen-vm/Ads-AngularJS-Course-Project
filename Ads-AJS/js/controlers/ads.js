@@ -11,7 +11,8 @@ app.controller('AdsList', ['$scope', '$rootScope', 'userAds', 'adminAds', 'userS
         $scope.adsParams = {
             categoryId: '',
             townId: ''        
-        };        
+        };
+        $scope.adsStatus = '';       
         $scope.currentPage = 1;
         $scope.pagerMaxSize = PAGER_MAX_SIZE;
         $scope.adsPerPage = ADS_PER_PAGE;
@@ -28,7 +29,7 @@ app.controller('AdsList', ['$scope', '$rootScope', 'userAds', 'adminAds', 'userS
                 townId = $scope.adsParams.townId;
             
             if ($scope.isAdmin) {
-                adminAds.getAdminAds(categoryId, townId, $scope.adsPerPage, $scope.currentPage).then(
+                adminAds.getAdminAds($scope.adsStatus, categoryId, townId, $scope.adsPerPage, $scope.currentPage).then(
                 function(data) {
                     $scope.adsList = data;
                     $scope.totalAds = $scope.adsList.numItems;
@@ -71,13 +72,17 @@ app.controller('AdsList', ['$scope', '$rootScope', 'userAds', 'adminAds', 'userS
              $scope.adsParams.townId = selectedTownId;
              $scope.loadAds();
          });
+         
+        $scope.$on('adsStatusChanged', function(ev, status) {
+            $scope.adsStatus = status;
+            $scope.loadAds();
+        });
         
         // Pagination
         $scope.pageChanged = function() {
             $scope.loadAds();
         };
-        
-        
+                
         $scope.isAdminLogedIn();
         $scope.loadAds();
         $scope.viewNameChanged();

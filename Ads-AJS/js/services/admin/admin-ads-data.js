@@ -12,11 +12,11 @@ app.factory('adminAds', ['httpData', 'userSession', 'constValue',
 
 
         
-        function getAdminAds(categoryId, townId, pageSize, startPage) {
+        function getAdminAds(status, categoryId, townId, pageSize, startPage) {
             // Ads?Status={Status}&CategoryId={CategoryId}&TownId={TownId}&SortBy={SortBy}&
                 // StartPage={StartPage}&PageSize={PageSize}
-            var url = adminUrl + 'ads?categoryid=' + categoryId + '&townid=' + townId +
-                    '&startpage=' + startPage + '&pagesize=' + pageSize,
+            var url = adminUrl + 'ads?status=' + status + '&categoryid=' + categoryId + '&townid=' + townId +
+                       '&sortby=-Date' + '&startpage=' + startPage + '&pagesize=' + pageSize,
                 headers = getAuthorizationHeaders();
                 
                 return httpData.request(url, 'GET', null, headers);

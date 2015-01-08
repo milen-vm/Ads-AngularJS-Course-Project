@@ -1,7 +1,7 @@
 'use strict';
 
-app.factory('userData', ['$http', '$q', 'userSession', 'httpData',
-    function($http, $q, userSession, httpData) {
+app.factory('userData', ['userSession', 'httpData',
+    function(userSession, httpData) {
         var baseUrl = 'http://softuni-ads.azurewebsites.net/api/user/';
         
         function getAuthorizationHeaders() {

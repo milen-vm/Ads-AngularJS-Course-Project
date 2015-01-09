@@ -1,7 +1,14 @@
 <div class="row">
     <!-- Left side bar -->
     <aside class="hidden-xs hidden-sm col-md-2 col-lg-2" ng-controller="NavigationBars" >
-        <div ng-include="'templates/user-sidenav-menu.html'"></div>
+        <div ng-switch on="isAdmin">            
+            <div  ng-switch-when="true" >
+                <div ng-include="'templates/admin/admin-sidenav-menu.html'"></div>
+            </div>
+            <div ng-switch-when="false">
+                <div ng-include="'templates/user-sidenav-menu.html'"></div>
+            </div>           
+        </div>
     </aside>
     <!-- Edit form -->
     <section class="col-sm-12 col-md-8 col-md-offset-1">
@@ -10,7 +17,7 @@
                 <strong class="title">Edit Ad</strong>
             </div>
             <div class="panel-body">            
-                <form name="editAdForm" class="form-horizontal" novalidate="novalidate" ng-submit="editAdClicked()">
+                <form name="editAdForm" class="form-horizontal form" novalidate="novalidate" ng-submit="editAdClicked()">
                     <div class="row">  
                         <div class="col-md-8">
                             <div class="row">
@@ -35,7 +42,7 @@
                                              The text must be at least 50 characters.
                                         </span>
                                     </span>                                                       
-                                    <textarea class="form-control text-edit"                  
+                                    <textarea class="form-control text-edit"                
                                         name="text"
                                         ng-model="adForEditing.text"
                                         ng-minlength="50"
@@ -63,6 +70,12 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <!-- Admin things -->
+                                        <div ng-switch on="isAdmin">
+                                            <div  ng-switch-when="true" >
+                                                <div ng-include="'templates/admin/admin-edit-options.html'"></div>
+                                            </div>            
+                                        </div>                                        
                                     </div>
                                 </div>
                             </div>                        
@@ -91,16 +104,15 @@
                                         <input type="checkbox" ng-model="deleteImage" />
                                         Delete                                   
                                     </label>
-                                </div>
-                                       
-                            </div>
-                                                            
+                                </div>                                       
+                            </div>                                                           
                         </div>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary btn-edit"
                             ng-disabled="editAdForm.$invalid">Edit</button>
-                        <a class="btn btn-primary btn-edit" href="#/user-ads">Cancel</a>                        
+                        <button type="button" class="btn btn-primary btn-edit"
+                            ng-click="cancelEditCliced()">Cancel</button>                        
                     </div> 
                 </form>                                            
             </div>

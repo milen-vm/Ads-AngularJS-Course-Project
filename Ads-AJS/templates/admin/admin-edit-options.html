@@ -1,0 +1,20 @@
+<div class="row">
+     <div class="col-sm-6">
+         <span>Date: </span><span class="text-warning">{{adDate | date: "dd-MMM-yyyy"}}</span>
+         <span ng-show="editAdForm.dateInput.$error.date" class="text-danger">Not a valid date!</span>
+         <span ng-show="editAdForm.dateInput.$error.required" class="error ng-hide">Required!</span>
+         <input type="date" class="form-control" name="dateInput"
+            ng-model="adDate"
+            required="required" />
+     </div>
+     <div class="col-sm-6">
+         <span>Status:</span>
+         <select class="form-control selectpicker"
+            ng-model="adForEditing.status"
+            required="required">
+            <option ng-repeat="status in statusArray"
+                ng-selected="adForEditing.status==status"
+                ng-value="{{ status }}">{{ status }}</option>
+        </select>
+    </div>
+</div>

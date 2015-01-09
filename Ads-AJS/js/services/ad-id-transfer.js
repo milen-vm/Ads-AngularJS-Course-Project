@@ -1,7 +1,9 @@
 'use strict';
 
-app.factory('adIdTransfer', function() {
-    return {
-        id: null
-    };
-});
+app.factory('adIdTransfer', [
+    function() {
+        return {
+            id: null
+        };
+    }
+]);

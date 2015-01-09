@@ -1,31 +1,33 @@
 'use strict';
 
-app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', 'userAds', 'townsData', 'categoriesData',
-    function($scope, $rootScope, $location, adIdTransfer, userAds, townsData, categoriesData) {
-        var EDIT_AD_VIEW_NAME = 'Edit Ad';
-        
+app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', 'userAds',
+        'adminAds', 'userSession', 'townsData', 'categoriesData', 'constValue',
+    function($scope, $rootScope, $location, adIdTransfer, userAds, adminAds,
+            userSession, townsData, categoriesData, constValue) {
+                
+        var viewName = constValue.editAdViewName;       
         $scope.adId = adIdTransfer.id;
         adIdTransfer.id = null;
+        $scope.isAdmin = userSession.isAdmin();
         $scope.adForEditing = {};
         $scope.deleteImage = false;
         $scope.categories = {};
         $scope.towns = {};
         
         $scope.loadAdForEdit = function() {            
-            if ($scope.adId) {
+            if ($scope.adId) {           
                 userAds.getAdById($scope.adId).then(
-                function(data) {
-                    $scope.adForEditing = data;                                    
-                },
-                function(error) {
-                    $scope.errorOccurred(error.message);
-                });
-                
+                    function(data) {
+                        $scope.adForEditing = data;                                    
+                    },
+                    function(error) {
+                        $scope.errorOccurred(error.message);
+                    });              
             } else {
                 $scope.errorOccurred('Ad for editing is not selected.');
-            };
-            
+            };           
         };
+
         
         // Load local image file
         $scope.fileSelected = function(fileInputField) {
@@ -66,6 +68,10 @@ app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', '
             );
         };
         
+        $scope.cancelEditCliced = function() {
+            $location.path('/user-ads');
+        };
+        
         // Load categories
         categoriesData.getCategories().then(
             function(data) {                
@@ -87,7 +93,7 @@ app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', '
         
         // Events
         $scope.viewChangedToEditAd = function() {
-            $rootScope.$broadcast('viewNameChanged', EDIT_AD_VIEW_NAME);
+            $rootScope.$broadcast('viewNameChanged', viewName);
         };
         
         $scope.successOccurred = function(message) {

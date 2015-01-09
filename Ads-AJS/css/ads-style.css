@@ -75,10 +75,6 @@ img {
     padding: 5px 0;
 }
 
-/*li > ul {
- display: none;
- }*/
-
 #sub-menu {
     margin: 2px 0 8px 0;
 }
@@ -126,7 +122,8 @@ img {
 
 .btn-edit {
     width: 72px;
-    margin: 25px 10px;
+    margin: 15px 10px 0 10px;
+    width: 100px;
 }
 
 .brws-edit {

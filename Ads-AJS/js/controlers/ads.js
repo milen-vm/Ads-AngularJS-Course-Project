@@ -29,27 +29,34 @@ app.controller('AdsList', ['$scope', '$rootScope', 'userAds', 'adminAds', 'userS
                 townId = $scope.adsParams.townId;
             
             if ($scope.isAdmin) {
-                adminAds.getAdminAds($scope.adsStatus, categoryId, townId, $scope.adsPerPage, $scope.currentPage).then(
-                function(data) {
-                    $scope.adsList = data;
-                    $scope.totalAds = $scope.adsList.numItems;
-                },
-                function(error) {
-                    $scope.errorOccurred(error.message);
-                });
-                
+                getAdminAds(categoryId, townId);                
             } else {
-                userAds.getAds(categoryId, townId, $scope.adsPerPage, $scope.currentPage).then(
-                function(data) {
-                    $scope.adsList = data;
-                    $scope.totalAds = $scope.adsList.numItems;
-                },
-                function(error) {
-                    $scope.errorOccurred(error.message);
-                });
+                getUserAds(categoryId, townId);
             };    
                        
         };
+        
+        function getAdminAds(categoryId, townId) {
+            adminAds.getAdminAds($scope.adsStatus, categoryId, townId, $scope.adsPerPage, $scope.currentPage).then(
+                function(data) {
+                    $scope.adsList = data;
+                    $scope.totalAds = $scope.adsList.numItems;
+                },
+                function(error) {
+                    $scope.errorOccurred(error.message);
+                });
+        }
+        
+        function getUserAds(categoryId, townId) {
+            userAds.getAds(categoryId, townId, $scope.adsPerPage, $scope.currentPage).then(
+                function(data) {
+                    $scope.adsList = data;
+                    $scope.totalAds = $scope.adsList.numItems;
+                },
+                function(error) {
+                    $scope.errorOccurred(error.message);
+                });
+        }
         
         // Event
         $scope.viewNameChanged = function() {

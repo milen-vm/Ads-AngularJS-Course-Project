@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('adsApp', ['ngRoute', 'ngCookies', 'ui.bootstrap', 'ui.bootstrap.tpls']);
+var app = angular.module('adsApp', ['ngRoute', 'ngResource', 'ngCookies', 'ui.bootstrap']);
 
 app.config(['$routeProvider',
     function($routeProvider) {
@@ -39,6 +39,11 @@ app.config(['$routeProvider',
             controller: 'UserProfileEdit'
         });
         
+        $routeProvider.when('/admin-edit-ad', {
+            templateUrl: 'templates/edit-ad.html',
+            controller: 'AdminEditAd'
+        });
+        
         $routeProvider.otherwise({
             redirectTo: '/'
         });
@@ -46,5 +51,6 @@ app.config(['$routeProvider',
 ]);
 
 app.constant('constValue', {
-    baseUrl: 'http://softuni-ads.azurewebsites.net/api/'
+    baseUrl: 'http://softuni-ads.azurewebsites.net/api/',
+    editAdViewName: 'Edit Ad'
 });

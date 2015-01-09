@@ -1,8 +1,26 @@
 'use strict';
 
-app.factory('categoriesData', 
-    function($http, $q) {
+app.factory('categoriesData', ['$http', '$q', '$resource', 'constValue',
+    function($http, $q, $resource, constValue) {
         var url = 'http://softuni-ads.azurewebsites.net/api/categories';
+        
+        function getAllCategoriesR() {
+            var urlR = constValue.baseUrl + 'categories',
+                result = [];
+
+            $http({
+                method: 'GET',
+                url: urlR
+            })
+            .success(function(data, status, headers, config) {
+                result = data;
+            })
+            .error(function(error, status, headers, config) {
+                console.log(error);
+            });
+            
+            return result;
+        }
         
         function getAllCategories() {
             var defer = $q.defer();
@@ -22,7 +40,8 @@ app.factory('categoriesData',
         }
     
         return {
-            getCategories: getAllCategories
+            getCategories: getAllCategories,
+            getAll: getAllCategoriesR
         };
     }
-);
+]);

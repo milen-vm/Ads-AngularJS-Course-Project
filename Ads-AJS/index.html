@@ -22,8 +22,14 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <div ng-hide="isAdmin" ng-include="'templates/user-topnav-menu.html'"></div>
-            <div ng-show="isAdmin" ng-include="'templates/admin/admin-topnav-menu.html'"></div>            
+            <div ng-switch on="isAdmin">
+                <div  ng-switch-when="true" >
+                    <div ng-include="'templates/admin/admin-topnav-menu.html'"></div>
+                </div>    
+                <div  ng-switch-when="false" >
+                    <div ng-include="'templates/user-topnav-menu.html'"></div>
+                </div>        
+            </div>           
         </nav>
         <div class="container">
             <!-- Alert messages -->
@@ -40,7 +46,7 @@
                     </button>
                     <strong>Oops!</strong> {{ errorMessage }}
                 </div>
-            </section>           
+            </section>        
             <!-- Views container -->
             <section ng-view></section>
         </div>
@@ -56,7 +62,8 @@
         </div>
         <!-- Angular libs -->
         <script src="libs/angular.js"></script>
-        <script src="libs/angular-route.js"></script>
+        <script src="libs/angular-route.min.js"></script>
+        <script src="libs/angular-resource.min.js"></script>
         <script src="libs/angular-cookies.min.js"></script>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="libs/jQuery/jquery-2.1.3.min.js"></script>
@@ -64,6 +71,8 @@
         <!-- Bootstrap plugins -->
         <script src="libs/bootstrap/js/bootstrap.min.js"></script>
         <script src="libs/bootstrap/js/ui-bootstrap-tpls-0.12.0.min.js"></script>
+        <!-- Datepicker -->
+
         <!-- My scripts -->
         <script src="js/app.js"></script>
         <script src="js/directives/password-match.js"></script>
@@ -86,5 +95,7 @@
         <script src="js/controlers/user-ads.js"></script>
         <script src="js/controlers/edit-ad.js"></script>
         <script src="js/controlers/user-profile-edit.js"></script>
+        <script src="js/controlers/admin/admin-ads-buttons.js"></script>
+        <script src="js/controlers/admin/admin-edit-ad.js"></script>
     </body>
 </html>

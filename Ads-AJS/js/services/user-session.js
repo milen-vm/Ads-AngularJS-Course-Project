@@ -1,59 +1,61 @@
 'use strict';
 
-app.factory('userSession', function($cookieStore) {
-    
-    function saveUserData(username, accessToken, isAdmin) {
-        var user = {
-            username: username,
-            accessToken: accessToken,
-            isAdmin: isAdmin
-        };
+app.factory('userSession', ['$cookieStore',
+    function($cookieStore) {
         
-        $cookieStore.put('user', user);
-    }
-    
-    function getUsername() {
-        var user = $cookieStore.get('user');
-        
-        if (user.username) {
-            return user.username;
-        };
-    }
-    
-    function getAccessToken() {
-        var user = $cookieStore.get('user');
-        
-        if (user.accessToken) {
-            return user.accessToken;
-        };
-    }
-    
-    function hasUserData() {
-        var user = $cookieStore.get('user');
-        
-        if (user) {
-            return true;
+        function saveUserData(username, accessToken, isAdmin) {
+            var user = {
+                username: username,
+                accessToken: accessToken,
+                isAdmin: isAdmin
+            };
+            
+            $cookieStore.put('user', user);
         }
         
-        return false;
-    }
-    
-    function removeUserData() {
-        $cookieStore.remove('user');
-    }
-    
-    function isUserAdmin() {
-        var user = $cookieStore.get('user');
+        function getUsername() {
+            var user = $cookieStore.get('user');
+            
+            if (user.username) {
+                return user.username;
+            };
+        }
         
-        return user.isAdmin;
+        function getAccessToken() {
+            var user = $cookieStore.get('user');
+            
+            if (user.accessToken) {
+                return user.accessToken;
+            };
+        }
+        
+        function hasUserData() {
+            var user = $cookieStore.get('user');
+            
+            if (user) {
+                return true;
+            }
+            
+            return false;
+        }
+        
+        function removeUserData() {
+            $cookieStore.remove('user');
+        }
+        
+        function isUserAdmin() {
+            var user = $cookieStore.get('user');
+            
+            return user.isAdmin;
+        }
+        
+        return {
+            saveUser: saveUserData,
+            getUsername: getUsername,
+            getAccessToken: getAccessToken,
+            hasUser: hasUserData,
+            removeUser: removeUserData,
+            isAdmin: isUserAdmin
+        };
     }
-    
-    return {
-        saveUser: saveUserData,
-        getUsername: getUsername,
-        getAccessToken: getAccessToken,
-        hasUser: hasUserData,
-        removeUser: removeUserData,
-        isAdmin: isUserAdmin
-    };
-});
+]);

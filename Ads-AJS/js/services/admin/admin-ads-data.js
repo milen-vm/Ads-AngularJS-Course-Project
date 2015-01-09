@@ -13,8 +13,6 @@ app.factory('adminAds', ['httpData', 'userSession', 'constValue',
 
         
         function getAdminAds(status, categoryId, townId, pageSize, startPage) {
-            // Ads?Status={Status}&CategoryId={CategoryId}&TownId={TownId}&SortBy={SortBy}&
-                // StartPage={StartPage}&PageSize={PageSize}
             var url = adminUrl + 'ads?status=' + status + '&categoryid=' + categoryId + '&townid=' + townId +
                        '&sortby=-Date' + '&startpage=' + startPage + '&pagesize=' + pageSize,
                 headers = getAuthorizationHeaders();
@@ -22,8 +20,16 @@ app.factory('adminAds', ['httpData', 'userSession', 'constValue',
                 return httpData.request(url, 'GET', null, headers);
         }
         
+        function getAdById(id) {
+            var url = adminUrl + 'ads/' + id,
+                headers = getAuthorizationHeaders();
+                
+            return httpData.request(url, 'GET', null, headers);
+        }
+        
         return {
             getAdminAds: getAdminAds,
+            getAdById: getAdById
         };
     }
 ]);

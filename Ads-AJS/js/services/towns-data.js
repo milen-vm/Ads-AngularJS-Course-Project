@@ -1,7 +1,7 @@
 'use strict';
 
-app.factory('townsData', 
-    function($http, $q) {
+app.factory('townsData', ['$http', '$q', '$resource', 'constValue',
+    function($http, $q, $resource, constValue) {
         var url = 'http://softuni-ads.azurewebsites.net/api/towns';
         
         function getAllTowns() {
@@ -25,4 +25,4 @@ app.factory('townsData',
             getTowns: getAllTowns
         };
     }
-);
+]);

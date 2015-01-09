@@ -114,6 +114,8 @@ app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', '
         }
         
         function editUserAd() {
+            delete $scope.adForEditing.date;
+            
             userAds.editAd($scope.adId, $scope.adForEditing).then(
                 function(data) {
                     $scope.successOccurred(data.message);

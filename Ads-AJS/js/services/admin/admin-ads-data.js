@@ -6,7 +6,7 @@ app.factory('adminAds', ['httpData', 'userSession', 'constValue',
         
         function getAuthorizationHeaders() {
             var accessToken = userSession.getAccessToken();
-            
+            // console.log(accessToken);
             return { 'Authorization': 'Bearer ' + accessToken };
         }
 
@@ -34,10 +34,18 @@ app.factory('adminAds', ['httpData', 'userSession', 'constValue',
             return httpData.request(url, 'PUT', data, headers);
         }
         
+        function rejectAd(id) {
+            var url = adminUrl + 'ads/reject/' + id,
+                headers = getAuthorizationHeaders();
+                
+            return httpData.request(url, 'PUT', null, headers);
+        }
+        
         return {
             getAdminAds: getAdminAds,
             getAdById: getAdById,
-            editAd: editAd
+            editAd: editAd,
+            rejectAd: rejectAd
         };
     }
 ]);

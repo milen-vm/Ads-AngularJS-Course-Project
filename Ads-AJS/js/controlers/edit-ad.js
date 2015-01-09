@@ -8,26 +8,47 @@ app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', '
         var viewName = constValue.editAdViewName;       
         $scope.adId = adIdTransfer.id;
         adIdTransfer.id = null;
-        $scope.isAdmin = userSession.isAdmin();
-        $scope.adForEditing = {};
         $scope.deleteImage = false;
-        $scope.categories = {};
-        $scope.towns = {};
+        $scope.statusArray = ['Published', 'WaitingApproval', 'Inactive', 'Rejected'];
+        $scope.isAdmin = userSession.isAdmin();
+        $scope.adForEditing = {};        
+        $scope.categories = [];
+        $scope.towns = [];
         
         $scope.loadAdForEdit = function() {            
-            if ($scope.adId) {           
-                userAds.getAdById($scope.adId).then(
-                    function(data) {
-                        $scope.adForEditing = data;                                    
-                    },
-                    function(error) {
-                        $scope.errorOccurred(error.message);
-                    });              
+            if ($scope.adId) {
+                if ($scope.isAdmin) {
+                    getAdminAd();
+                } else {
+                    getUserAd();
+                };                                    
             } else {
                 $scope.errorOccurred('Ad for editing is not selected.');
             };           
         };
-
+        
+        function getAdminAd() {
+            adminAds.getAdById($scope.adId).then(
+                function(data) {                    
+                    $scope.adForEditing = data;
+                    $scope.adForEditing.changeimage = false;
+                    $scope.adDate = new Date(data.date + 'Z');    // takes 2 hours back in firefox without "Z"                            
+                },
+                function(error) {
+                    $scope.errorOccurred(error.message);
+                });
+        }
+        
+        function getUserAd() {
+            userAds.getAdById($scope.adId).then(
+                function(data) {
+                    $scope.adForEditing = data;
+                    $scope.adForEditing.changeimage = false;                                    
+                },
+                function(error) {
+                    $scope.errorOccurred(error.message);
+                });
+        }
         
         // Load local image file
         $scope.fileSelected = function(fileInputField) {
@@ -47,16 +68,52 @@ app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', '
             }
         }; 
         
+        $scope.setAdNewDate = function(date) {
+            if (date) {
+                delete $scope.adForEditing.date;
+                $scope.adForEditing.date = date.toISOString();  
+            };            
+        };
+        
         $scope.editAdClicked = function() {            
             if ($scope.deleteImage) {
                 delete $scope.adForEditing.imageDataUrl;
                 $scope.adForEditing.changeimage = true;
             };
             
+            if (!$scope.adForEditing.changeimage) {
+                delete $scope.adForEditing.imageDataUrl;
+            };
+            
             delete $scope.adForEditing.categoryName;
             delete $scope.adForEditing.townName;
             delete $scope.adForEditing.id;
+            
+            if ($scope.isAdmin) {
+                editAdminAd();
+            } else {
+                editUserAd();
+            };          
+        };
+        
+        function editAdminAd() {
+            delete $scope.adForEditing.ownerUsername;
+            delete $scope.adForEditing.ownerPhone;
+            delete $scope.adForEditing.ownerName;
+            delete $scope.adForEditing.ownerEmail;
 
+            adminAds.editAd($scope.adForEditing, $scope.adId).then(
+                function(data) {
+                    $scope.successOccurred(data.message);
+                    $location.path('/');
+                },
+                function(error) {
+                    $scope.errorOccurred(error.message);
+                }
+            );
+        }
+        
+        function editUserAd() {
             userAds.editAd($scope.adId, $scope.adForEditing).then(
                 function(data) {
                     $scope.successOccurred(data.message);
@@ -66,10 +123,14 @@ app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', '
                     $scope.errorOccurred(error.message);
                 }
             );
-        };
+        }
         
         $scope.cancelEditCliced = function() {
-            $location.path('/user-ads');
+            if ($scope.isAdmin) {
+                $location.path('/');
+            } else {
+                $location.path('/user-ads');
+            };           
         };
         
         // Load categories
@@ -89,8 +150,8 @@ app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', '
             function(error) {
                 console.log(error);
             }
-        );     
-        
+        );   
+
         // Events
         $scope.viewChangedToEditAd = function() {
             $rootScope.$broadcast('viewNameChanged', viewName);

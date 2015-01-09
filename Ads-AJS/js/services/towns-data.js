@@ -1,24 +1,11 @@
 'use strict';
 
-app.factory('townsData', ['$http', '$q', '$resource', 'constValue',
-    function($http, $q, $resource, constValue) {
-        var url = 'http://softuni-ads.azurewebsites.net/api/towns';
+app.factory('townsData', ['httpData', 'constValue',
+    function(httpData, constValue) {
+        var url = constValue.baseUrl + 'towns';
         
-        function getAllTowns() {
-            var defer = $q.defer();
-            
-            $http({
-                method: 'GET',
-                url: url
-            })
-            .success(function(data, status, headers, config) {
-                defer.resolve(data);
-            })
-            .error(function(error, status, headers, config) {
-                defer.reject(error);
-            });
-            
-            return defer.promise;
+        function getAllTowns() {            
+            return httpData.request(url, 'GET', null, null);
         }
     
         return {

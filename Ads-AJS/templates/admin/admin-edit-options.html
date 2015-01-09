@@ -1,10 +1,12 @@
 <div class="row">
      <div class="col-sm-6">
-         <span>Date: </span><span class="text-warning">{{adDate | date: "dd-MMM-yyyy"}}</span>
+         <span>Date: </span><span class="text-warning">{{ adDate | date: "dd-MMM-yyyy" }}</span>
          <span ng-show="editAdForm.dateInput.$error.date" class="text-danger">Not a valid date!</span>
-         <span ng-show="editAdForm.dateInput.$error.required" class="error ng-hide">Required!</span>
+         <span ng-show="editAdForm.dateInput.$error.required" class="text-danger">Required!</span>
          <input type="date" class="form-control" name="dateInput"
             ng-model="adDate"
+            ng-change="setAdNewDate(adDate)"
+            placeholder="yyyy-MM-dd"
             required="required" />
      </div>
      <div class="col-sm-6">

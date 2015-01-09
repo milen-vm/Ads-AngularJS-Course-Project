@@ -39,11 +39,6 @@ app.config(['$routeProvider',
             controller: 'UserProfileEdit'
         });
         
-        $routeProvider.when('/admin-edit-ad', {
-            templateUrl: 'templates/edit-ad.html',
-            controller: 'AdminEditAd'
-        });
-        
         $routeProvider.otherwise({
             redirectTo: '/'
         });

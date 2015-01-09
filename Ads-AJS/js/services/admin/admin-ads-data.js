@@ -27,9 +27,17 @@ app.factory('adminAds', ['httpData', 'userSession', 'constValue',
             return httpData.request(url, 'GET', null, headers);
         }
         
+        function editAd(data, id) {
+            var url = adminUrl + 'ads/' + id,
+                headers = getAuthorizationHeaders();
+            
+            return httpData.request(url, 'PUT', data, headers);
+        }
+        
         return {
             getAdminAds: getAdminAds,
-            getAdById: getAdById
+            getAdById: getAdById,
+            editAd: editAd
         };
     }
 ]);

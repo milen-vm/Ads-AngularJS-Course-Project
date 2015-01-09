@@ -18,6 +18,7 @@ app.controller('NavigationBars', ['$scope', '$rootScope', '$location', '$route',
         $scope.logoutUser = function() {
             userSession.removeUser();
             $scope.hasUser = false;
+            $scope.isAdmin = false;
             
             if ($location.path() === '/') {
                 $route.reload();
@@ -60,8 +61,7 @@ app.controller('NavigationBars', ['$scope', '$rootScope', '$location', '$route',
         });
         
         $scope.$on('userLoggedIn', function(ev) {
-            $scope.username = userSession.getUsername();
-            $scope.hasUser = true;
+            $scope.isUserLoggedIn();
         });
         
         $scope.isUserLoggedIn();

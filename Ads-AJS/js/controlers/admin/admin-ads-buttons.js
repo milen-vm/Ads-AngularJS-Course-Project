@@ -5,7 +5,7 @@ app.controller('AdminButtons', ['$scope', '$location', 'adIdTransfer',
         
         $scope.adminEditAdClicked = function(id) {
             adIdTransfer.id = id;
-            $location.path('/admin-edit-ad');
+            $location.path('/edit-ad');
         };
     }
 ]);

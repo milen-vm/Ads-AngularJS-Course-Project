@@ -35,9 +35,7 @@ app.controller('AdsList', ['$scope', '$rootScope', '$location', 'userAds', 'admi
             };    
                        
         };
-        
-        
-        
+               
         function getUserAds(categoryId, townId) {
             userAds.getAds(categoryId, townId, $scope.adsPerPage, $scope.currentPage).then(
                 function(data) {

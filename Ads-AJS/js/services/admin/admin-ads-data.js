@@ -6,7 +6,7 @@ app.factory('adminAds', ['httpData', 'userSession', 'constValue',
         
         function getAuthorizationHeaders() {
             var accessToken = userSession.getAccessToken();
-            // console.log(accessToken);
+
             return { 'Authorization': 'Bearer ' + accessToken };
         }
         

@@ -15,10 +15,7 @@
             <!-- Navigation -->
             <ul class="dropdown-menu" role="menu">
                 <li>
-                    <a href="#/">Ads</a>
-                </li>
-                <li>
-                    <a href="#/">Users</a>
+                    <a href="#/admin-users-list">Users</a>
                 </li>
                 <li>
                     <a href="#/">Categiries</a>
@@ -29,24 +26,24 @@
             </ul>
         </li>
         <li class="dropdown" ng-show="hasUser">
-            <a href class="dropdown-toggle" data-toggle="dropdown"
+            <a href="" class="dropdown-toggle" data-toggle="dropdown"
             role="button" aria-expanded="false">Ads <span class="caret"></span></a>
             <!-- Ads -->
             <ul class="dropdown-menu" role="menu">
                 <li>
-                    <a href="#/user-ads" ng-click="allClicked()">All</a>
+                    <a href="#/" ng-click="allClicked()">All</a>
                 </li>
                 <li>
-                    <a href="#/user-ads" ng-click="publishedCliked()">Published</a>
+                    <a href="#/" ng-click="publishedCliked()">Published</a>
                 </li>
                 <li>
-                    <a href="#/user-ads" ng-click="waitingApprovalClicked()">Waiting Approval</a>
+                    <a href="#/" ng-click="waitingApprovalClicked()">Waiting Approval</a>
                 </li>
                 <li>
-                    <a href="#/user-ads" ng-click="inactiveClicked()">Inactive</a>
+                    <a href="#/" ng-click="inactiveClicked()">Inactive</a>
                 </li>
                 <li>
-                    <a href="#/user-ads" ng-click="rejectedClicked()">Rejected</a>
+                    <a href="#/" ng-click="rejectedClicked()">Rejected</a>
                 </li>
             </ul>
         </li>

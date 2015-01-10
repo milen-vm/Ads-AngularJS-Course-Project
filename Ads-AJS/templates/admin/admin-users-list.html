@@ -1,0 +1,44 @@
+<div class="row">
+    <aside class="hidden-xs hidden-sm col-md-2 col-lg-2" ng-controller="NavigationBars" >
+        <div ng-switch on="isAdmin">
+            <div ng-include="'templates/admin/admin-sidenav-menu.html'"></div>                     
+        </div>
+    </aside>
+    <!-- Content -->
+    <section class="col-md-8 col-md-offset-1">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in usersList">
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.name }}</td>
+                        <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+                        <td>{{ user.phoneNumber }}</td>
+                        <td><a href="">Edit</a> <a href="">Delete</a></td>
+                    </tr>               
+                </tbody>
+            </table>
+        </div>
+        <!-- Paging -->
+        <nav class="text-center">
+            <ul pagination
+                total-items="totalUsers"
+                items-per-page="usersPerPage"
+                ng-model="currentPage"
+                max-size="pagerMaxSize"
+                ng-change="pageChanged()"
+                boundary-links="true"
+                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+            </ul>
+        </nav>
+    </section>   
+</div>

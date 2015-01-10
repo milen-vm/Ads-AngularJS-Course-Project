@@ -32,7 +32,15 @@ app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', '
                 function(data) {                    
                     $scope.adForEditing = data;
                     $scope.adForEditing.changeimage = false;
-                    $scope.adDate = new Date(data.date + 'Z');    // takes 2 hours back in firefox without "Z"                            
+                    
+                    var dateStr = data.date;                          // takes 2 hours back in firefox without "Z"
+                    var lastChar = dateStr.charAt(dateStr.length - 1);
+                    if (lastChar ==! 'Z' || lastChar ==! 'z') {
+                        $scope.adDate = new Date(data.date + 'Z');
+                    } else {
+                        $scope.adDate = new Date(data.date); 
+                    };
+                                                   
                 },
                 function(error) {
                     $scope.errorOccurred(error.message);

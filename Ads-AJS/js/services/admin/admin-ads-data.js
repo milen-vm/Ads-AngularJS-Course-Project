@@ -9,8 +9,6 @@ app.factory('adminAds', ['httpData', 'userSession', 'constValue',
             // console.log(accessToken);
             return { 'Authorization': 'Bearer ' + accessToken };
         }
-
-
         
         function getAdminAds(status, categoryId, townId, pageSize, startPage) {
             var url = adminUrl + 'ads?status=' + status + '&categoryid=' + categoryId + '&townid=' + townId +
@@ -41,11 +39,27 @@ app.factory('adminAds', ['httpData', 'userSession', 'constValue',
             return httpData.request(url, 'PUT', null, headers);
         }
         
+        function approveAd(id) {
+            var url  = adminUrl + 'ads/approve/' + id,
+                headers = getAuthorizationHeaders();
+                
+            return httpData.request(url, 'PUT', null, headers);
+        }
+        
+        function deleteAd(id) {
+            var url = adminUrl + 'ads/' + id,
+                headers = getAuthorizationHeaders();
+                
+            return httpData.request(url, 'DELETE', null, headers);
+        }
+
         return {
             getAdminAds: getAdminAds,
             getAdById: getAdById,
             editAd: editAd,
-            rejectAd: rejectAd
+            rejectAd: rejectAd,
+            approveAd: approveAd,
+            deleteAd: deleteAd
         };
     }
 ]);

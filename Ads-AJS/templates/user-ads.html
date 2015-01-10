@@ -73,7 +73,8 @@
                     <div class="modal-body">
                         <div class="head-ad">
                             <strong class="title">{{ adForDeleting.title }}</strong>
-                            <span class="pull-right">{{ adForDeleting.date | date: 'd MMM yyyy' }}</span>
+                            <!-- 'Z' is for time zone recognition -->
+                            <span class="pull-right">{{ adForDeleting.date + 'Z' | date: 'd MMM yyyy' }}</span>
                         </div>
                         <div class="row">
                             <div class="mod-cnt">

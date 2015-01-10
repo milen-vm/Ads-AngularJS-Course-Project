@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('AdsList', ['$scope', '$rootScope', 'userAds', 'adminAds', 'userSession',
-    function($scope, $rootScope, userAds, adminAds, userSession) {
+app.controller('AdsList', ['$scope', '$rootScope', '$location', 'userAds', 'adminAds', 'userSession', 'adIdTransfer',
+    function($scope, $rootScope, $location, userAds, adminAds, userSession, adIdTransfer) {
         var ADS_PER_PAGE = 10,
             PAGER_MAX_SIZE = 5,
             USER_VIEW_NAME = 'Home',
@@ -36,16 +36,7 @@ app.controller('AdsList', ['$scope', '$rootScope', 'userAds', 'adminAds', 'userS
                        
         };
         
-        function getAdminAds(categoryId, townId) {
-            adminAds.getAdminAds($scope.adsStatus, categoryId, townId, $scope.adsPerPage, $scope.currentPage).then(
-                function(data) {
-                    $scope.adsList = data;
-                    $scope.totalAds = $scope.adsList.numItems;
-                },
-                function(error) {
-                    $scope.errorOccurred(error.message);
-                });
-        }
+        
         
         function getUserAds(categoryId, townId) {
             userAds.getAds(categoryId, townId, $scope.adsPerPage, $scope.currentPage).then(
@@ -58,11 +49,69 @@ app.controller('AdsList', ['$scope', '$rootScope', 'userAds', 'adminAds', 'userS
                 });
         }
         
+        // Admin things
+        function getAdminAds(categoryId, townId) {
+            adminAds.getAdminAds($scope.adsStatus, categoryId, townId, $scope.adsPerPage, $scope.currentPage).then(
+                function(data) {
+                    $scope.adsList = data;
+                    $scope.totalAds = $scope.adsList.numItems;
+                },
+                function(error) {
+                    $scope.errorOccurred(error.message);
+                });
+        }
+        
+        $scope.adminEditAdClicked = function(id) {
+            adIdTransfer.id = id;
+            $location.path('/edit-ad');
+        };
+        
+        $scope.adminRejectAdClicked = function(id) {
+            adminAds.rejectAd(id).then(
+                function(data) {
+                    $scope.successOccurred(data.message);
+                },
+                function(error) {
+                    $scope.errorOccurred(error.message);                   
+                }
+            );
+        };
+        
+        $scope.adminApproveAdClicked = function(id) {
+            adminAds.approveAd(id).then(
+                function(data) {
+                    $scope.successOccurred(data.message);
+                },
+                function(error) {
+                    $scope.errorOccurred(error.message);                   
+                }
+            );
+        };
+        
+        $scope.adminDeleteAdClicked = function(ad) {
+            $scope.adForDeleting = ad;
+        };
+        
+        $scope.adminDeleteAdConfirmed = function(id) {
+            adminAds.deleteAd(id).then(
+                function(data) {
+                    $scope.successOccurred(data.message);
+                },
+                function(error) {
+                    $scope.errorOccurred(error.message);                   
+                }
+            );
+        };
+        
         // Event
         $scope.viewNameChanged = function() {
             var viewName = $scope.isAdmin ? ADMIN_VIEW_NAME : USER_VIEW_NAME;
             
             $rootScope.$broadcast('viewNameChanged', viewName);
+        };
+        
+        $scope.successOccurred = function(message) {
+            $rootScope.$broadcast('operationSuccess', message);
         };
         
         $scope.errorOccurred = function(message) {

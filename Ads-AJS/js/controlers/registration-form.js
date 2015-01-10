@@ -4,7 +4,7 @@ app.controller('RegistrationForm', ['$scope', '$rootScope', '$location', 'userSe
     function($scope, $rootScope, $location, userSession, townsData, userData) {
         var REGISTER_VIEW_NAME = 'Registration';
                 
-        $scope.towns = {};
+        // $scope.towns = [];
         $scope.regUserData = {};
     
         $scope.registerUser = function() {

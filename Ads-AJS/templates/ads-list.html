@@ -22,7 +22,8 @@
         <div ng-repeat="ad in adsList.ads" class="panel panel-primary">
             <div class="panel-heading">
                 <strong class="title">{{ ad.title }}</strong>
-                <span class="pull-right">{{ ad.date | date: 'd-MMM-yyyy HH:mm' }}</span>
+                <!-- 'Z' is for time zone recognition -->
+                <span class="pull-right">{{ ad.date + 'Z' | date: 'd-MMM-yyyy HH:mm' }}</span>
                 <div class="clearfix"></div>
             </div>
             <div class="panel-body">
@@ -48,45 +49,13 @@
                             
                         </div>                                                                       
                     </div>
-                </div>                     
+                </div>
                 <!-- Admin things -->
-                <div class="row" ng-show="isAdmin">
-                    <div class="col-xs-12 col-sm-3">
-                        <strong>Status:</strong>
-                        <div class="well well-sm status-box text-center admin-staus-ad">
-                            <span class="title">{{ ad.status }}</span>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-9">
-                        <ul class="list-group" >
-                            <li class="list-group-item">Username: <span>{{ ad.ownerUsername }}</span></li>
-                            <li class="list-group-item">Categiry: <span>{{ ad.categoryName }}</span></li>
-                            <li class="list-group-item">Town: <span>{{ ad.townName }}</span></li>                                  
-                        </ul>
-                    </div>
-                    <!-- Admin buttons -->
-                    <div class="col-xs-12" ng-controller="AdminButtons">                        
-                        <div class="row text-center">
-                            <div class="col-xs-6 col-sm-3">
-                                <button type="button" class="btn btn-primary admin-btn"
-                                ng-click="publishAgainClicked(ad.id)">Approve</button>
-                            </div>
-                            <div class="col-xs-6 col-sm-3">
-                                <button type="button" class="btn btn-primary admin-btn admin-btn"
-                                ng-click="adminRejectAdClicked(ad.id)">Reject</button>
-                            </div>
-                            <div class="col-xs-6 col-sm-3">
-                                <button type="button" class="btn btn-primary admin-btn"
-                                ng-click="adminEditAdClicked(ad.id)">Edit</button>
-                            </div>                           
-                            <div class="col-xs-6 col-sm-3">
-                                <button type="button" class="btn btn-primary admin-btn"
-                                ng-click="deleteAdClicked(ad)"
-                                data-toggle="modal" data-target="#delete-modal">Delete</button>
-                            </div>                                                
-                        </div>
-                    </div>
-                </div>                                  
+                <div ng-switch on="isAdmin">
+                    <div  ng-switch-when="true" >
+                        <div ng-include="'templates/admin/admin-ads-list-options.html'"></div>
+                    </div>            
+                </div>                                                 
             </div>
         </div>
         <!-- Paging -->

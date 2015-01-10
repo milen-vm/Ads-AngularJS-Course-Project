@@ -5,15 +5,47 @@
         </div>
     </aside>
     <!-- Content -->
-    <section class="col-md-8 col-md-offset-1">
-        <div class="table-responsive">
+    <section class="col-md-9 col-md-offset-1">
+        <!-- <div class="table-responsive"> -->
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Username</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
+                        <th ng-click="reverseSort = !reverseSort; sortByPropertyClicked('UserName')">
+                            <span class="sort-title">Username </span>
+                            <span ng-show="sortUsersBy == 'UserName' || sortUsersBy == '-UserName'">
+                                <span ng-show="reverseSort" class="caret"></span>
+                                <span ng-hide="reverseSort" class="dropup">
+                                    <span class="caret"></span>
+                                </span>
+                            </span>
+                        </th>
+                        <th ng-click="reverseSort = !reverseSort; sortByPropertyClicked('Name')">
+                            <span class="sort-title">Name </span>
+                            <span ng-show="sortUsersBy == 'Name' || sortUsersBy == '-Name'">
+                                <span ng-show="reverseSort" class="caret"></span>
+                                <span ng-hide="reverseSort" class="dropup">
+                                    <span class="caret"></span>
+                                </span>
+                            </span>
+                        </th>
+                        <th ng-click="reverseSort = !reverseSort; sortByPropertyClicked('Email')">
+                            <span class="sort-title">Email </span>
+                            <span ng-show="sortUsersBy == 'Email' || sortUsersBy == '-Email'">
+                                <span ng-show="reverseSort" class="caret"></span>
+                                <span ng-hide="reverseSort" class="dropup">
+                                    <span class="caret"></span>
+                                </span>
+                            </span>
+                        </th>
+                        <th ng-click="reverseSort = !reverseSort; sortByPropertyClicked('PhoneNumber')">
+                            <span class="sort-title">Phone </span>
+                            <span ng-show="sortUsersBy == 'PhoneNumber' || sortUsersBy == '-PhoneNumber'">
+                                <span ng-show="reverseSort" class="caret"></span>
+                                <span ng-hide="reverseSort" class="dropup">
+                                    <span class="caret"></span>
+                                </span>
+                            </span>
+                        </th>                       
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -23,11 +55,11 @@
                         <td>{{ user.name }}</td>
                         <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
                         <td>{{ user.phoneNumber }}</td>
-                        <td><a href="">Edit</a> <a href="">Delete</a></td>
+                        <td><a href="" class="btn-link">Edit</a> <a href="" class="btn-link">Delete</a></td>
                     </tr>               
                 </tbody>
             </table>
-        </div>
+        <!-- </div> -->
         <!-- Paging -->
         <nav class="text-center">
             <ul pagination

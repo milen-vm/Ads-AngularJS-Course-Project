@@ -159,6 +159,10 @@ img {
     margin-bottom: 15px;
 }
 
+.sort-title:hover {
+    cursor: pointer;
+}
+
 /*input.ng-invalid {
  border: 1px solid red;
  }

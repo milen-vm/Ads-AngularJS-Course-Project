@@ -6,20 +6,20 @@
             <strong class="title">Navigation</strong>
         </header>
         <ul id="tree" class="nav nav-pills nav-stacked">
-            <li ng-class="{ active: isActive('/')}">
+            <li ng-class="{ active: isActivePath('/')}">
                 <a href="#/">Ads</a>
             </li>
-            <li ng-class="{ active: isActive('/admin-users-list')}">
+            <li ng-class="{ active: isActivePath('/admin-users-list')}">
                 <a href="#/admin-users-list">Users</a>
             </li>
             <li>
-                <a href="#/">Categiries</a>
+                <a href="">Categiries</a>
             </li>
             <li>
-                <a href="#/">Towns</a>
+                <a href="">Towns</a>
             </li>
         </ul>
     </nav>
     <!-- Ads status filter -->
-    <div ng-include="'templates/ads-status-menu.html'" ng-show="isActive('/')"></div>   
+    <div ng-include="'templates/ads-status-menu.html'" ng-show="isActivePath('/')"></div>   
 </section>

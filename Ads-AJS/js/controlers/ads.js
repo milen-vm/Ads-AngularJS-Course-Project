@@ -128,6 +128,7 @@ app.controller('AdsList', ['$scope', '$rootScope', '$location', 'userAds', 'admi
          });
          
         $scope.$on('adsStatusChanged', function(ev, status) {
+            console.log(status);
             $scope.adsStatus = status;
             $scope.loadAds();
         });

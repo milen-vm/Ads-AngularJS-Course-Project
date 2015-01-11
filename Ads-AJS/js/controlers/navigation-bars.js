@@ -2,6 +2,7 @@
 
 app.controller('NavigationBars', ['$scope', '$rootScope', '$location', '$route', 'userSession',
     function($scope, $rootScope, $location, $route, userSession) {
+        $scope.adStatus = 'All';
         $scope.viewName = '';
         $scope.username = '';        
         $scope.hasUser = false;
@@ -27,38 +28,23 @@ app.controller('NavigationBars', ['$scope', '$rootScope', '$location', '$route',
             };           
         };
 
-        // Adds active state on navigation buttons
+        // Active state on navigation buttons
         $scope.isActivePath = function (viewLocation) {
-            var active = (viewLocation === $location.path());
+            var isActive = (viewLocation === $location.path());
             
-            return active;
+            return isActive;
         };
-        
-        $scope.isActiveStatus = function(status) {
-            var active = (status === $location.path());
-        };
-        
+     
         //Events
-        $scope.allClicked = function() {
-            $rootScope.$broadcast('adsStatusChanged', '');
+        $scope.adStatusClicked = function(status) {
+             $scope.adStatus = status;
+            if (status === 'All') {
+                status = '';
+            };
+            
+            $rootScope.$broadcast('adsStatusChanged', status);
         };
-        
-        $scope.publishedCliked = function() {
-            $rootScope.$broadcast('adsStatusChanged', 'Published');
-        };
-        
-        $scope.inactiveClicked = function() {
-            $rootScope.$broadcast('adsStatusChanged', 'Inactive');
-        };
-        
-        $scope.waitingApprovalClicked = function() {
-            $rootScope.$broadcast('adsStatusChanged', 'WaitingApproval');
-        };
-        
-        $scope.rejectedClicked = function() {
-            $rootScope.$broadcast('adsStatusChanged', 'Rejected');
-        };     
-        
+
         // EventListeners
         $scope.$on('viewNameChanged', function(ev, viewName) {
             $scope.viewName = viewName;

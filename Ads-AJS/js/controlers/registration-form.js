@@ -13,9 +13,9 @@ app.controller('RegistrationForm', ['$scope', '$rootScope', '$location', 'userSe
                     var username = data.username,
                         accessToken = data.access_token;
                         
-                    userSession.saveUser(username, accessToken);
+                    userSession.saveUser(username, accessToken, false);
                     $scope.userLoggedIn();
-                    $location.path('#/');
+                    $location.path('/');
                 },
                 function(error) {
                     var array = $.map(error.modelState, function(value, index) {

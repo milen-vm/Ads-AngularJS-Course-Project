@@ -17,8 +17,16 @@ app.factory('adminUsers', ['httpData', 'userSession', 'constValue',
                return httpData.request(url, 'GET', null, headers); 
         }
         
+        function editUserProfile(username, userData) {
+            var url = adminUrl + 'User/' + username,
+                headers = getAuthorizationHeaders();
+                
+            return httpData.request(url, 'PUT', userData, headers);
+        }
+        
         return {
-            getAll: getAllUsers
+            getAll: getAllUsers,
+            editProfile: editUserProfile
         };
     }
 ]);

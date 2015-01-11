@@ -28,10 +28,14 @@ app.controller('NavigationBars', ['$scope', '$rootScope', '$location', '$route',
         };
 
         // Adds active state on navigation buttons
-        $scope.isActive = function (viewLocation) {
+        $scope.isActivePath = function (viewLocation) {
             var active = (viewLocation === $location.path());
             
             return active;
+        };
+        
+        $scope.isActiveStatus = function(status) {
+            var active = (status === $location.path());
         };
         
         //Events

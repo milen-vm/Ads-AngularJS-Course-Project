@@ -5,7 +5,7 @@
     <!-- must be radio buttons -->
     <ul class="nav nav-pills nav-stacked">
         <li>
-            <a href="" ng-click="allClicked()">All</a>
+            <a href="" ng-class="{ active: isActiveStatus('/publish-new-ad')}" ng-click="allClicked()">All</a>
         </li>
         <li>
             <a href="" ng-click="publishedCliked()">Published</a>

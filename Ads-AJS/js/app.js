@@ -44,6 +44,11 @@ app.config(['$routeProvider',
             controller: 'AdminUsersList'
         });
         
+        $routeProvider.when('/admin-user-edit', {
+            templateUrl: 'templates/admin/admin-user-edit.html',
+            controller: 'AdminUserEdit'
+        });
+        
         $routeProvider.otherwise({
             redirectTo: '/'
         });

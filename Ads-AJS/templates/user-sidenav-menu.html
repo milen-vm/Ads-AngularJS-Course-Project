@@ -6,17 +6,17 @@
             <strong class="title">Navigation</strong>
         </header>
         <ul id="tree" class="nav nav-pills nav-stacked">
-            <li ng-class="{ active: isActive('/')}">
+            <li ng-class="{ active: isActivePath('/')}">
                 <a href="#/">Home</a>
             </li>
             
-            <li ng-class="{ active: isActive('/user-ads')}">
+            <li ng-class="{ active: isActivePath('/user-ads')}">
                 <a href="#/user-ads">My Ads</a>
             </li>
-            <li ng-class="{ active: isActive('/publish-new-ad')}">
+            <li ng-class="{ active: isActivePath('/publish-new-ad')}">
                 <a href="#/publish-new-ad">Publish New Ad</a>
             </li>
-            <li ng-class="{ active: isActive('/user-profile-edit')}">
+            <li ng-class="{ active: isActivePath('/user-profile-edit')}">
                 <a href="#/user-profile-edit">Edit Profile</a>
             </li>
         </ul>

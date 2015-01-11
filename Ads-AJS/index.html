@@ -33,7 +33,7 @@
         </nav>
         <div class="container">
             <!-- Alert messages -->
-            <section ng-controller="AlertMessages">
+            <section ng-controller="AlertMessages" class="alert-box">
                 <div class="alert alert-success alert-dismissible" role="alert" ng-show="hasSuccess">
                     <button type="button" class="close" aria-label="Close" ng-click="hideSuccessAlert()">
                         <span aria-hidden="true">&times;</span>
@@ -95,5 +95,6 @@
         <script src="js/controlers/edit-ad.js"></script>
         <script src="js/controlers/user-profile-edit.js"></script>
         <script src="js/controlers/admin/admin-users-list.js"></script>
+        <script src="js/controlers/admin/admin-user-edit.js"></script>
     </body>
 </html>

@@ -1,7 +1,7 @@
 <div class="row">
     <!-- Left side bar -->
     <aside class="hidden-xs hidden-sm col-md-2 col-lg-2" ng-controller="NavigationBars" >
-        <div ng-include="'templates/user-sidenav-menu.html'"></div>
+        <div ng-include="'templates/admin/admin-sidenav-menu.html'"></div>  
     </aside>
     <!-- Content -->
     <section class="col-sm-12 col-md-10">
@@ -10,41 +10,45 @@
             <div class="col-xs-12 col-sm-6 col-md-5 col-md-offset-1"> 
                 <div class="panel panel-primary">
                     <div class="panel-heading text-center">
-                        <strong class="title">Edit Profile</strong>
+                        <strong class="title">Edit User Profile</strong>
                     </div>
                     <div class="panel-body form">
-                        <form name="editProfileForm" class="form-group" novalidate="novalidate" ng-submit="editUserProfile()">
+                        <form name="editUserForm" class="form-group" novalidate="novalidate" ng-submit="adminEditUser()">
                             <div>
+                                <span>Username:</span>
+                                <div class="well well-sm status-box">
+                                    <span>{{ userForEdit.username }}</span>
+                                </div>
                                 <span>Name:</span>
                                 <span class="text-danger"
-                                    ng-show="editProfileForm.name.$dirty && editProfileForm.name.$invalid">
+                                    ng-show="editUserForm.name.$invalid">
                                     <span 
-                                        ng-show="editProfileForm.name.$error.required">
+                                        ng-show="editUserForm.name.$error.required">
                                         The name is required.
                                     </span>
                                     <span 
-                                        ng-show="editProfileForm.name.$error.pattern">
-                                        Name must be in format 'Jon Doe'.
+                                        ng-show="editUserForm.name.$error.pattern">
+                                        The name must be in format 'Jon Doe'.
                                     </span>
                                 </span>
                                 <input type="text"
                                     placeholder="Name"
                                     class="form-control"
                                     name="name"
-                                    ng-model="userData.name"
+                                    ng-model="userForEdit.name"
                                     ng-pattern="/[A-Za-z]+ [A-Za-z]+/"
                                     required="required" />
                             </div>
                             <div>
                                 <span>Email:</span>
                                 <span class="text-danger"
-                                    ng-show="editProfileForm.email.$dirty && editProfileForm.email.$invalid">
+                                    ng-show="editUserForm.email.$invalid">
                                     <span 
-                                        ng-show="editProfileForm.email.$error.required">
+                                        ng-show="editUserForm.email.$error.required">
                                         The email is required.
                                     </span>
                                     <span 
-                                        ng-show="editProfileForm.email.$error.pattern">
+                                        ng-show="editUserForm.email.$error.pattern">
                                         Enter valid email.
                                     </span>
                                 </span>
@@ -52,47 +56,51 @@
                                     placeholder="Email"
                                     class="form-control"
                                     name="email"
-                                    ng-model="userData.email"
+                                    ng-model="userForEdit.email"
                                     ng-pattern="/\S+@\S+\.\S+/"
                                     required="required"/>
                             </div>
                             <div>
                                 <span>Phone:</span>
                                 <span class="text-danger"
-                                    ng-show="editProfileForm.phone.$dirty && editProfileForm.phone.$invalid">
+                                    ng-show="editUserForm.phone.$invalid">
                                     <span 
-                                        ng-show="editProfileForm.phone.$error.required">
+                                        ng-show="editUserForm.phone.$error.required">
                                         The phone is required.
                                     </span>
                                     <span 
-                                        ng-show="editProfileForm.phone.$error.pattern">
+                                        ng-show="editUserForm.phone.$error.pattern">
                                         The phone must be in format '0999 99 99 99'.
                                     </span>
                                 </span>
                                 <input type="text"
-                                    placeholder="Enter phone"
+                                    placeholder="Phone"
                                     class="form-control"
                                     name="phone"
-                                    ng-model="userData.phoneNumber"
+                                    ng-model="userForEdit.phoneNumber"
                                     ng-pattern="/(\d{4}) (\d{2}) (\d{2}) (\d{2})/"
                                     required="required" />
                             </div>                            
                             <div>
                                 <span>Town:</span>
                                 <select class="form-control selectpicker"
-                                    ng-model="userData.townId">
+                                    ng-model="userForEdit.townId">
                                     <option ng-repeat="town in towns"
-                                        ng-selected="userData.townId==town.id"
+                                        ng-selected="userForEdit.townId==town.id"
                                         ng-value="{{ town.id }}">{{ town.name }}</option>                     
                                 </select>
                             </div>
+                            <label class="label-edit">
+                                <input type="checkbox" name="isUserAdmin" ng-model="userForEdit.isAdmin" />
+                                Change                                    
+                            </label>
                             <div class="row text-center">
                                 <div class="col-xs-6">
                                     <button type="submit" class="btn btn-primary"
-                                        ng-disabled="editProfileForm.$invalid">Update</button>
+                                        ng-disabled="editUserForm.$invalid || !editUserForm.$dirty">Update</button>
                                 </div>
                                 <div class="col-xs-6">
-                                    <a class="btn btn-primary" href="#/">Cancel</a>                        
+                                    <a class="btn btn-primary" href="#/admin-users-list">Cancel</a>                        
                                 </div>
                             </div>              
                         </form>

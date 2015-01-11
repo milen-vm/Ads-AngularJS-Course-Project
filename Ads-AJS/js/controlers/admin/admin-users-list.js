@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('AdminUsersList', ['$scope', '$rootScope', 'adminUsers',
-    function($scope, $rootScope, adminUsers) {
+app.controller('AdminUsersList', ['$scope', '$rootScope', '$location', 'adminUsers', 'adIdTransfer',
+    function($scope, $rootScope, $location, adminUsers, adIdTransfer) {
         $scope.usersPerPage = 10;
         $scope.currentPage = 1;
         $scope.pagerMaxSize = 5;        
@@ -9,7 +9,6 @@ app.controller('AdminUsersList', ['$scope', '$rootScope', 'adminUsers',
         $scope.reverseSort = false;
         
         $scope.loadUsers = function() {
-            console.log($scope.sortUsersBy);
             adminUsers.getAll($scope.sortUsersBy, $scope.currentPage, $scope.usersPerPage).then(
                 function(data) {
                     $scope.totalUsers = data.numItems;
@@ -29,6 +28,11 @@ app.controller('AdminUsersList', ['$scope', '$rootScope', 'adminUsers',
             };
             
             $scope.loadUsers();
+        };
+        
+        $scope.editUserClicked = function(user) {
+            adIdTransfer.id = user;
+            $location.path('/admin-user-edit');
         };
         
         // Event

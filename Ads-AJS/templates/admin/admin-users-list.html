@@ -1,8 +1,6 @@
 <div class="row">
     <aside class="hidden-xs hidden-sm col-md-2 col-lg-2" ng-controller="NavigationBars" >
-        <div ng-switch on="isAdmin">
-            <div ng-include="'templates/admin/admin-sidenav-menu.html'"></div>                     
-        </div>
+        <div ng-include="'templates/admin/admin-sidenav-menu.html'"></div>                     
     </aside>
     <!-- Content -->
     <section class="col-md-9 col-md-offset-1">
@@ -55,7 +53,11 @@
                         <td>{{ user.name }}</td>
                         <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
                         <td>{{ user.phoneNumber }}</td>
-                        <td><a href="" class="btn-link">Edit</a> <a href="" class="btn-link">Delete</a></td>
+                        <td>                            
+                            <a href="" class="btn-link" ng-click="editUserClicked(user)">Edit</a> 
+                            <a href="" class="btn-link" ng-click="deleteUserClicked(user)"
+                            data-toggle="modal" data-target="#delete-modal">Delete</a>                           
+                        </td>
                     </tr>               
                 </tbody>
             </table>
@@ -71,6 +73,50 @@
                 boundary-links="true"
                 previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
             </ul>
-        </nav>
+        </nav>        
+        <!-- Modal Delete user -->
+        <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal-label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="delete-modal-label">Confirm Deleting User?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mod-cnt">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    Username: <span>{{ userForDeleting.categoryName }}</span>
+                                </li>
+                                <li class="list-group-item">
+                                    Name: <span>{{ userForDeleting.townName }}</span>
+                                </li>
+                                <li class="list-group-item">
+                                    Email: <span>{{ userForDeleting.ownerUsername }}</span>
+                                </li>
+                                <li class="list-group-item">
+                                    Phone: <span>{{ userForDeleting.ownerName }}</span>
+                                </li>
+                                <li class="list-group-item">
+                                    Town: <span>{{ userForDeleting.ownerEmail }}</span>
+                                </li>
+                            </ul>
+                            <p>Deleting the user will also delete all ads, created by this user!</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Cancel
+                        </button>
+                        <button type="button" class="btn btn-primary"  data-dismiss="modal"
+                            ng-click="adminDeleteAdConfirmed(adForDeleting.id)">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>         
     </section>   
 </div>

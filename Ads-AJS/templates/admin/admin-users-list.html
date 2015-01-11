@@ -88,19 +88,19 @@
                         <div class="mod-cnt">
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    Username: <span>{{ userForDeleting.categoryName }}</span>
+                                    Username: <span>{{ userForDeleting.username }}</span>
                                 </li>
                                 <li class="list-group-item">
-                                    Name: <span>{{ userForDeleting.townName }}</span>
+                                    Name: <span>{{ userForDeleting.name }}</span>
                                 </li>
                                 <li class="list-group-item">
-                                    Email: <span>{{ userForDeleting.ownerUsername }}</span>
+                                    Email: <span>{{ userForDeleting.email }}</span>
                                 </li>
                                 <li class="list-group-item">
-                                    Phone: <span>{{ userForDeleting.ownerName }}</span>
+                                    Phone: <span>{{ userForDeleting.phoneNumber }}</span>
                                 </li>
                                 <li class="list-group-item">
-                                    Town: <span>{{ userForDeleting.ownerEmail }}</span>
+                                    Town: <span>{{ userForDeleting.townName }}</span>
                                 </li>
                             </ul>
                             <p>Deleting the user will also delete all ads, created by this user!</p>
@@ -111,7 +111,7 @@
                             Cancel
                         </button>
                         <button type="button" class="btn btn-primary"  data-dismiss="modal"
-                            ng-click="adminDeleteAdConfirmed(adForDeleting.id)">
+                            ng-click="adminDeleteUserConfirmed()">
                             Delete
                         </button>
                     </div>

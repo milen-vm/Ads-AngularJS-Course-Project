@@ -24,9 +24,17 @@ app.factory('adminUsers', ['httpData', 'userSession', 'constValue',
             return httpData.request(url, 'PUT', userData, headers);
         }
         
+        function deleteUser(username) {
+            var url = adminUrl + 'user/' + username,
+                headers = getAuthorizationHeaders();
+                
+            return httpData.request(url, 'DELETE', null, headers);
+        }
+        
         return {
             getAll: getAllUsers,
-            editProfile: editUserProfile
+            editProfile: editUserProfile,
+            deleteUser: deleteUser
         };
     }
 ]);

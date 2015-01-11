@@ -35,9 +35,31 @@ app.controller('AdminUsersList', ['$scope', '$rootScope', '$location', 'adminUse
             $location.path('/admin-user-edit');
         };
         
+        // Delete user
+        $scope.deleteUserClicked = function(user) {
+            $scope.userForDeleting = user;
+        };
+        
+        $scope.adminDeleteUserConfirmed = function() {
+            var username = $scope.userForDeleting.username;
+            
+            adminUsers.deleteUser(username).then(
+                function(data) {
+                    $scope.successOccurred(data.message);
+                },
+                function(error) {
+                    $scope.errorOccurred(error.message);
+                }
+            );
+        };
+        
         // Event
         $scope.viewNameChanged = function() {           
             $rootScope.$broadcast('viewNameChanged', 'Users');
+        };
+        
+        $scope.successOccurred = function(message) {
+            $rootScope.$broadcast('operationSuccess', message);
         };
         
         $scope.errorOccurred = function(message) {

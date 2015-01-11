@@ -25,15 +25,7 @@ app.controller('AdminUserEdit', ['$scope', '$rootScope', '$location', 'adminUser
                 }
             );
         };
-        
-        // Delete user
-        $scope.deleteUserClicked = function(user) {
-            $scope.userForDeleting = user;
-            console.log(user + ' ho');
-            console.log($scope.userForDeleting);
-        };
-        
-        
+     
         // Load towns
         townsData.getTowns().then(
             function(data) {

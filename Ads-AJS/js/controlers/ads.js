@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('AdsList', ['$scope', '$rootScope', '$location', 'userAds', 'adminAds', 'userSession', 'adIdTransfer',
-    function($scope, $rootScope, $location, userAds, adminAds, userSession, adIdTransfer) {
+app.controller('AdsList', ['$scope', '$rootScope', '$location', 'userAds', 'adminAds', 'userSession', 'dataTransfer',
+    function($scope, $rootScope, $location, userAds, adminAds, userSession, dataTransfer) {
         var ADS_PER_PAGE = 10,
             PAGER_MAX_SIZE = 5,
             USER_VIEW_NAME = 'Home',
@@ -60,7 +60,7 @@ app.controller('AdsList', ['$scope', '$rootScope', '$location', 'userAds', 'admi
         }
         
         $scope.adminEditAdClicked = function(id) {
-            adIdTransfer.id = id;
+            dataTransfer.data = id;
             $location.path('/edit-ad');
         };
         
@@ -68,6 +68,7 @@ app.controller('AdsList', ['$scope', '$rootScope', '$location', 'userAds', 'admi
             adminAds.rejectAd(id).then(
                 function(data) {
                     $scope.successOccurred(data.message);
+                    $scope.loadAds();
                 },
                 function(error) {
                     $scope.errorOccurred(error.message);                   
@@ -79,6 +80,7 @@ app.controller('AdsList', ['$scope', '$rootScope', '$location', 'userAds', 'admi
             adminAds.approveAd(id).then(
                 function(data) {
                     $scope.successOccurred(data.message);
+                    $scope.loadAds();
                 },
                 function(error) {
                     $scope.errorOccurred(error.message);                   
@@ -94,6 +96,7 @@ app.controller('AdsList', ['$scope', '$rootScope', '$location', 'userAds', 'admi
             adminAds.deleteAd(id).then(
                 function(data) {
                     $scope.successOccurred(data.message);
+                    $scope.loadAds();
                 },
                 function(error) {
                     $scope.errorOccurred(error.message);                   
@@ -128,7 +131,6 @@ app.controller('AdsList', ['$scope', '$rootScope', '$location', 'userAds', 'admi
          });
          
         $scope.$on('adsStatusChanged', function(ev, status) {
-            console.log(status);
             $scope.adsStatus = status;
             $scope.loadAds();
         });

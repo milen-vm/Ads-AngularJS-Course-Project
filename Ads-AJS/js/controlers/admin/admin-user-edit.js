@@ -1,10 +1,9 @@
 'use strict';
 
-app.controller('AdminUserEdit', ['$scope', '$rootScope', '$location', 'adminUsers', 'townsData', 'adIdTransfer',
-    function($scope, $rootScope, $location, adminUsers, townsData, adIdTransfer) {
-        $scope.userForEdit = adIdTransfer.id;
-        adIdTransfer.id = null;
-        // $scope.userForDeleting = {};
+app.controller('AdminUserEdit', ['$scope', '$rootScope', '$location', 'adminUsers', 'townsData', 'dataTransfer',
+    function($scope, $rootScope, $location, adminUsers, townsData, dataTransfer) {
+        $scope.userForEdit = dataTransfer.data;
+        dataTransfer.data = null;
         
         // Edit user
         $scope.adminEditUser = function() {
@@ -20,7 +19,6 @@ app.controller('AdminUserEdit', ['$scope', '$rootScope', '$location', 'adminUser
                     $location.path('/admin-users-list');
                 },
                 function(error) {
-                    console.log(error);
                     $scope.errorOccurred(error.message);
                 }
             );

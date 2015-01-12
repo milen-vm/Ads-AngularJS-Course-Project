@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('AdminUsersList', ['$scope', '$rootScope', '$location', 'adminUsers', 'adIdTransfer',
-    function($scope, $rootScope, $location, adminUsers, adIdTransfer) {
+app.controller('AdminUsersList', ['$scope', '$rootScope', '$location', 'adminUsers', 'dataTransfer',
+    function($scope, $rootScope, $location, adminUsers, dataTransfer) {
         $scope.usersPerPage = 10;
         $scope.currentPage = 1;
         $scope.pagerMaxSize = 5;        
@@ -31,7 +31,7 @@ app.controller('AdminUsersList', ['$scope', '$rootScope', '$location', 'adminUse
         };
         
         $scope.editUserClicked = function(user) {
-            adIdTransfer.id = user;
+            dataTransfer.data = user;
             $location.path('/admin-user-edit');
         };
         
@@ -46,6 +46,7 @@ app.controller('AdminUsersList', ['$scope', '$rootScope', '$location', 'adminUse
             adminUsers.deleteUser(username).then(
                 function(data) {
                     $scope.successOccurred(data.message);
+                    $scope.loadUsers();
                 },
                 function(error) {
                     $scope.errorOccurred(error.message);

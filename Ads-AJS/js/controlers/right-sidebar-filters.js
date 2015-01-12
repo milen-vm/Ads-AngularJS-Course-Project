@@ -2,8 +2,6 @@
 
 app.controller('RightSideBarFilters', ['$scope', '$rootScope', 'categoriesData', 'townsData',
     function($scope, $rootScope, categoriesData, townsData) {
-        $scope.categories = {};
-        $scope.towns = {};
         
         categoriesData.getCategories().then(
             function(data) {                

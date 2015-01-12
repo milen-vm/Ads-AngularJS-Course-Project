@@ -18,8 +18,6 @@ app.controller('UserProfileEdit', ['$scope', '$rootScope', '$route', 'userData',
         };
         
         $scope.editUserProfile = function() {
-            // $scope.userData.townId = parseInt($scope.userData.townId);
-            console.log($scope.userData.townId);
             userData.editUser($scope.userData).then(
                 function(data) {
                     $scope.successOccurred(data.message);

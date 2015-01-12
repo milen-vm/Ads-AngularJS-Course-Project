@@ -1,13 +1,13 @@
 'use strict';
 
-app.controller('EditAd', ['$scope', '$rootScope', '$location', 'adIdTransfer', 'userAds',
+app.controller('EditAd', ['$scope', '$rootScope', '$location', 'dataTransfer', 'userAds',
         'adminAds', 'userSession', 'townsData', 'categoriesData', 'constValue',
-    function($scope, $rootScope, $location, adIdTransfer, userAds, adminAds,
+    function($scope, $rootScope, $location, dataTransfer, userAds, adminAds,
             userSession, townsData, categoriesData, constValue) {
                 
         var viewName = constValue.editAdViewName;       
-        $scope.adId = adIdTransfer.id;
-        adIdTransfer.id = null;
+        $scope.adId = dataTransfer.data;
+        dataTransfer.data = null;
         $scope.deleteImage = false;
         $scope.statusArray = ['Published', 'WaitingApproval', 'Inactive', 'Rejected'];
         $scope.isAdmin = userSession.isAdmin();

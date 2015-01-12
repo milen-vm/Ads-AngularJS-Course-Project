@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'userAds', 'adIdTransfer',
-    function($scope, $rootScope, $location, $route, userAds, adIdTransfer) {
+app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'userAds', 'dataTransfer',
+    function($scope, $rootScope, $location, $route, userAds, dataTransfer) {
         var USER_ADS_VIEW_NAME = 'My Ads',
             ADS_PER_PAGE = 10,
             PAGER_MAX_SIZE = 5;
@@ -42,7 +42,7 @@ app.controller('UserAds', ['$scope', '$rootScope', '$location', '$route', 'userA
         };
         
         $scope.editAdClicked = function(id) {
-            adIdTransfer.id = id;
+            dataTransfer.data = id;
         };
         
         $scope.deleteAdConfirmed = function(id) {                        

@@ -2,8 +2,13 @@
 
 app.controller('AdminUserEdit', ['$scope', '$rootScope', '$location', 'adminUsers', 'townsData', 'dataTransfer',
     function($scope, $rootScope, $location, adminUsers, townsData, dataTransfer) {
-        $scope.userForEdit = dataTransfer.data;
+        $scope.userForEdit = dataTransfer.data || {};
         dataTransfer.data = null;
+        $scope.setUserPass = {
+            username: $scope.userForEdit.username,
+            newPassword: '',
+            confirmPassword: ''
+        };
         
         // Edit user
         $scope.adminEditUser = function() {
@@ -17,6 +22,18 @@ app.controller('AdminUserEdit', ['$scope', '$rootScope', '$location', 'adminUser
                 function(data) {
                     $scope.successOccurred(data.message);
                     $location.path('/admin-users-list');
+                },
+                function(error) {
+                    $scope.errorOccurred(error.message);
+                }
+            );
+        };
+        
+        // Change user password
+        $scope.adminPasswordChange = function() {
+            adminUsers.setPassword($scope.setUserPass).then(
+                function(data) {
+                    $scope.successOccurred(data.message);
                 },
                 function(error) {
                     $scope.errorOccurred(error.message);
@@ -45,6 +62,10 @@ app.controller('AdminUserEdit', ['$scope', '$rootScope', '$location', 'adminUser
         
         $scope.errorOccurred = function(message) {
             $rootScope.$broadcast('operationFailure', message);
+        };
+        
+        if (!$scope.userForEdit.username) {
+            $scope.errorOccurred('User for editing is not sected.');
         };
         
         $scope.viewNameChanged();

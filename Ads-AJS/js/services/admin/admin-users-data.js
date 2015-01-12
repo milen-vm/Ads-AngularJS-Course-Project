@@ -31,10 +31,18 @@ app.factory('adminUsers', ['httpData', 'userSession', 'constValue',
             return httpData.request(url, 'DELETE', null, headers);
         }
         
+        function setUserPassword(data) {
+            var url = adminUrl + 'setpassword',
+                headers = getAuthorizationHeaders();
+                
+            return httpData.request(url, 'PUT', data, headers);
+        }
+        
         return {
             getAll: getAllUsers,
             editProfile: editUserProfile,
-            deleteUser: deleteUser
+            deleteUser: deleteUser,
+            setPassword: setUserPassword
         };
     }
 ]);

@@ -13,22 +13,25 @@
                         <strong class="title">Edit User Profile</strong>
                     </div>
                     <div class="panel-body form">
-                        <form name="editUserForm" class="form-group" novalidate="novalidate" ng-submit="adminEditUser()">
+                        <form name="editUserForm" class="form-group" novalidate="novalidate"
+                            ng-submit="adminEditUser()">
                             <div>
-                                <span>Username:</span>
-                                <div class="well well-sm status-box">
-                                    <span>{{ userForEdit.username }}</span>
-                                </div>
+                                <div>
+                                    <span>Username:</span>
+                                    <div class="well well-sm status-box">
+                                        <span>{{ userForEdit.username }}</span>
+                                    </div>
+                                </div>                                
                                 <span>Name:</span>
                                 <span class="text-danger"
                                     ng-show="editUserForm.name.$invalid">
                                     <span 
                                         ng-show="editUserForm.name.$error.required">
-                                        The name is required.
+                                        Required!
                                     </span>
                                     <span 
                                         ng-show="editUserForm.name.$error.pattern">
-                                        The name must be in format 'Jon Doe'.
+                                        Required format 'Jon Doe'.
                                     </span>
                                 </span>
                                 <input type="text"
@@ -45,11 +48,11 @@
                                     ng-show="editUserForm.email.$invalid">
                                     <span 
                                         ng-show="editUserForm.email.$error.required">
-                                        The email is required.
+                                        Required!
                                     </span>
                                     <span 
                                         ng-show="editUserForm.email.$error.pattern">
-                                        Enter valid email.
+                                        Invalid email.
                                     </span>
                                 </span>
                                 <input type="email"
@@ -66,11 +69,11 @@
                                     ng-show="editUserForm.phone.$invalid">
                                     <span 
                                         ng-show="editUserForm.phone.$error.required">
-                                        The phone is required.
+                                        Required!
                                     </span>
                                     <span 
                                         ng-show="editUserForm.phone.$error.pattern">
-                                        The phone must be in format '0999 99 99 99'.
+                                        Required format '0999 99 99 99'.
                                     </span>
                                 </span>
                                 <input type="text"
@@ -114,56 +117,36 @@
                         <strong class="title">Change Password</strong>
                     </div>
                     <div class="panel-body form">
-                        <form name="changePasswordForm" class="form-group" novalidate="novalidate" ng-submit="passwordChange()">
-                            <div>
-                                <span>Old password:</span>
-                                <span class="text-danger"
-                                    ng-show="changePasswordForm.oldPassword.$dirty && changePasswordForm.oldPassword.$invalid">
-                                    <span 
-                                        ng-show="changePasswordForm.oldPassword.$error.required">
-                                        The password is required.
-                                    </span>
-                                    <span 
-                                        ng-show="changePasswordForm.oldPassword.$error.minlength">
-                                         The password is at least 3 characters.
-                                    </span>
-                                    <span 
-                                        ng-show="changePasswordForm.oldPassword.$error.pattern">
-                                        The password can't contain white space.
-                                    </span>
-                                </span>
-                                <input type="password"
-                                    placeholder="Enter password"
-                                    class="form-control"
-                                    name="oldPassword"
-                                    ng-model="passData.oldPassword"
-                                    ng-minlength="3"
-                                    ng-trim="false"
-                                    ng-pattern="/^[\S]*$/"
-                                    required="required" />
+                        <form name="setPasswordForm" class="form-group"
+                            novalidate="novalidate" ng-submit="adminPasswordChange()">
+                            <div>  
+                                <span>Username:</span>
+                                <div class="well well-sm status-box">
+                                    <span>{{ userForEdit.username }}</span>
+                                </div>
                             </div>
                             <div>
                                 <span>New password:</span>
                                 <span class="text-danger"
-                                    ng-show="changePasswordForm.newPassword.$dirty && changePasswordForm.newPassword.$invalid">
+                                    ng-show="setPasswordForm.newPassword.$dirty && setPasswordForm.newPassword.$invalid">
                                     <span 
-                                        ng-show="changePasswordForm.password.$error.required">
-                                        The password is required.
+                                        ng-show="setPasswordForm.newPassword.$error.required">
+                                        Required!
                                     </span>
                                     <span 
-                                        ng-show="changePasswordForm.newPassword.$error.minlength">
-                                         The password must be at least 3 characters.
+                                        ng-show="setPasswordForm.newPassword.$error.minlength">
+                                         Min lenth is 3 characters.
                                     </span>
                                     <span 
-                                        ng-show="changePasswordForm.newPassword.$error.pattern">
-                                        The password can't contain white space.
+                                        ng-show="setPasswordForm.newPassword.$error.pattern">
+                                        Can't contain white space.
                                     </span>
                                 </span>
                                 <input type="password"
                                     placeholder="Enter password"
                                     class="form-control"
                                     name="newPassword"
-                                    ng-model="passData.newPassword"
+                                    ng-model="setUserPass.newPassword"
                                     ng-minlength="3"
                                     ng-trim="false"
                                     ng-pattern="/^[\S]*$/"
@@ -172,26 +155,26 @@
                             <div>
                                 <span>Confirm password:</span>
                                 <span class="text-danger"
-                                    ng-show="changePasswordForm.confirmPassword.$invalid">
+                                    ng-show="setPasswordForm.confirmPassword.$invalid">
                                     <span 
-                                        ng-show="changePasswordForm.confirmPassword.$error.passwordmatch">
-                                        The password do not match.
+                                        ng-show="setPasswordForm.confirmPassword.$error.passwordmatch">
+                                        Not match.
                                     </span>
                                 </span>
                                 <input type="password"
                                     placeholder="Confirm password"
                                     class="form-control"
                                     name="confirmPassword"
-                                    ng-model="passData.confirmPassword"
-                                    password-match="passData.newPassword"/>
+                                    ng-model="setUserPass.confirmPassword"
+                                    password-match="setUserPass.newPassword"/>
                             </div>
                             <div class="row text-center">
                                 <div class="col-xs-6">
                                     <button type="submit" class="btn btn-primary"
-                                        ng-disabled="changePasswordForm.$invalid">Change</button>
+                                        ng-disabled="setPasswordForm.$invalid || !setPasswordForm.$dirty">Change</button>
                                 </div>
                                 <div class="col-xs-6">
-                                    <a class="btn btn-primary" href="#/">Cancel</a>                        
+                                    <a class="btn btn-primary" href="#/admin-users-list">Cancel</a>                        
                                 </div>
                             </div>              
                         </form>

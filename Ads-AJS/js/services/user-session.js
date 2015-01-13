@@ -49,13 +49,22 @@ app.factory('userSession', ['$cookieStore',
             return user.isAdmin;
         }
         
+        function getAuthorization() {
+            var accessToken = getAccessToken();
+            
+            if (accessToken) {
+                return { 'Authorization': 'Bearer ' + accessToken };
+            };            
+        }
+        
         return {
             saveUser: saveUserData,
             getUsername: getUsername,
             getAccessToken: getAccessToken,
             hasUser: hasUserData,
             removeUser: removeUserData,
-            isAdmin: isUserAdmin
+            isAdmin: isUserAdmin,
+            getAuthorization: getAuthorization
         };
     }
 ]);

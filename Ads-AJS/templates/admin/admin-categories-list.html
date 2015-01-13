@@ -1,0 +1,102 @@
+<div class="row">
+    <aside class="hidden-xs hidden-sm col-md-2 col-lg-2" ng-controller="NavigationBars" >
+        <div ng-include="'templates/admin/admin-sidenav-menu.html'"></div>                     
+    </aside>
+    <!-- Content -->
+    <section class="col-md-5 col-md-offset-2">
+        <!-- <div class="table-responsive"> -->
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th ng-click="reverseSort = !reverseSort; sortByPropertyClicked('UserName')">
+                            <span class="sort-title">Id </span>
+                            <span ng-show="sortUsersBy == 'UserName' || sortUsersBy == '-UserName'">
+                                <span ng-show="reverseSort" class="caret"></span>
+                                <span ng-hide="reverseSort" class="dropup">
+                                    <span class="caret"></span>
+                                </span>
+                            </span>
+                        </th>
+                        <th ng-click="reverseSort = !reverseSort; sortByPropertyClicked('Name')">
+                            <span class="sort-title">Category </span>
+                            <span ng-show="sortUsersBy == 'Name' || sortUsersBy == '-Name'">
+                                <span ng-show="reverseSort" class="caret"></span>
+                                <span ng-hide="reverseSort" class="dropup">
+                                    <span class="caret"></span>
+                                </span>
+                            </span>
+                        </th>                      
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="categorie in categories">
+                        <td>{{ categorie.id }}</td>
+                        <td>{{ categorie.username }}</td>
+                        <td>                            
+                            <a href="" class="btn-link" ng-click="editUserClicked(user)">Edit</a> 
+                            <a href="" class="btn-link" ng-click="deleteUserClicked(user)"
+                            data-toggle="modal" data-target="#delete-modal">Delete</a>                           
+                        </td>
+                    </tr>               
+                </tbody>
+            </table>
+        <!-- </div> -->
+        <!-- Paging -->
+        <nav class="text-center">
+            <ul pagination
+                total-items="totalUsers"
+                items-per-page="usersPerPage"
+                ng-model="currentPage"
+                max-size="pagerMaxSize"
+                ng-change="pageChanged()"
+                boundary-links="true"
+                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+            </ul>
+        </nav>        
+        <!-- Modal Delete user -->
+        <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal-label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="delete-modal-label">Confirm Deleting User?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mod-cnt">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    Username: <span>{{ userForDeleting.username }}</span>
+                                </li>
+                                <li class="list-group-item">
+                                    Name: <span>{{ userForDeleting.name }}</span>
+                                </li>
+                                <li class="list-group-item">
+                                    Email: <span>{{ userForDeleting.email }}</span>
+                                </li>
+                                <li class="list-group-item">
+                                    Phone: <span>{{ userForDeleting.phoneNumber }}</span>
+                                </li>
+                                <li class="list-group-item">
+                                    Town: <span>{{ userForDeleting.townName }}</span>
+                                </li>
+                            </ul>
+                            <p>Deleting the user will also delete all ads, created by this user!</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Cancel
+                        </button>
+                        <button type="button" class="btn btn-primary"  data-dismiss="modal"
+                            ng-click="adminDeleteUserConfirmed()">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>         
+    </section>   
+</div>

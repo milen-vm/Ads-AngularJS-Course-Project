@@ -5,7 +5,7 @@ app.controller('AdminUsersList', ['$scope', '$rootScope', '$location', 'adminUse
         $scope.usersPerPage = 10;
         $scope.currentPage = 1;
         $scope.pagerMaxSize = 5;        
-        $scope.sortUsersBy = '';
+        $scope.sortUsersBy = 'UserName';
         $scope.reverseSort = false;
         
         $scope.loadUsers = function() {

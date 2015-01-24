@@ -61,6 +61,8 @@ app.config(['$routeProvider',
 ]);
 
 app.constant('constValue', {
-    baseUrl: 'http://softuni-ads.azurewebsites.net/api/',
-    editAdViewName: 'Edit Ad'
+    baseUrl: 'http://softuni-ads.azurewebsites.net/api/',   // localhost:1337   softuni-ads.azurewebsites.net
+    editAdViewName: 'Edit Ad',
+    itemsPerPage: 10,
+    pagerMaxSize: 5
 });

@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('AdsList', ['$scope', '$rootScope', '$location', 'userAds', 'adminAds', 'userSession', 'dataTransfer',
-    function($scope, $rootScope, $location, userAds, adminAds, userSession, dataTransfer) {
+app.controller('AdsList', ['$scope', '$rootScope', '$location', '$anchorScroll', 'userAds', 'adminAds', 'userSession', 'dataTransfer',
+    function($scope, $rootScope, $location, $anchorScroll, userAds, adminAds, userSession, dataTransfer) {
         var ADS_PER_PAGE = 10,
             PAGER_MAX_SIZE = 5,
             USER_VIEW_NAME = 'Home',
@@ -33,7 +33,9 @@ app.controller('AdsList', ['$scope', '$rootScope', '$location', 'userAds', 'admi
             } else {
                 getUserAds(categoryId, townId);
             };    
-                       
+            
+            $location.hash('top-navbar');
+            $anchorScroll();   
         };
                
         function getUserAds(categoryId, townId) {

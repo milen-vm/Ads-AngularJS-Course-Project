@@ -163,6 +163,10 @@ img {
     cursor: pointer;
 }
 
+.create-btn {
+    margin: 0 auto;
+}
+
 /*input.ng-invalid {
  border: 1px solid red;
  }

@@ -33,10 +33,18 @@ app.factory('adminCategories', ['httpData', 'userSession', 'constValue',
             return httpData.request(url, 'POST', data, headers);
         }
         
+        function editCategory(data, id) {
+            var url = categoriesUrl + '/' + id,
+                headers = getAuthorizationHeaders();
+                
+            return httpData.request(url, 'PUT', data, headers);
+        }
+        
         return {
             getAll: getAllCategiries,
             delete: deleteCategorie,
-            create: createCategory
+            create: createCategory,
+            edit: editCategory
         };
     }
 ]);

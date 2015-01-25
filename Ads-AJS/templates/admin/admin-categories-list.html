@@ -30,13 +30,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="categorie in categories">
-                        <td>{{ categorie.id }}</td>
-                        <td>{{ categorie.username }}</td>
+                    <tr ng-repeat="category in categories">
+                        <td>{{ category.id }}</td>
+                        <td>{{ category.username }}</td>
                         <td>                            
-                            <a href="" class="btn-link" ng-click="editUserClicked(categorie)">Edit</a> 
-                            <a href="" class="btn-link" ng-click="deleteCategorieClicked(categorie)"
-                            data-toggle="modal" data-target="#delete-modal">Delete</a>                           
+                            <a href="" class="btn-link" ng-click="editCategoryClicked(category)"
+                                data-toggle="modal" data-target="#edit-modal">Edit</a> 
+                            <a href="" class="btn-link" ng-click="deleteCategoryClicked(category)"
+                                data-toggle="modal" data-target="#delete-modal">Delete</a>                           
                         </td>
                     </tr>               
                 </tbody>
@@ -71,7 +72,7 @@
                         <div class="mod-cnt">
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    Categori: <span>{{ categorieForDeleting.username }}</span>
+                                    Categori: <span>{{ categoryForDeleting.username }}</span>
                                 </li>
                             </ul>
                         </div>
@@ -81,7 +82,7 @@
                             Cancel
                         </button>
                         <button type="button" class="btn btn-primary"  data-dismiss="modal"
-                            ng-click="deleteCategorieConfirmed()">
+                            ng-click="deleteCategoryConfirmed()">
                             Delete
                         </button>
                     </div>
@@ -98,8 +99,7 @@
                         </button>
                         <h4 class="modal-title" id="create-modal-label">Create Category</h4>
                     </div>
-                    <form name="createCategory" class="form-group" novalidate="novalidate"
-                        ng-submit="adminCreateCategory()">
+                    <form name="createCategory" class="form-group" novalidate="novalidate">
                         <div class="modal-body">
                             <div class="mod-cnt">                                                            
                                     <span>Category:</span>
@@ -128,7 +128,8 @@
                                 Cancel
                             </button>
                             <button type="submit" class="btn btn-primary" data-dismiss="modal"
-                                ng-disabled="createCategory.$invalid">
+                                ng-disabled="createCategory.$invalid"
+                                ng-click="adminCreateCategory()">
                                 Create
                             </button>
                         </div>
@@ -136,5 +137,53 @@
                 </div>
             </div>
         </div>         
+        <!-- Modal Edit category -->
+        <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="create-modal-label">Edit Category</h4>
+                    </div>
+                    <form name="editCategory" class="form-group" novalidate="novalidate">
+                        <div class="modal-body">
+                            <div class="mod-cnt">                                                            
+                                    <span>Category:</span>
+                                    <span class="text-danger"
+                                        ng-show="editCategory.name.$dirty && createCategory.name.$invalid">
+                                        <span 
+                                            ng-show="editCategory.name.$error.required">
+                                            Required!
+                                        </span>
+                                        <span 
+                                            ng-show="editCategory.name.$error.pattern">
+                                            Only letters are allowed.
+                                        </span>
+                                    </span>
+                                    <input type="text"
+                                        placeholder="Name"
+                                        class="form-control"
+                                        name="name"
+                                        ng-model="editedCategory.name"
+                                        ng-pattern="/^[a-z A-Z]+$/"
+                                        required="required" />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary" data-dismiss="modal"
+                                ng-disabled="editCategory.$invalid || !editCategory.$dirty"
+                                ng-click="adminEditCategory()">
+                                Edit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> 
     </section>   
 </div>

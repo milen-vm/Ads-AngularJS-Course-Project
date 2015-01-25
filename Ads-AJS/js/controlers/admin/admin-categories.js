@@ -29,19 +29,13 @@ app.controller('AdminCategories', ['$scope', '$rootScope', 'adminCategories', 'c
             };
             
             $scope.loadCategories();
-        };
+        }; 
         
-        // Delete category
-        $scope.deleteCategorieClicked = function(categorie) {
-            $scope.categorieForDeleting = categorie;
-        };
-        
-        $scope.deleteCategorieConfirmed = function() {
-            var id = $scope.categorieForDeleting.id;
-            
-            adminCategories.delete(id).then(
+        // Create category
+        $scope.adminCreateCategory = function() {
+            adminCategories.create($scope.newCategory).then(
                 function(data) {
-                    console.log(data);
+                    $scope.successOccurred(data.message);
                 },
                 function(error) {
                     $scope.errorOccurred(error.message);
@@ -49,18 +43,49 @@ app.controller('AdminCategories', ['$scope', '$rootScope', 'adminCategories', 'c
             );
         };
         
-        // Create category
-        $scope.adminCreateCategory = function() {
-            console.log($scopenewCategory);
-            adminCategories.create($scope.newCategory).then(
+        // Edit category
+        $scope.editCategoryClicked = function(category) {
+            $scope.editedCategory = {};
+            $scope.editedCategory.name = category.username;
+            $scope.editedCategory.id = category.id;
+            
+        };
+        
+        $scope.adminEditCategory = function() {
+            console.log($scope.editedCategory);
+            var id = $scope.editedCategory.id;
+            delete $scope.editedCategory.id;
+            
+            adminCategories.edit($scope.editedCategory, id).then(
                 function(data) {
-                    console.log(data);
+                    $scope.successOccurred(data.message);
+                    $scope.loadCategories();
                 },
                 function(error) {
-                    console.log(error);
+                    $scope.errorOccurred(error.message);
                 }
             );
         };
+        
+        // Delete category
+        $scope.deleteCategoryClicked = function(category) {
+            $scope.categoryForDeleting = category;
+        };
+        
+        $scope.deleteCategoryConfirmed = function() {
+            var id = $scope.categoryForDeleting.id;
+            
+            adminCategories.delete(id).then(
+                function(data) {
+                    $scope.successOccurred(data.message);
+                    $scope.loadCategories();
+                },
+                function(error) {
+                    $scope.errorOccurred(error.message);
+                }
+            );
+        };
+        
         // Events
         $scope.viewNameChanged = function() {           
             $rootScope.$broadcast('viewNameChanged', 'Categories');
@@ -68,6 +93,10 @@ app.controller('AdminCategories', ['$scope', '$rootScope', 'adminCategories', 'c
         
         $scope.itemsCountReceived = function() {
             $rootScope.$broadcast('itemsCountReceived', $scope.totalItems);
+        };
+        
+        $scope.successOccurred = function(message) {
+            $rootScope.$broadcast('operationSuccess', message);
         };
         
         $scope.errorOccurred = function(message) {

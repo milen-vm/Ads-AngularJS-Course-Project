@@ -4,28 +4,27 @@ app.controller('AdminCategories', ['$scope', '$rootScope', 'adminCategories', 'c
     function($scope, $rootScope, adminCategories, constValue) {
         $scope.itemPerPage = constValue.itemsPerPage;
         $scope.currentPage = 1;
-        $scope.sortUsersBy = 'Name';
-        $scope.reverseSort = false;
-        // $scope.pagerMaxSize = 5;
+        $scope.pagerMaxSize = 5;
+        $scope.sortCategoriesBy = 'Name';
+        $scope.reverseSort = false;       
         
-         $scope.loadCategories = function() {
-            adminCategories.getAll($scope.sortUsersBy, $scope.currentPage, $scope.itemPerPage).then(
+        $scope.loadCategories = function() {
+            adminCategories.getAll($scope.sortCategoriesBy, $scope.currentPage, $scope.itemPerPage).then(
                 function(data) {
                     $scope.categories = data.categories;
                     $scope.totalItems = data.numItems;
-                    $scope.itemsCountReceived();
                 },
                 function(error) {
-                    $scope.errorOccurred(error.data);
+                    $scope.errorOccurred(error.message);
                 }
             );
         };      
         
-        $scope.sortByPropertyClicked = function(userProperty) {
+        $scope.sortByPropertyClicked = function(categoryProperty) {
             if ($scope.reverseSort) {
-                $scope.sortUsersBy = '-' + userProperty;
+                $scope.sortCategoriesBy = '-' + categoryProperty;
             } else {
-                $scope.sortUsersBy = userProperty;
+                $scope.sortCategoriesBy = categoryProperty;
             };
             
             $scope.loadCategories();
@@ -36,6 +35,7 @@ app.controller('AdminCategories', ['$scope', '$rootScope', 'adminCategories', 'c
             adminCategories.create($scope.newCategory).then(
                 function(data) {
                     $scope.successOccurred(data.message);
+                    $scope.loadCategories();
                 },
                 function(error) {
                     $scope.errorOccurred(error.message);
@@ -52,7 +52,6 @@ app.controller('AdminCategories', ['$scope', '$rootScope', 'adminCategories', 'c
         };
         
         $scope.adminEditCategory = function() {
-            console.log($scope.editedCategory);
             var id = $scope.editedCategory.id;
             delete $scope.editedCategory.id;
             
@@ -90,11 +89,7 @@ app.controller('AdminCategories', ['$scope', '$rootScope', 'adminCategories', 'c
         $scope.viewNameChanged = function() {           
             $rootScope.$broadcast('viewNameChanged', 'Categories');
         };
-        
-        $scope.itemsCountReceived = function() {
-            $rootScope.$broadcast('itemsCountReceived', $scope.totalItems);
-        };
-        
+
         $scope.successOccurred = function(message) {
             $rootScope.$broadcast('operationSuccess', message);
         };
@@ -103,16 +98,10 @@ app.controller('AdminCategories', ['$scope', '$rootScope', 'adminCategories', 'c
             $rootScope.$broadcast('operationFailure', message);
         };
         
-        // EventListener
-        $scope.$on('currentPageChanged', function(ev, newPage) {
-            $scope.currentPage = newPage;
-            $scope.loadCategories();
-        });
-        
         // Pagination
-        // $scope.pageChanged = function() {
-            // $scope.loadCategories();
-        // };
+        $scope.pageChanged = function() {
+            $scope.loadCategories();
+        };
         
         $scope.viewNameChanged();
         $scope.loadCategories();

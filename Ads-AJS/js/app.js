@@ -54,6 +54,11 @@ app.config(['$routeProvider',
             controller: 'AdminCategories'
         });
         
+        $routeProvider.when('/admin-towns-list', {
+            templateUrl: 'templates/admin/admin-towns-list.html',
+            controller: 'AdminTowns'
+        });
+        
         $routeProvider.otherwise({
             redirectTo: '/'
         });

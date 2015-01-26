@@ -1,8 +1,8 @@
 'use strict';
 
-app.factory('adminCategories', ['httpData', 'userSession', 'constValue',
+app.factory('adminTownsData', ['httpData', 'userSession', 'constValue',
     function(httpData, userSession, constValue) {
-        var categoriesUrl = constValue.baseUrl + 'admin/Categories';
+        var townsUrl = constValue.baseUrl + 'admin/towns';
         
         function getAuthorizationHeaders() {
             var accessToken = userSession.getAccessToken();
@@ -10,39 +10,39 @@ app.factory('adminCategories', ['httpData', 'userSession', 'constValue',
             return { 'Authorization': 'Bearer ' + accessToken };
         }
         
-        function getAllCategiries(sortBy, currentPage, pageSize) {
-            var url = categoriesUrl + '?SortBy=' + sortBy + '&StartPage=' + currentPage + '&PageSize=' + pageSize,
+        function getAlltowns(sortBy, currentPage, pageSize) {
+            var url = townsUrl + '?sortBy=' + sortBy + '&StartPage=' + currentPage + '&PageSize=' + pageSize,
                 headers = getAuthorizationHeaders();
                 
             return httpData.request(url, 'GET', null, headers);
         }
-                
-        function createCategory(data) {
-            var url = categoriesUrl,
+        
+        function createTown(data) {
+            var url = townsUrl,
                 headers = getAuthorizationHeaders();
                 
             return httpData.request(url, 'POST', data, headers);
         }
         
-        function editCategory(data, id) {
-            var url = categoriesUrl + '/' + id,
+        function editTown(data, id) {
+            var url = townsUrl + '/' + id,
                 headers = getAuthorizationHeaders();
                 
             return httpData.request(url, 'PUT', data, headers);
         }
         
-        function deleteCategorie(id) {
-            var url = categoriesUrl + '/' + id,
+        function deleteTown(id) {
+            var url = townsUrl + '/' + id,
                 headers = getAuthorizationHeaders();
                 
             return httpData.request(url, 'DELETE', null, headers);
         }
         
         return {
-            getAll: getAllCategiries,
-            create: createCategory,
-            edit: editCategory,
-            delete: deleteCategorie            
+            getAll: getAlltowns,
+            create: createTown,
+            edit: editTown,
+            delete: deleteTown
         };
     }
 ]);

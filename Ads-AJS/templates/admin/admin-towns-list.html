@@ -10,7 +10,7 @@
                     <tr>
                         <th ng-click="reverseSort = !reverseSort; sortByPropertyClicked('Id')">
                             <span class="sort-title">Id </span>
-                            <span ng-show="sortCategoriesBy == 'Id' || sortCategoriesBy == '-Id'">
+                            <span ng-show="sortTownsBy == 'Id' || sortTownsBy == '-Id'">
                                 <span ng-show="reverseSort" class="caret"></span>
                                 <span ng-hide="reverseSort" class="dropup">
                                     <span class="caret"></span>
@@ -18,8 +18,8 @@
                             </span>
                         </th>
                         <th ng-click="reverseSort = !reverseSort; sortByPropertyClicked('Name')">
-                            <span class="sort-title">Category </span>
-                            <span ng-show="sortCategoriesBy == 'Name' || sortCategoriesBy == '-Name'">
+                            <span class="sort-title">Town </span>
+                            <span ng-show="sortTownsBy == 'Name' || sortTownsBy == '-Name'">
                                 <span ng-show="reverseSort" class="caret"></span>
                                 <span ng-hide="reverseSort" class="dropup">
                                     <span class="caret"></span>
@@ -30,13 +30,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="category in categories">
-                        <td>{{ category.id }}</td>
-                        <td>{{ category.username }}</td>
+                    <tr ng-repeat="town in towns">
+                        <td>{{ town.id }}</td>
+                        <td>{{ town.username }}</td>
                         <td>                            
-                            <a href="" class="btn-link" ng-click="editCategoryClicked(category)"
+                            <a href="" class="btn-link" ng-click="editTownClicked(town)"
                                 data-toggle="modal" data-target="#edit-modal">Edit</a> 
-                            <a href="" class="btn-link" ng-click="deleteCategoryClicked(category)"
+                            <a href="" class="btn-link" ng-click="deleteTownClicked(town)"
                                 data-toggle="modal" data-target="#delete-modal">Delete</a>                           
                         </td>
                     </tr>               
@@ -44,9 +44,6 @@
             </table>
         <!-- </div> -->
         <!-- Paging -->
-        <!-- <div ng-controller="AdminCategories">
-            <div ng-include="'templates/pagination.html'"></div>
-        </div> -->        
         <nav class="text-center">
             <ul pagination
                 total-items="totalItems"
@@ -59,7 +56,7 @@
             </ul>
         </nav>
         <button type="button" class="btn btn-default create-btn"
-            data-toggle="modal" data-target="#create-modal">Create New Category</button>
+            data-toggle="modal" data-target="#create-modal">Create New Town</button>
         <!-- Modal delete category -->
         <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal-label" aria-hidden="true">
             <div class="modal-dialog">
@@ -68,13 +65,13 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h4 class="modal-title" id="delete-modal-label">Confirm Deleting Category?</h4>
+                        <h4 class="modal-title" id="delete-modal-label">Confirm Deleting Town?</h4>
                     </div>
                     <div class="modal-body">
                         <div class="mod-cnt">
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    Categori: <span>{{ categoryForDeleting.username }}</span>
+                                    Town: <span>{{ townForDeleting.username }}</span>
                                 </li>
                             </ul>
                         </div>
@@ -84,14 +81,14 @@
                             Cancel
                         </button>
                         <button type="button" class="btn btn-primary"  data-dismiss="modal"
-                            ng-click="deleteCategoryConfirmed()">
+                            ng-click="deleteTownConfirmed()">
                             Delete
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Modal create category -->
+        <!-- Modal create town -->
         <div class="modal fade" id="create-modal" tabindex="-1" role="dialog" aria-labelledby="create-modal-label" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -99,20 +96,20 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h4 class="modal-title" id="create-modal-label">Create Category</h4>
+                        <h4 class="modal-title" id="create-modal-label">Create Town</h4>
                     </div>
-                    <form name="createCategory" class="form-group" novalidate="novalidate">
+                    <form name="createTown" class="form-group" novalidate="novalidate">
                         <div class="modal-body">
                             <div class="mod-cnt">                                                            
-                                    <span>Category:</span>
+                                    <span>Town:</span>
                                     <span class="text-danger"
-                                        ng-show="createCategory.name.$dirty && createCategory.name.$invalid">
+                                        ng-show="createTown.name.$dirty && createTown.name.$invalid">
                                         <span 
-                                            ng-show="createCategory.name.$error.required">
+                                            ng-show="createTown.name.$error.required">
                                             Required!
                                         </span>
                                         <span 
-                                            ng-show="createCategory.name.$error.pattern">
+                                            ng-show="createTown.name.$error.pattern">
                                             Only letters are allowed.
                                         </span>
                                     </span>
@@ -120,7 +117,7 @@
                                         placeholder="Name"
                                         class="form-control"
                                         name="name"
-                                        ng-model="newCategory.name"
+                                        ng-model="newTown.name"
                                         ng-pattern="/^[a-z A-Z]+$/"
                                         required="required" />
                             </div>
@@ -130,8 +127,8 @@
                                 Cancel
                             </button>
                             <button type="submit" class="btn btn-primary" data-dismiss="modal"
-                                ng-disabled="createCategory.$invalid"
-                                ng-click="adminCreateCategory()">
+                                ng-disabled="createTown.$invalid"
+                                ng-click="adminCreateTown()">
                                 Create
                             </button>
                         </div>
@@ -139,7 +136,7 @@
                 </div>
             </div>
         </div>         
-        <!-- Modal edit category -->
+        <!-- Modal edit town -->
         <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -147,20 +144,20 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h4 class="modal-title" id="edit-modal-label">Edit Category</h4>
+                        <h4 class="modal-title" id="edit-modal-label">Edit Town</h4>
                     </div>
-                    <form name="editCategory" class="form-group" novalidate="novalidate">
+                    <form name="editTown" class="form-group" novalidate="novalidate">
                         <div class="modal-body">
                             <div class="mod-cnt">                                                            
-                                    <span>Category:</span>
+                                    <span>Town:</span>
                                     <span class="text-danger"
-                                        ng-show="editCategory.name.$dirty && createCategory.name.$invalid">
+                                        ng-show="editTown.name.$dirty && editTown.name.$invalid">
                                         <span 
-                                            ng-show="editCategory.name.$error.required">
+                                            ng-show="editTown.name.$error.required">
                                             Required!
                                         </span>
                                         <span 
-                                            ng-show="editCategory.name.$error.pattern">
+                                            ng-show="editTown.name.$error.pattern">
                                             Only letters are allowed.
                                         </span>
                                     </span>
@@ -168,7 +165,7 @@
                                         placeholder="Name"
                                         class="form-control"
                                         name="name"
-                                        ng-model="editedCategory.name"
+                                        ng-model="editedTown.name"
                                         ng-pattern="/^[a-z A-Z]+$/"
                                         required="required" />
                             </div>
@@ -178,8 +175,8 @@
                                 Cancel
                             </button>
                             <button type="submit" class="btn btn-primary" data-dismiss="modal"
-                                ng-disabled="editCategory.$invalid || !editCategory.$dirty"
-                                ng-click="adminEditCategory()">
+                                ng-disabled="editTown.$invalid || !editTown.$dirty"
+                                ng-click="adminEditTown()">
                                 Edit
                             </button>
                         </div>

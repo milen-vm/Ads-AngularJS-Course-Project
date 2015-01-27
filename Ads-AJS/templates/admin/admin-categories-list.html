@@ -43,10 +43,7 @@
                 </tbody>
             </table>
         <!-- </div> -->
-        <!-- Paging -->
-        <!-- <div ng-controller="AdminCategories">
-            <div ng-include="'templates/pagination.html'"></div>
-        </div> -->        
+        <!-- Paging -->       
         <nav class="text-center">
             <ul pagination
                 total-items="totalItems"
@@ -58,11 +55,13 @@
                 previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
             </ul>
         </nav>
-        <button type="button" class="btn btn-default create-btn"
-            data-toggle="modal" data-target="#create-modal">Create New Category</button>
+        <div class="text-center">
+            <button type="button" class="btn btn-default create-btn"
+                data-toggle="modal" data-target="#create-modal">Create New Category</button>
+        </div>        
         <!-- Modal delete category -->
         <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal-label" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-shrink">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -80,10 +79,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">
                             Cancel
                         </button>
-                        <button type="button" class="btn btn-primary"  data-dismiss="modal"
+                        <button type="button" class="btn btn-danger"  data-dismiss="modal"
                             ng-click="deleteCategoryConfirmed()">
                             Delete
                         </button>
@@ -93,7 +92,7 @@
         </div>
         <!-- Modal create category -->
         <div class="modal fade" id="create-modal" tabindex="-1" role="dialog" aria-labelledby="create-modal-label" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-shrink">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -126,10 +125,10 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                            <button type="button" class="btn btn-info" data-dismiss="modal">
                                 Cancel
                             </button>
-                            <button type="submit" class="btn btn-primary" data-dismiss="modal"
+                            <button type="submit" class="btn btn-success" data-dismiss="modal"
                                 ng-disabled="createCategory.$invalid"
                                 ng-click="adminCreateCategory()">
                                 Create
@@ -141,7 +140,7 @@
         </div>         
         <!-- Modal edit category -->
         <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-shrink">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -174,10 +173,10 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                            <button type="button" class="btn btn-info" data-dismiss="modal">
                                 Cancel
                             </button>
-                            <button type="submit" class="btn btn-primary" data-dismiss="modal"
+                            <button type="submit" class="btn btn-warning" data-dismiss="modal"
                                 ng-disabled="editCategory.$invalid || !editCategory.$dirty"
                                 ng-click="adminEditCategory()">
                                 Edit

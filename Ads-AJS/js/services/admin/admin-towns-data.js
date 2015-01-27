@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('adminTownsData', ['httpData', 'userSession', 'constValue',
+app.factory('adminTowns', ['httpData', 'userSession', 'constValue',
     function(httpData, userSession, constValue) {
         var townsUrl = constValue.baseUrl + 'admin/towns';
         

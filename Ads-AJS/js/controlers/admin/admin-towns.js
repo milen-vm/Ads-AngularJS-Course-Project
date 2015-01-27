@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('AdminTowns', ['$scope', '$rootScope', 'adminTownsData', 'constValue',
-    function($scope, $rootScope, adminTownsData, constValue) {
+app.controller('AdminTownsList', ['$scope', '$rootScope', 'adminTowns', 'constValue',
+    function($scope, $rootScope, adminTowns, constValue) {
         $scope.itemPerPage = constValue.itemsPerPage;
         $scope.currentPage = 1;
         $scope.pagerMaxSize = 5;
@@ -9,7 +9,7 @@ app.controller('AdminTowns', ['$scope', '$rootScope', 'adminTownsData', 'constVa
         $scope.reverseSort = false;
         
         $scope.loadTowns = function() {
-            adminTownsData.getAll($scope.sortTownsBy, $scope.currentPage, $scope.itemPerPage).then(
+            adminTowns.getAll($scope.sortTownsBy, $scope.currentPage, $scope.itemPerPage).then(
                 function(data) {
                     $scope.towns = data.towns;
                     $scope.totalItems = data.numItems;
@@ -32,7 +32,7 @@ app.controller('AdminTowns', ['$scope', '$rootScope', 'adminTownsData', 'constVa
         
         // Create town
         $scope.adminCreateTown = function() {
-            adminTownsData.create($scope.newTown).then(
+            adminTowns.create($scope.newTown).then(
                 function(data) {
                     $scope.successOccurred(data.message);
                     $scope.loadTowns();
@@ -55,7 +55,7 @@ app.controller('AdminTowns', ['$scope', '$rootScope', 'adminTownsData', 'constVa
             var id = $scope.editedTown.id;
             delete $scope.editedTown.id;
             
-            adminTownsData.edit($scope.editedTown, id).then(
+            adminTowns.edit($scope.editedTown, id).then(
                 function(data) {
                     $scope.successOccurred(data.message);
                     $scope.loadTowns();
@@ -74,7 +74,7 @@ app.controller('AdminTowns', ['$scope', '$rootScope', 'adminTownsData', 'constVa
         $scope.deleteTownConfirmed = function() {
             var id = $scope.townForDeleting.id;
             
-            adminTownsData.delete(id).then(
+            adminTowns.delete(id).then(
                 function(data) {
                     $scope.successOccurred(data.message);
                     $scope.loadTowns();

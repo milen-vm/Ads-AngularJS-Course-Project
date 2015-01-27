@@ -12,6 +12,10 @@ div, li {
     padding: 15px;
 }
 
+#login-register a {
+    margin-top: 15px;
+}
+
 .ad {
     border: 1px solid black;
     margin: 10px;
@@ -164,14 +168,66 @@ img {
 }
 
 .create-btn {
-    margin: 0 auto;
+
+}
+.modal-shrink {
+    width: 400px;
 }
 
-/*input.ng-invalid {
- border: 1px solid red;
- }
+@media screen and (max-width: 420px) {
+    .modal-shrink {
+        width: auto;
+    }
+}
 
- input.ng-valid {
- border: 1px solid green;
- }*/
+.modal-shrink button, .modal-delete-user button {
+    width: 80px;
+}
+
+.modal-shrink input {
+    margin-top: 10px;
+}
+
+.admin-edit-user button, .admin-edit-user a {
+    width: 120px;
+    margin-top: 15px;
+}
+
+.admin-edit-user form, .register-form form, #login-form form, .modal-content form,
+    .form form {
+    margin-bottom: 0;
+}
+
+.register-form .text-center, #login-form .text-center, .form .text-center {
+    padding-top: 15px;
+}
+
+.register-form button, #login-form button, .form button,
+    .form a {
+    width: 80px;
+}
+
+.admin-edit-user .well {
+    margin-bottom: 15px;
+}
+
+.modal-delete-user {
+    width: 500px;
+}
+
+@media screen and (max-width: 520px) {
+    .modal-delete-user {
+        width: auto;
+    }
+}
+
+
+
+
+
+
+
+
+
+
 

@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('AdminCategories', ['$scope', '$rootScope', 'adminCategories', 'constValue',
+app.controller('AdminCategoriesList', ['$scope', '$rootScope', 'adminCategories', 'constValue',
     function($scope, $rootScope, adminCategories, constValue) {
         $scope.itemPerPage = constValue.itemsPerPage;
         $scope.currentPage = 1;

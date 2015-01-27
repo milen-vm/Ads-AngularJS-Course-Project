@@ -51,12 +51,12 @@ app.config(['$routeProvider',
         
         $routeProvider.when('/admin-categories-list', {
             templateUrl: 'templates/admin/admin-categories-list.html',
-            controller: 'AdminCategories'
+            controller: 'AdminCategoriesList'
         });
         
         $routeProvider.when('/admin-towns-list', {
             templateUrl: 'templates/admin/admin-towns-list.html',
-            controller: 'AdminTowns'
+            controller: 'AdminTownsList'
         });
         
         $routeProvider.otherwise({

@@ -7,6 +7,7 @@ app.controller('AdsList', ['$scope', '$rootScope', '$location', '$anchorScroll',
             USER_VIEW_NAME = 'Home',
             ADMIN_VIEW_NAME = 'Ads';
             
+        $scope.isReady = false;
         $scope.isAdmin = false;
         $scope.adsParams = {
             categoryId: '',
@@ -27,6 +28,7 @@ app.controller('AdsList', ['$scope', '$rootScope', '$location', '$anchorScroll',
         $scope.loadAds = function () {
             var categoryId = $scope.adsParams.categoryId,
                 townId = $scope.adsParams.townId;
+            $scope.isReady = false;
             
             if ($scope.isAdmin) {
                 getAdminAds(categoryId, townId);                
@@ -43,6 +45,7 @@ app.controller('AdsList', ['$scope', '$rootScope', '$location', '$anchorScroll',
                 function(data) {
                     $scope.adsList = data;
                     $scope.totalAds = $scope.adsList.numItems;
+                    $scope.isReady = true;
                 },
                 function(error) {
                     $scope.errorOccurred(error.message);
@@ -55,6 +58,7 @@ app.controller('AdsList', ['$scope', '$rootScope', '$location', '$anchorScroll',
                 function(data) {
                     $scope.adsList = data;
                     $scope.totalAds = $scope.adsList.numItems;
+                    $scope.isReady = true;
                 },
                 function(error) {
                     $scope.errorOccurred(error.message);

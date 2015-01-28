@@ -221,6 +221,14 @@ img {
     }
 }
 
+.loading-img {
+    padding-bottom: 30px;
+}
+
+.loading-img img {
+    height: 100px;
+}
+
 
 
 

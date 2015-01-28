@@ -18,6 +18,9 @@
     </aside>
     <!-- Content -->
     <section class="col-sm-12 col-md-8">
+        <div class="text-center loading-img" ng-hide="isReady" >
+            <img src="../img/loading.gif" alt="loadinf-imege" />
+        </div>        
         <!-- Ads list -->
         <div ng-repeat="ad in adsList.ads" class="panel panel-primary">
             <div class="panel-heading">

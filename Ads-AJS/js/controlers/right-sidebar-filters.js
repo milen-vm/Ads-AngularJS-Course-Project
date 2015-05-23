@@ -15,7 +15,6 @@ app.controller('RightSideBarFilters', ['$scope', '$rootScope', 'categoriesData',
         townsData.getTowns().then(
             function(data) {
                 $scope.towns = data;
-                console.log(data);
             },
             function(error) {
                 console.log(error);

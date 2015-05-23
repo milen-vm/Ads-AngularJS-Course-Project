@@ -1,12 +1,13 @@
 'use strict';
 
-app.controller('NavigationBars', ['$scope', '$rootScope', '$location', '$route', 'userSession',
-    function($scope, $rootScope, $location, $route, userSession) {
+app.controller('NavigationBars', ['$scope', '$rootScope', '$location', '$route', '$window', 'userSession',
+    function($scope, $rootScope, $location, $route, $window, userSession) {
         $scope.adStatus = 'All';
         $scope.viewName = '';
         $scope.username = '';        
         $scope.hasUser = false;
         $scope.isAdmin = false;
+        $scope.isCollapsed = true;
         
         $scope.isUserLoggedIn = function() {
             if (userSession.hasUser()) {

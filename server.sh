@@ -1,2 +1,2 @@
 cd Ads-AJS
-node ../scripts/web-server.js
+nodejs ../scripts/web-server.js
